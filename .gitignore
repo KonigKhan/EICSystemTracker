@@ -5,3 +5,5 @@
 /EICSystemTracker.Web/bin
 /EICSystemTracker.Host/obj
 /EICSystemTracker.Host/bin
+/EICSystemTracker.Web/compilerconfig.json.defaults
+/EICSystemTracker.Web/compilerconfig.json

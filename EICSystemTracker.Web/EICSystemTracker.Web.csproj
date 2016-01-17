@@ -22,7 +22,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.css" />
+    <Content Include="app\areas\home\views\startView.htm" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -30,6 +30,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
+    <Content Include="node_modules\pagerjs\pager.js" />
     <Content Include="node_modules\systemjs\dist\system-csp-production.js" />
     <Content Include="node_modules\systemjs\dist\system-csp-production.src.js" />
     <Content Include="node_modules\systemjs\dist\system-polyfills.js" />
@@ -99,6 +100,10 @@
     <Content Include="Content\fontawesome\animated.less" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="node_modules\pagerjs\package.json" />
+    <Content Include="node_modules\pagerjs\README.md" />
+    <Content Include="app\areas\home\styles\homeviewstyles.less" />
+    <Content Include="appStyles.less" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -109,12 +114,20 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="app\areas\home\manifest.ts" />
+    <TypeScriptCompile Include="app\areas\home\viewmodels\startViewModel.ts" />
+    <TypeScriptCompile Include="app\framework\domain\PageViewModel.ts" />
+    <TypeScriptCompile Include="app\framework\SystemUtils.ts" />
     <TypeScriptCompile Include="app\lib\jquery.ts" />
     <TypeScriptCompile Include="app\lib\knockout.ts" />
+    <TypeScriptCompile Include="app\lib\pager.ts" />
     <TypeScriptCompile Include="init.ts" />
+    <TypeScriptCompile Include="manifest.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\eic\eicsystemtracker.web.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\es6Promise\es6Promise.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\pager\pager.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\systemjs\systemjs.d.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +139,9 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="node_modules\pagerjs\node_modules\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
@@ -160,7 +175,7 @@
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptOutFile />
     <TypeScriptOutDir />
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
