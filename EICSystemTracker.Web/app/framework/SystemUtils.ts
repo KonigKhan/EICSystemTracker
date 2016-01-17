@@ -2,6 +2,7 @@
 import FrameworkManifest from '../../manifest';
 
 module SystemUtils {
+
     export function ImportModuleAsync<T>(moduleName: string): Promise<T> {
 
         var modulePromise = new Promise<T>((resolve, reject) => {
@@ -62,6 +63,27 @@ module SystemUtils {
             head.appendChild(link);
         }
         return dfdLink.promise();
+    }
+
+    export function AddToSessionCache(key: string, value: any): void {
+        if (document["SessionCache"]) {
+            document["SessionCache"][key] = value;
+        }
+        else {
+            document["SessionCache"] = {};
+            document["SessionCache"][key] = value;
+        }
+
+    }
+
+    export function GetSessionCacheValue(key: string): any {
+
+        if (document["SessionCache"]) {
+            return document["SessionCache"][key];
+        }
+        else {
+            return null;
+        }
     }
 }
 

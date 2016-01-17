@@ -40,11 +40,14 @@ interface IPageNavigation {
     Sequence: number;
 }
 
-
-interface ISubscription {
-    (...args: any[]): void;
+interface IEDStarMapSystem {
+    name: string;
 }
 
-interface IDictionary {
-    [name: string]: ISubscription[];
+interface IDictionary<T> {
+    add(key: string, value: T): void;
+    remove(key: string): void;
+    containsKey(key: string): boolean;
+    keys(): string[];
+    values(): T[];
 }

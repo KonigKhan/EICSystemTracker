@@ -59,6 +59,25 @@ var SystemUtils;
         return dfdLink.promise();
     }
     SystemUtils.LoadStyleAsync = LoadStyleAsync;
+    function AddToSessionCache(key, value) {
+        if (document["SessionCache"]) {
+            document["SessionCache"][key] = value;
+        }
+        else {
+            document["SessionCache"] = {};
+            document["SessionCache"][key] = value;
+        }
+    }
+    SystemUtils.AddToSessionCache = AddToSessionCache;
+    function GetSessionCacheValue(key) {
+        if (document["SessionCache"]) {
+            return document["SessionCache"][key];
+        }
+        else {
+            return null;
+        }
+    }
+    SystemUtils.GetSessionCacheValue = GetSessionCacheValue;
 })(SystemUtils || (SystemUtils = {}));
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = SystemUtils;

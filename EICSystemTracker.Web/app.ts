@@ -26,6 +26,7 @@ class AppViewModel extends PageViewModel {
 
     constructor() {
         super();
+
         FrameworkManifest.GlobalVariables.areas.map((area) => {
             var areaPath = 'app/areas/' + area;
             return SystemUtils.ImportModuleAsync<IAreaManifest>(areaPath + '/manifest')
