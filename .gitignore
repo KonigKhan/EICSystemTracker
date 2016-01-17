@@ -1,0 +1,7 @@
+*.user
+/.vs
+/packages
+/EICSystemTracker.Web/obj
+/EICSystemTracker.Web/bin
+/EICSystemTracker.Host/obj
+/EICSystemTracker.Host/bin
