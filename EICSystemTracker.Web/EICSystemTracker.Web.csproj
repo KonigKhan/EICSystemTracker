@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{3DDBEDA2-2AAF-4A01-B0E0-162B8A22C980}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="index.html" />
+    <Content Include="node_modules\systemjs\dist\system-csp-production.js" />
+    <Content Include="node_modules\systemjs\dist\system-csp-production.src.js" />
+    <Content Include="node_modules\systemjs\dist\system-polyfills.js" />
+    <Content Include="node_modules\systemjs\dist\system-polyfills.src.js" />
+    <Content Include="node_modules\systemjs\dist\system-register-only.js" />
+    <Content Include="node_modules\systemjs\dist\system-register-only.src.js" />
+    <Content Include="node_modules\systemjs\dist\system.js" />
+    <Content Include="node_modules\systemjs\dist\system.src.js" />
+    <Content Include="node_modules\systemjs\lib\alias.js" />
+    <Content Include="node_modules\systemjs\lib\amd-helpers.js" />
+    <Content Include="node_modules\systemjs\lib\amd.js" />
+    <Content Include="node_modules\systemjs\lib\bundles.js" />
+    <Content Include="node_modules\systemjs\lib\cjs-helpers.js" />
+    <Content Include="node_modules\systemjs\lib\cjs.js" />
+    <Content Include="node_modules\systemjs\lib\conditionals.js" />
+    <Content Include="node_modules\systemjs\lib\core.js" />
+    <Content Include="node_modules\systemjs\lib\createSystem.js" />
+    <Content Include="node_modules\systemjs\lib\depCache.js" />
+    <Content Include="node_modules\systemjs\lib\esm.js" />
+    <Content Include="node_modules\systemjs\lib\global-eval.js" />
+    <Content Include="node_modules\systemjs\lib\global-helpers.js" />
+    <Content Include="node_modules\systemjs\lib\global.js" />
+    <Content Include="node_modules\systemjs\lib\map.js" />
+    <Content Include="node_modules\systemjs\lib\meta.js" />
+    <Content Include="node_modules\systemjs\lib\package.js" />
+    <Content Include="node_modules\systemjs\lib\paths.js" />
+    <Content Include="node_modules\systemjs\lib\plugins.js" />
+    <Content Include="node_modules\systemjs\lib\polyfills-bootstrap.js" />
+    <Content Include="node_modules\systemjs\lib\proto.js" />
+    <Content Include="node_modules\systemjs\lib\register.js" />
+    <Content Include="node_modules\systemjs\lib\scriptLoader.js" />
+    <Content Include="node_modules\systemjs\lib\scriptOnly.js" />
+    <Content Include="node_modules\systemjs\lib\wrapper-end.js" />
+    <Content Include="node_modules\systemjs\lib\wrapper-start.js" />
+    <Content Include="packages.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="node_modules\systemjs\LICENSE" />
+    <Content Include="node_modules\systemjs\README.md" />
+    <Content Include="node_modules\systemjs\dist\system-csp-production.js.map" />
+    <Content Include="node_modules\systemjs\dist\system-polyfills.js.map" />
+    <Content Include="node_modules\systemjs\dist\system-register-only.js.map" />
+    <Content Include="node_modules\systemjs\dist\system.js.map" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fontawesome\variables.less" />
+    <Content Include="Content\fontawesome\stacked.less" />
+    <Content Include="Content\fontawesome\rotated-flipped.less" />
+    <Content Include="Content\fontawesome\path.less" />
+    <Content Include="Content\fontawesome\mixins.less" />
+    <Content Include="Content\fontawesome\list.less" />
+    <Content Include="Content\fontawesome\larger.less" />
+    <Content Include="Content\fontawesome\icons.less" />
+    <Content Include="Content\fontawesome\font-awesome.less" />
+    <Content Include="Content\fontawesome\fixed-width.less" />
+    <Content Include="Content\fontawesome\core.less" />
+    <Content Include="Content\fontawesome\bordered-pulled.less" />
+    <Content Include="Content\fontawesome\animated.less" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\traceur.min.js" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="app\lib\jquery.ts" />
+    <TypeScriptCompile Include="app\lib\knockout.ts" />
+    <TypeScriptCompile Include="init.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\es6Promise\es6Promise.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\systemjs\systemjs.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>EICSystemTracker.Web</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50708</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50708/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>
