@@ -6,11 +6,12 @@ var Manifest;
     Manifest.GlobalVariables = {
         applicationName: 'EIC System Tracker',
         areas: [
-            'home'
+            'home',
+            'systems'
         ],
         fadeSpeed: 300
     };
 })(Manifest = exports.Manifest || (exports.Manifest = {}));
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Manifest;
-//# sourceMappingURL=Manifest.js.map
+//# sourceMappingURL=manifest.js.map
