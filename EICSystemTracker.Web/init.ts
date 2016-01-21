@@ -11,4 +11,14 @@ System.config(<SystemConfig>{
     }
 });
 
-System.import('app');
+Promise.all([
+    // CSS
+    System.import('content/bootstrap.css'),
+    System.import('content/kendo/2016.1.112/kendo.common.min.css'),
+    System.import('appStyles.css'),
+
+    // External Plugins.
+    System.import('Scripts/bootstrap.js'),
+    System.import('scripts/kendo/2016.1.112/kendo.core.min.js'),
+    System.import('app')
+]);
