@@ -4,15 +4,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var PageViewModel_1 = require('../../../framework/domain/PageViewModel');
-var edstarmapcontroller_1 = require('../controllers/edstarmapcontroller');
 var systemsViewModel = (function (_super) {
     __extends(systemsViewModel, _super);
     function systemsViewModel() {
         _super.call(this);
         console.debug('New Systems View Model!');
-        edstarmapcontroller_1.default.GetSystems().done(function (data) {
-            console.debug("GetSystems Returns: " + data);
-        });
+        //starMapController.GetSystems().done((data: IEDStarMapSystem[]) => {
+        //    console.debug("GetSystems Returns: " + data);
+        //});
     }
     return systemsViewModel;
 })(PageViewModel_1.default);

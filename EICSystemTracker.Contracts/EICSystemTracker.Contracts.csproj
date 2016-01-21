@@ -40,10 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataAdapter.cs" />
+    <Compile Include="Data\DataAdapters\DataAdapterType.cs" />
+    <Compile Include="Data\DataAdapters\IDataAdapter.cs" />
     <Compile Include="Data\IEICData.cs" />
+    <Compile Include="Data\DataAdapters\Relational\IRelationalDataAdapter.cs" />
+    <Compile Include="Data\DataAdapters\Query\IStoredProcedureConfig.cs" />
+    <Compile Include="domain\Data\DataAdapters\Query\StoredProcedureConfig.cs" />
     <Compile Include="domain\SystemTracking\EICFaction.cs" />
     <Compile Include="domain\SystemTracking\EICSystem.cs" />
+    <Compile Include="domain\SystemTracking\EICSystemFaction.cs" />
     <Compile Include="SystemTracking\IEICFaction.cs" />
     <Compile Include="SystemTracking\IEICSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,7 +3,7 @@ using EICSystemTracker.Contracts.SystemTracking;
 
 namespace EICSystemTracker.Contracts.domain.SystemTracking
 {
-    class EICSystem : IEICSystem
+    public class EICSystem : IEICSystem
     {
         public int Id { get; private set; }
         public string Name { get; set; }

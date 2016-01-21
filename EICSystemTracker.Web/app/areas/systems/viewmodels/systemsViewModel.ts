@@ -7,9 +7,9 @@ class systemsViewModel extends PageViewModel {
     constructor() {
         super();
         console.debug('New Systems View Model!');
-        starMapController.GetSystems().done((data: IEDStarMapSystem[]) => {
-            console.debug("GetSystems Returns: " + data);
-        });
+        //starMapController.GetSystems().done((data: IEDStarMapSystem[]) => {
+        //    console.debug("GetSystems Returns: " + data);
+        //});
     }
 }
 
