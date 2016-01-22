@@ -13,3 +13,10 @@
 /EICSystemTracker.Data.Tests/obj/Debug
 /EICSystemTracker.Data/bin/Debug
 /EICSystemTracker.Data/obj/Debug
+/TestResults
+/EICSystemTracker.Contracts/obj
+/EICSystemTracker.Contracts/bin
+/EICSystemTracker.Data/bin
+/EICSystemTracker.Data/obj
+/EICSystemTracker.Data.Tests/obj
+/EICSystemTracker.Data.Tests/bin
