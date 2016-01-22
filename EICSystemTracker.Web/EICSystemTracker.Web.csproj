@@ -364,9 +364,17 @@
     <Content Include="Content\kendo\2016.1.112\Uniform\sprite_2x.png" />
     <Content Include="Content\kendo\2016.1.112\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2016.1.112\Uniform\sprite_kpi_2x.png" />
+    <Content Include="Content\site_plugins.css">
+      <DependentUpon>site_plugins.less</DependentUpon>
+    </Content>
+    <Content Include="Content\site_plugins.min.css">
+      <DependentUpon>site_plugins.css</DependentUpon>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
     <Content Include="node_modules\pagerjs\pager.js" />
+    <Content Include="node_modules\systemjs\plugins\css-builder.js" />
+    <Content Include="node_modules\systemjs\plugins\css.js" />
     <Content Include="node_modules\systemjs\dist\system-csp-production.js" />
     <Content Include="node_modules\systemjs\dist\system-csp-production.src.js" />
     <Content Include="node_modules\systemjs\dist\system-polyfills.js" />
@@ -375,32 +383,6 @@
     <Content Include="node_modules\systemjs\dist\system-register-only.src.js" />
     <Content Include="node_modules\systemjs\dist\system.js" />
     <Content Include="node_modules\systemjs\dist\system.src.js" />
-    <Content Include="node_modules\systemjs\lib\alias.js" />
-    <Content Include="node_modules\systemjs\lib\amd-helpers.js" />
-    <Content Include="node_modules\systemjs\lib\amd.js" />
-    <Content Include="node_modules\systemjs\lib\bundles.js" />
-    <Content Include="node_modules\systemjs\lib\cjs-helpers.js" />
-    <Content Include="node_modules\systemjs\lib\cjs.js" />
-    <Content Include="node_modules\systemjs\lib\conditionals.js" />
-    <Content Include="node_modules\systemjs\lib\core.js" />
-    <Content Include="node_modules\systemjs\lib\createSystem.js" />
-    <Content Include="node_modules\systemjs\lib\depCache.js" />
-    <Content Include="node_modules\systemjs\lib\esm.js" />
-    <Content Include="node_modules\systemjs\lib\global-eval.js" />
-    <Content Include="node_modules\systemjs\lib\global-helpers.js" />
-    <Content Include="node_modules\systemjs\lib\global.js" />
-    <Content Include="node_modules\systemjs\lib\map.js" />
-    <Content Include="node_modules\systemjs\lib\meta.js" />
-    <Content Include="node_modules\systemjs\lib\package.js" />
-    <Content Include="node_modules\systemjs\lib\paths.js" />
-    <Content Include="node_modules\systemjs\lib\plugins.js" />
-    <Content Include="node_modules\systemjs\lib\polyfills-bootstrap.js" />
-    <Content Include="node_modules\systemjs\lib\proto.js" />
-    <Content Include="node_modules\systemjs\lib\register.js" />
-    <Content Include="node_modules\systemjs\lib\scriptLoader.js" />
-    <Content Include="node_modules\systemjs\lib\scriptOnly.js" />
-    <Content Include="node_modules\systemjs\lib\wrapper-end.js" />
-    <Content Include="node_modules\systemjs\lib\wrapper-start.js" />
     <Content Include="packages.config" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
@@ -503,6 +485,7 @@
     <Content Include="Content\kendo\2016.1.112\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
     <Content Include="Content\kendo\2016.1.112\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
     <Content Include="Content\kendo\2016.1.112\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <Content Include="Content\site_plugins.less" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -1026,6 +1009,7 @@
     <Content Include="Scripts\kendo\2016.1.112\messages\kendo.messages.zh-TW.min.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\knockout\kendoBindigns.js" />
     <Content Include="Scripts\traceur.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
