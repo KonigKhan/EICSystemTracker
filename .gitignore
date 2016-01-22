@@ -7,3 +7,9 @@
 /EICSystemTracker.Host/bin
 /EICSystemTracker.Web/compilerconfig.json.defaults
 /EICSystemTracker.Web/compilerconfig.json
+/EICSystemTracker.Contracts/bin/Debug
+/EICSystemTracker.Contracts/obj/Debug
+/EICSystemTracker.Data.Tests/bin/Debug
+/EICSystemTracker.Data.Tests/obj/Debug
+/EICSystemTracker.Data/bin/Debug
+/EICSystemTracker.Data/obj/Debug
