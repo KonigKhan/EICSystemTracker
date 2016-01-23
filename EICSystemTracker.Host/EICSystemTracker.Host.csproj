@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\WebApi\Startup.cs" />
     <Compile Include="CustomRootPathProvider.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="NancyBootstrapper.cs" />

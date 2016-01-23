@@ -1009,7 +1009,6 @@
     <Content Include="Scripts\kendo\2016.1.112\messages\kendo.messages.zh-TW.min.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
-    <Content Include="Scripts\knockout\kendoBindigns.js" />
     <Content Include="Scripts\traceur.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -1027,10 +1026,12 @@
     <TypeScriptCompile Include="app\lib\pager.ts" />
     <TypeScriptCompile Include="init.ts" />
     <TypeScriptCompile Include="manifest.ts" />
+    <TypeScriptCompile Include="Scripts\knockout\knockout-kendo.ts" />
     <TypeScriptCompile Include="Scripts\Typings\eic\EICSystemTracker.Contracts.Typings.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\eic\eicsystemtracker.web.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\es6Promise\es6Promise.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\kendo\kendo-ui.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\pager\pager.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\systemjs\systemjs.d.ts" />

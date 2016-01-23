@@ -3,9 +3,11 @@
     <div class="splash">
         <div class="title" style="border: solid 1px black; height: 300px;">EIC System Tracker</div>
 
-        <input data-bind="kendoColorPicker: { palette: colorPalette, value: selectedChoice }" />
-        <hr />
-        Selected: <strong data-bind="text: selectedChoice"> </strong>
+        <!--<input data-bind="kendoColorPicker: { palette: colorPalette, value: selectedChoice }"/>
+        <hr/>
+        Selected: <strong data-bind="text: selectedChoice"> </strong>-->
+
+        <input id="autocomplete" data-bind="kendoAutoComplete: { ds: dataSource }"/>
     </div>
 
 </div>

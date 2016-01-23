@@ -3,8 +3,15 @@ import ko from '../../../lib/knockout';
 
 class startViewModel extends PageViewModel {
 
-    public colorPalette: KnockoutObservable<string> = ko.observable("basic");
-    public selectedChoice: KnockoutObservable<string> = ko.observable("#ffffff");
+    public dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: 'http://edsm.net/api-v1/systems',
+                dataType: "json"
+            }
+        }
+    });
+
 
     constructor() {
         super();
