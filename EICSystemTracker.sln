@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EICSystemTracker.Data", "EI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EICSystemTracker.Data.Tests", "EICSystemTracker.Data.Tests\EICSystemTracker.Data.Tests.csproj", "{F5A28F61-9858-4798-BCB0-01CE0BA6D176}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EICSystemTracker.Service", "EICSystemTracker.Service\EICSystemTracker.Service.csproj", "{14EC8891-AEDD-419C-9BAA-4C4D012FB8C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F5A28F61-9858-4798-BCB0-01CE0BA6D176}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5A28F61-9858-4798-BCB0-01CE0BA6D176}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5A28F61-9858-4798-BCB0-01CE0BA6D176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14EC8891-AEDD-419C-9BAA-4C4D012FB8C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14EC8891-AEDD-419C-9BAA-4C4D012FB8C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14EC8891-AEDD-419C-9BAA-4C4D012FB8C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14EC8891-AEDD-419C-9BAA-4C4D012FB8C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

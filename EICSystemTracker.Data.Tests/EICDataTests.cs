@@ -19,11 +19,11 @@ namespace EICSystemTracker.Data.Tests
                 System = new EICSystem()
                 {
                     Name = "Kappa Fornacis",
-                    Traffic = 30,
+                    //Traffic = 30,
                     Population = 1000,
                     Government = "Agriculture",
                     Security = "High",
-                    ControllingPower = "Troval"
+                    Power = "Troval"
                 },
                 Faction = new EICFaction()
                 {

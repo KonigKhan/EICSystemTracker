@@ -35,11 +35,11 @@ namespace EICSystemTracker.Data.EICData
                 Parameters =
                 {
                     ["@sysName"] = systemFaction.System.Name,
-                    ["@sysTraffic"] = systemFaction.System.Traffic,
+                    //["@sysTraffic"] = systemFaction.System.,
                     ["@sysPopulation"] = systemFaction.System.Population,
                     ["@sysGovernment"] = systemFaction.System.Government,
                     ["@sysSecurity"] = systemFaction.System.Security,
-                    ["@sysPower"] = systemFaction.System.ControllingPower,
+                    ["@sysPower"] = systemFaction.System.Power,
                     ["@facName"] = systemFaction.Faction.Name,
                     ["@facAllegiance"] = systemFaction.Faction.Allegiance,
                     ["@facInfluence"] = systemFaction.Influence,

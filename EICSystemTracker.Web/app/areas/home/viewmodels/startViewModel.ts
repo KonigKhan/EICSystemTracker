@@ -3,14 +3,7 @@ import ko from '../../../lib/knockout';
 
 class startViewModel extends PageViewModel {
 
-    public dataSource = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: 'http://edsm.net/api-v1/systems',
-                dataType: "json"
-            }
-        }
-    });
+    public dataSource = [];
 
 
     constructor() {

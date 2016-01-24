@@ -50,6 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="EddbDataTests.cs" />
+    <Compile Include="EDSMDataTests.cs" />
     <Compile Include="EICDataTests.cs" />
     <Compile Include="MySqlDataAdapterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

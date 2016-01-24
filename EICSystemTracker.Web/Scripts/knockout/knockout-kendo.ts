@@ -21,8 +21,9 @@ ko.bindingHandlers['kendoAutoComplete'] = {
         var others = allBindings() || {};
 
         //create AutoComplete UI component
+        $.support.cors = true;
         $(element).kendoAutoComplete({
-            dataTextField: 'name',
+            dataTextField: 'Name',
             minLength: 3,
             filter: "startswith",
             placeholder: "Select System...",

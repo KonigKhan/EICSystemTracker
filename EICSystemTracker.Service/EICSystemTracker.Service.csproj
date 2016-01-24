@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9579CD9E-B17F-4A51-9458-99EEAB06B025}</ProjectGuid>
+    <ProjectGuid>{14EC8891-AEDD-419C-9BAA-4C4D012FB8C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EICSystemTracker.Contracts</RootNamespace>
-    <AssemblyName>EICSystemTracker.Contracts</AssemblyName>
+    <RootNamespace>EICSystemTracker.Service</RootNamespace>
+    <AssemblyName>EICSystemTracker.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,25 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataAdapters\DataAdapterType.cs" />
-    <Compile Include="Data\DataAdapters\IDataAdapter.cs" />
-    <Compile Include="Data\IEICData.cs" />
-    <Compile Include="Data\DataAdapters\Relational\IRelationalDataAdapter.cs" />
-    <Compile Include="Data\DataAdapters\Query\IStoredProcedureConfig.cs" />
-    <Compile Include="domain\Data\DataAdapters\Query\StoredProcedureConfig.cs" />
-    <Compile Include="domain\SystemTracking\EICFaction.cs" />
-    <Compile Include="domain\SystemTracking\EICSystem.cs" />
-    <Compile Include="domain\SystemTracking\EICSystemFaction.cs" />
-    <Compile Include="IEICSystemTrackerService.cs" />
-    <Compile Include="SystemTracking\IEICFaction.cs" />
-    <Compile Include="SystemTracking\IEICSystem.cs" />
+    <Compile Include="EICSystemTrackerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemTracking\IEICSystemFaction.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Generate_dts.ps1" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\EICSystemTracker.Contracts\EICSystemTracker.Contracts.csproj">
+      <Project>{9579CD9E-B17F-4A51-9458-99EEAB06B025}</Project>
+      <Name>EICSystemTracker.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
