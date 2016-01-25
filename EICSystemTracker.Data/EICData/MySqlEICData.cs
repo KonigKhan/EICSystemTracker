@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EICSystemTracker.Contracts.domain.Data.DataAdapters.Query;
+using EICSystemTracker.Contracts.domain.SystemTracking;
 using EICSystemTracker.Contracts.Data;
 using EICSystemTracker.Contracts.Data.DataAdapters.Relational;
 using EICSystemTracker.Contracts.SystemTracking;
@@ -62,6 +64,43 @@ namespace EICSystemTracker.Data.EICData
         public List<IEICFaction> GetAllFactions()
         {
             throw new NotImplementedException();
+        }
+
+        public List<IEICSystemFaction> GetLatestEICSystemFactionTracking()
+        {
+            var sprocConfig = new StoredProcedureConfig
+            {
+                ProcedureName = "get_latestsystemfaction_tracking"
+            };
+
+            var dt = _dataAdapter.ExecuteProcedure(sprocConfig);
+            var eicSystemFactions = dt.Select().Select(row => new EICSystemFaction()
+            {
+                System = new EICSystem()
+                {
+                    Name = row["system_name"].ToString(),
+                    Traffic = int.Parse(row["system_traffic"].ToString()),
+                    Population = int.Parse(row["system_population"].ToString()),
+                    Government = row["system_government"].ToString(),
+                    Allegiance = row["system_allegiance"].ToString(),
+                    State = row["system_state"].ToString(),
+                    Security = row["system_security"].ToString(),
+                    Economy = row["system_economy"].ToString(),
+                    Power = row["system_power"].ToString(),
+                    PowerState = row["system_power_state"].ToString(),
+                },
+                Faction = new EICFaction()
+                {
+                    Name = row["faction_name"].ToString()
+                },
+                Influence = Double.Parse(row["systemfaction_influence"].ToString()),
+                CurrentState = row["systemfaction_currentstate"].ToString(),
+                PendingState = row["systemfaction_pendingstate"].ToString(),
+                RecoveringState = row["systemfaction_recoveringstate"].ToString()
+
+            }).ToList<IEICSystemFaction>();
+
+            return eicSystemFactions;
         }
 
         public void Dispose()

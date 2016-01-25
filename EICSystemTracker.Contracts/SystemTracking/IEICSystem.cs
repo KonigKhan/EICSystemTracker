@@ -10,10 +10,8 @@ namespace EICSystemTracker.Contracts.SystemTracking
     {
         int Id { get; }
         string Name { get; set; }
-        float LocationX { get; set; }
-        float LocationY { get; set; }
-        float LocationZ { get; set; }
-        IEICFaction ControllingFaction { get; set; }
+        string ControllingFaction { get; set; }
+        int Traffic { get; set; }
         int Population { get; set; }
         string Government { get; set; }
         string Allegiance { get; set; }

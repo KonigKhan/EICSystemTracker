@@ -43,5 +43,12 @@ namespace EICSystemTracker.Data.Tests
             // assert
             // if exception, we fail.
         }
+
+        [TestMethod]
+        public void gettlatesttracing_mysql_success_test()
+        {
+            IEICData eicData = EICDataFactory.GetDataAdapter(DataAdapterType.MySql);
+            var systemfactiontrackingdata = eicData.GetLatestEICSystemFactionTracking();
+        }
     }
 }

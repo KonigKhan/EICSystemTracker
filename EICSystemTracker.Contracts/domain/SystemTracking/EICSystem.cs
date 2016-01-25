@@ -7,10 +7,8 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
     {
         public int Id { get; }
         public string Name { get; set; }
-        public float LocationX { get; set; }
-        public float LocationY { get; set; }
-        public float LocationZ { get; set; }
-        public IEICFaction ControllingFaction { get; set; }
+        public string ControllingFaction { get; set; }
+        public int Traffic { get; set; }
         public int Population { get; set; }
         public string Government { get; set; }
         public string Allegiance { get; set; }
@@ -27,10 +25,8 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
         {
             this.Id = system.Id;
             this.Name = system.Name;
-            this.LocationX = system.LocationX;
-            this.LocationY = system.LocationY;
-            this.LocationZ = system.LocationZ;
             this.ControllingFaction = system.ControllingFaction;
+            this.Traffic = system.Traffic;
             this.Population = system.Population;
             this.Government = system.Government;
             this.Allegiance = system.Allegiance;

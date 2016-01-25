@@ -1017,6 +1017,7 @@
     <TypeScriptCompile Include="app\areas\home\manifest.ts" />
     <TypeScriptCompile Include="app\areas\home\viewmodels\startViewModel.ts" />
     <TypeScriptCompile Include="app\areas\systems\controllers\EDStarMapController.ts" />
+    <TypeScriptCompile Include="app\areas\systems\controllers\EICSystemTrackerDataController.ts" />
     <TypeScriptCompile Include="app\areas\systems\manifest.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\systemsViewModel.ts" />
     <TypeScriptCompile Include="app\framework\domain\PageViewModel.ts" />

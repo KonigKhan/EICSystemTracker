@@ -48,6 +48,10 @@
       <Project>{9579CD9E-B17F-4A51-9458-99EEAB06B025}</Project>
       <Name>EICSystemTracker.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EICSystemTracker.Data\EICSystemTracker.Data.csproj">
+      <Project>{958BD696-F7C6-4C40-B758-472174D580FF}</Project>
+      <Name>EICSystemTracker.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

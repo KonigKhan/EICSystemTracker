@@ -1,7 +1,20 @@
 ﻿<div id="systems_startView">
 
     <div class="splash">
-        <div class="title" style="border: solid 1px black; height: 300px;">Systems...</div>
+        <!-- ko foreach: TrackedSystems -->
+        <div class="row">
+            <div class="col-xs-3">System</div>
+            <div class="col-xs-3">Traffic</div>
+            <div class="col-xs-3">Population</div>
+            <div class="col-xs-3">Government</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3" data-bind="text: Name"></div>
+            <div class="col-xs-3" data-bind="text: Traffic"></div>
+            <div class="col-xs-3" data-bind="text: Population"></div>
+            <div class="col-xs-3" data-bind="text: Government"></div>
+        </div>
+        <!-- /ko -->
     </div>
 
 </div>

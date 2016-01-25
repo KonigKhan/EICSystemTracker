@@ -48,9 +48,6 @@ namespace EICSystemTracker.Data.EliteDangerousApiData
             return this.GetSystemsFromApi(false).Select(dto => new EICSystem()
             {
                 Name = dto.name,
-                LocationX = float.Parse(dto.x),
-                LocationY = float.Parse(dto.y),
-                LocationZ = float.Parse(dto.z),
                 ControllingFaction = null,
                 Population = int.Parse(dto.population),
                 Government = dto.government,
@@ -74,6 +71,10 @@ namespace EICSystemTracker.Data.EliteDangerousApiData
         public void AddSystemFactionTracking(IEICSystemFaction systemFaction)
         {
             throw new System.NotImplementedException();
+        }
+        public List<IEICSystemFaction> GetLatestEICSystemFactionTracking()
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
