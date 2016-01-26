@@ -1,18 +1,47 @@
 ﻿<div id="systems_startView">
 
-    <div class="splash">
+    <div class="splash" data-bind="css: {'loader': isLoading }">
+        <h1>Tracked Systems</h1>
         <!-- ko foreach: TrackedSystems -->
         <div class="row">
-            <div class="col-xs-3">System</div>
-            <div class="col-xs-3">Traffic</div>
-            <div class="col-xs-3">Population</div>
-            <div class="col-xs-3">Government</div>
+            <div class="col-xs-10 col-sm-2">
+                <h4>System</h4>
+            </div>
+            <div class="hidden-xs col-sm-1">
+                <h4>Traffic</h4>
+            </div>
+            <div class="hidden-xs col-sm-1">
+                <h4>Population</h4>
+            </div>
+            <div class="hidden-xs col-sm-1">
+                <h4>Government</h4>
+            </div>
+            <div class="hidden-xs col-sm-1">
+                <h4>Security</h4>
+            </div>
+            <div class="hidden-xs col-sm-1">
+                <h4>Allegiance</h4>
+            </div>
+            <div class="hidden-xs col-sm-1">
+                <h4>Power</h4>
+            </div>
+            <div class="col-xs-1">
+                <h4>
+                    Action
+                </h4>
+            </div>
         </div>
         <div class="row">
-            <div class="col-xs-3" data-bind="text: Name"></div>
-            <div class="col-xs-3" data-bind="text: Traffic"></div>
-            <div class="col-xs-3" data-bind="text: Population"></div>
-            <div class="col-xs-3" data-bind="text: Government"></div>
+            <div class="col-xs-10 col-sm-2" data-bind="text: Name"></div>
+            <div class="hidden-xs col-sm-1" data-bind="text: Traffic"></div>
+            <div class="hidden-xs col-sm-1" data-bind="text: Population"></div>
+            <div class="hidden-xs col-sm-1" data-bind="text: Government"></div>
+            <div class="hidden-xs col-sm-1" data-bind="text: Security"></div>
+            <div class="hidden-xs col-sm-1" data-bind="text: Allegiance"></div>
+            <div class="hidden-xs col-sm-1" data-bind="text: Power"></div>
+            <div class="col-xs-1">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </div>
         </div>
         <!-- /ko -->
     </div>

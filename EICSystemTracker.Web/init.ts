@@ -35,6 +35,7 @@ Promise.all([
         System.import('Content/bootstrap.css!css'),
         System.import('Content/kendo/2016.1.112/kendo.common.min.css!css'),
         System.import('Content/kendo/2016.1.112/kendo.default.min.css!css'),
+        System.import('Content/Loader.css!css'),
         System.import('appStyles.css!css'),
 
         // External Plugins.

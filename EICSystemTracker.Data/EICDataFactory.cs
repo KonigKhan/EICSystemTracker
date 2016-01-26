@@ -20,7 +20,7 @@ namespace EICSystemTracker.Data
             // The passed in data adapter only needs to implement the IEICData interface.
             switch (dataAdapterType)
             {
-                case DataAdapterType.MySql: return new EICData.MySqlEICData("localhost", "iller123_eic", "root", "password");
+                case DataAdapterType.MySql: return new EICData.MySqlEICData("pumknnutzeic.ceavysjwdvq1.us-west-2.rds.amazonaws.com", "EICData", "admin", "password");
                 default: return null;
             }
         }

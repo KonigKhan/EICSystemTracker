@@ -9,6 +9,7 @@ class systemsViewModel extends PageViewModel {
 
     public SystemFactions: KnockoutObservableArray<IEICSystemFaction> = ko.observableArray([]);
     public TrackedSystems: KnockoutObservableArray<IEICSystem> = ko.observableArray([]);
+    public isLoading: KnockoutObservable<boolean> = ko.observable(false);
 
     constructor() {
         super();
@@ -18,6 +19,7 @@ class systemsViewModel extends PageViewModel {
     }
 
     private _init(): void {
+        this.isLoading(true);
         eicDataController.GetLatestSystemTrackingData().done((returnData: Array<IEICSystemFaction>) => {
             this.SystemFactions(returnData);
 
@@ -36,6 +38,8 @@ class systemsViewModel extends PageViewModel {
             }
 
             this.TrackedSystems(uniqueSystems);
+        }).always(() => {
+            this.isLoading(false);
         });
     }
 }

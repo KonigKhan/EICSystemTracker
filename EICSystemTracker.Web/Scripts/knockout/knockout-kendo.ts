@@ -32,3 +32,23 @@ ko.bindingHandlers['kendoAutoComplete'] = {
         });
     }
 };
+
+//ko.bindingHandlers['kendoMultiSelect'] = {
+//    init: (element, valueAccessor, allBindings, viewModel, bindingContext) => {
+
+//        // First get the latest data that we're bound to
+//        var options = valueAccessor() || {};
+//        var others = allBindings() || {};
+
+//        //create AutoComplete UI component
+//        $.support.cors = true;
+//        $(element).kendoAutoComplete({
+//            dataTextField: 'Name',
+//            minLength: 3,
+//            filter: "startswith",
+//            placeholder: "Select System...",
+//            dataSource: options.ds
+//            //separator: ", "
+//        });
+//    }
+//};

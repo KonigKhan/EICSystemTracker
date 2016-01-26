@@ -364,6 +364,7 @@
     <Content Include="Content\kendo\2016.1.112\Uniform\sprite_2x.png" />
     <Content Include="Content\kendo\2016.1.112\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2016.1.112\Uniform\sprite_kpi_2x.png" />
+    <Content Include="Content\Loader.css" />
     <Content Include="Content\site_plugins.css">
       <DependentUpon>site_plugins.less</DependentUpon>
     </Content>

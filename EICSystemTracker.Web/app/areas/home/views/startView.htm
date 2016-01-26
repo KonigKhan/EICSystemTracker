@@ -1,13 +1,86 @@
 ﻿<div id="home_startView">
 
     <div class="splash">
-        <div class="title" style="border: solid 1px black; height: 300px;">EIC System Tracker</div>
+        <div class="title">EIC System Tracker [vAlpha-1.0]</div>
+        <br/>
 
-        <!--<input data-bind="kendoColorPicker: { palette: colorPalette, value: selectedChoice }"/>
-        <hr/>
-        Selected: <strong data-bind="text: selectedChoice"> </strong>-->
-
-        <input id="autocomplete" data-bind="kendoAutoComplete: { ds: dataSource }"/>
+        <div style="width: 32em; border: solid 1px #F6F6F6; padding: 10px;" data-bind="css: {'loader': isLoading }">
+            <h4>System Info</h4>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Name</div>
+                <div class="col-xs-8">
+                    <input type="text" class="col-xs-12" data-bind="value: systemName"/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Traffic</div>
+                <div class="col-xs-8">
+                    <input type="number" class="col-xs-12" data-bind="value: traffic"/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Population</div>
+                <div class="col-xs-8">
+                    <input type="number" class="col-xs-12" data-bind="value: population"/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Security</div>
+                <div class="col-xs-8">
+                    <input type="text" class="col-xs-12" data-bind="value: security"/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Allegiance</div>
+                <div class="col-xs-8">
+                    <input type="text" class="col-xs-12" data-bind="value: allegiance"/>
+                </div>
+            </div>
+            <br/>
+            <h4>Party Info</h4>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Name</div>
+                <div class="col-xs-8">
+                    <input type="text" class="col-xs-12" data-bind="value: partyName"/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Influence</div>
+                <div class="col-xs-8">
+                    <input type="number" class="col-xs-12" data-bind="value: partyInfluence"/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Current State</div>
+                <div class="col-xs-8">
+                    <input type="text" class="col-xs-12" data-bind="value: partyState"/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Pending State</div>
+                <div class="col-xs-8">
+                    <input type="text" class="col-xs-12" data-bind="value: partyPendingState"/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Recovering State</div>
+                <div class="col-xs-8">
+                    <input type="text" class="col-xs-12" data-bind="value: partyRecoveringState"/>
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">CMDR Name</div>
+                <div class="col-xs-8">
+                    <input type="text" class="col-xs-12" data-bind="value: cmdrName"/>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-default pull-right">Submit</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
