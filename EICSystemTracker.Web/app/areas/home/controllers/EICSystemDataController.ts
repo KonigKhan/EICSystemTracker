@@ -26,11 +26,11 @@ class EICSystemDataController implements IEICSystemTrackerService {
             type: "POST",
             url: "/api/EICSystemTrackerData/UpdateSystemFactionInfo",
             data: systemFaction,
-            dataType: 'json',
-            success: (result) => {
-                console.debug("UpdateSystemFactionInfo Result: " + JSON.stringify(result));
-                dfd.resolve(result);
-            }
+            dataType: 'json'
+        }).done((res) => {
+            dfd.resolve(res);
+        }).fail((res) => {
+            dfd.reject(res);
         });
 
 

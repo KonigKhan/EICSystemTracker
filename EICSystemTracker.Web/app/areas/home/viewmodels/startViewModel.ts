@@ -104,9 +104,31 @@ class startViewModel extends PageViewModel {
         this.isLoading(true);
         eicDataController.UpdateSystemFactionInfo(submitSystemFaction).done((result) => {
             console.debug("eicDataController.UpdateSystemFactionInfo Result: " + JSON.stringify(result));
-        }).always(() => {
+            this.resetValues();
+            this.isLoading(false);
+        }).fail((res) => {
+            //console.debug("eicDataController.UpdateSystemFactionInfo Failure: " + JSON.stringify(res));
+            var errorobj = JSON.parse(res.error().responseText);
+            alert("Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage);
             this.isLoading(false);
         });
+
+    }
+
+    private resetValues() {
+
+        this.systemName("");
+        this.traffic(0);
+        this.population(0);
+        this.security("");
+        this.government("");
+        this.allegiance("");
+        this.partyName("");
+        this.partyInfluence(0);
+        this.partyState("");
+        this.partyPendingStates([]);
+        this.partyRecoveringStates([]);
+        this.partyAllegiance("");
     }
 }
 

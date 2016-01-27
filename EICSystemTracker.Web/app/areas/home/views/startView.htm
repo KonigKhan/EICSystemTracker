@@ -1,11 +1,11 @@
 ﻿<div id="home_startView">
 
-    <div class="splash">
+    <div class="splash" data-bind="css: {'loader': isLoading }">
+        <!-- ko if: !isLoading() -->
         <div class="title">EIC System Tracker [vAlpha-0.0.1]</div>
         <br/>
 
-        <div class="col-xs-12 col-md-4 col-lg-3" style="border: solid 1px #F6F6F6; padding: 10px;" data-bind="css: {'loader': isLoading }">
-            <!-- ko if: !isLoading() -->
+        <div class="col-xs-12 col-md-4 col-lg-3" style="border: solid 1px #F6F6F6; padding: 10px;">
             <h4>System Info</h4>
             <div class="row" style="padding-bottom: 5px;">
                 <div class="col-xs-4">Name</div>
@@ -48,7 +48,7 @@
             <div class="row" style="padding-bottom: 5px;">
                 <div class="col-xs-4">Allegiance</div>
                 <div class="col-xs-8">
-                    <input data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select an Allegiance...', dataSource: allegianceOptions, value: partyAllegiance}" />
+                    <input data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select an Allegiance...', dataSource: allegianceOptions, value: partyAllegiance}"/>
                 </div>
             </div>
             <div class="row" style="padding-bottom: 5px;">
@@ -87,8 +87,7 @@
                     <button class="btn btn-default pull-right" data-bind="click: submitData">Submit</button>
                 </div>
             </div>
-            <!-- /ko -->
         </div>
+        <!-- /ko -->
     </div>
-
 </div>
