@@ -1,10 +1,11 @@
 ﻿<div id="home_startView">
 
     <div class="splash">
-        <div class="title">EIC System Tracker [vAlpha-1.0]</div>
+        <div class="title">EIC System Tracker [vAlpha-0.0.1]</div>
         <br/>
 
-        <div style="width: 32em; border: solid 1px #F6F6F6; padding: 10px;" data-bind="css: {'loader': isLoading }">
+        <div class="col-xs-12 col-md-4 col-lg-3" style="border: solid 1px #F6F6F6; padding: 10px;" data-bind="css: {'loader': isLoading }">
+            <!-- ko if: !isLoading() -->
             <h4>System Info</h4>
             <div class="row" style="padding-bottom: 5px;">
                 <div class="col-xs-4">Name</div>
@@ -27,13 +28,13 @@
             <div class="row" style="padding-bottom: 5px;">
                 <div class="col-xs-4">Security</div>
                 <div class="col-xs-8">
-                    <input type="text" class="col-xs-12" data-bind="value: security"/>
+                    <input data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select Security...', dataSource: securityOptions, value: security}"/>
                 </div>
             </div>
             <div class="row" style="padding-bottom: 5px;">
                 <div class="col-xs-4">Allegiance</div>
                 <div class="col-xs-8">
-                    <input type="text" class="col-xs-12" data-bind="value: allegiance"/>
+                    <input data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select an Allegiance...', dataSource: allegianceOptions, value: allegiance}"/>
                 </div>
             </div>
             <br/>
@@ -45,6 +46,12 @@
                 </div>
             </div>
             <div class="row" style="padding-bottom: 5px;">
+                <div class="col-xs-4">Allegiance</div>
+                <div class="col-xs-8">
+                    <input data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select an Allegiance...', dataSource: allegianceOptions, value: partyAllegiance}" />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 5px;">
                 <div class="col-xs-4">Influence</div>
                 <div class="col-xs-8">
                     <input type="number" class="col-xs-12" data-bind="value: partyInfluence"/>
@@ -53,19 +60,19 @@
             <div class="row" style="padding-bottom: 5px;">
                 <div class="col-xs-4">Current State</div>
                 <div class="col-xs-8">
-                    <input type="text" class="col-xs-12" data-bind="value: partyState"/>
+                    <input data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select a State...', dataSource: stateOptions, value: partyState}"/>
                 </div>
             </div>
             <div class="row" style="padding-bottom: 5px;">
                 <div class="col-xs-4">Pending State</div>
                 <div class="col-xs-8">
-                    <input type="text" class="col-xs-12" data-bind="value: partyPendingState"/>
+                    <select multiple="multiple" data-bind="kendoMultiSelect: { dataTextField: '', dataValueField: '', dataSource: stateOptions, minLength: 3, maxSelectedItems: 3, filter: 'startswith', ignoreCase: true, placeholder: 'Select up to 3...', value:  partyPendingStates}"></select>
                 </div>
             </div>
             <div class="row" style="padding-bottom: 5px;">
                 <div class="col-xs-4">Recovering State</div>
                 <div class="col-xs-8">
-                    <input type="text" class="col-xs-12" data-bind="value: partyRecoveringState"/>
+                    <select multiple="multiple" data-bind="kendoMultiSelect: { dataTextField: '', dataValueField: '', dataSource: stateOptions, minLength: 3, maxSelectedItems: 3, filter: 'startswith', ignoreCase: true, placeholder: 'Select up to 3...', value:  partyRecoveringStates}"></select>
                 </div>
             </div>
             <div class="row" style="padding-bottom: 5px;">
@@ -77,9 +84,10 @@
             <br/>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-default pull-right">Submit</button>
+                    <button class="btn btn-default pull-right" data-bind="click: submitData">Submit</button>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </div>
 

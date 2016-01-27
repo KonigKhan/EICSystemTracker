@@ -6,15 +6,21 @@ interface IEICSystemTrackerService{
   /*methods*/
 	GetSystems?():JQueryPromise<any>;
 	GetLatestSystemTrackingData?():JQueryPromise<any>;
+	UpdateSystemFactionInfo?(systemFaction:IEICSystemFaction/*IEICSystemFaction*/):JQueryPromise<void>;
 }
 
 
-/*EICSystemTracker.Contracts.SystemTracking.IEICFaction*/
-interface IEICFaction{
+/*EICSystemTracker.Contracts.SystemTracking.IEICSystemFaction*/
+interface IEICSystemFaction{
   /*properties*/
 	Id: number; /*System.Int32*/
-	Name: string; /*System.String*/
-	Allegiance: string; /*System.String*/
+	System: IEICSystem; /*EICSystemTracker.Contracts.SystemTracking.IEICSystem*/
+	Faction: IEICFaction; /*EICSystemTracker.Contracts.SystemTracking.IEICFaction*/
+	Influence: number; /*System.Double*/
+	CurrentState: string; /*System.String*/
+	PendingState: string; /*System.String*/
+	RecoveringState: string; /*System.String*/
+	UpdatedBy: string; /*System.String*/
 
 }
 
@@ -40,17 +46,12 @@ interface IEICSystem{
 }
 
 
-/*EICSystemTracker.Contracts.SystemTracking.IEICSystemFaction*/
-interface IEICSystemFaction{
+/*EICSystemTracker.Contracts.SystemTracking.IEICFaction*/
+interface IEICFaction{
   /*properties*/
 	Id: number; /*System.Int32*/
-	System: IEICSystem; /*EICSystemTracker.Contracts.SystemTracking.IEICSystem*/
-	Faction: IEICFaction; /*EICSystemTracker.Contracts.SystemTracking.IEICFaction*/
-	Influence: number; /*System.Double*/
-	CurrentState: string; /*System.String*/
-	PendingState: string; /*System.String*/
-	RecoveringState: string; /*System.String*/
-	UpdatedBy: string; /*System.String*/
+	Name: string; /*System.String*/
+	Allegiance: string; /*System.String*/
 
 }
 
