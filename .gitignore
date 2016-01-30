@@ -20,3 +20,12 @@
 /EICSystemTracker.Data/obj
 /EICSystemTracker.Data.Tests/obj
 /EICSystemTracker.Data.Tests/bin
+*.pdb
+*.dll
+Debug
+Release
+/EICSystemTracker.Web/init.js
+/EICSystemTracker.Web/init.js.map
+/EICSystemTracker.Web/manifest.js
+/EICSystemTracker.Web/manifest.js.map
+/EICSystemTracker.sln.DotSettings
