@@ -35,6 +35,7 @@
       <DependentUpon>homeviewstyles.css</DependentUpon>
     </Content>
     <Content Include="app\areas\home\views\startView.htm" />
+    <Content Include="app\areas\systems\views\systemView.htm" />
     <Content Include="app\areas\systems\styles\systemsviewstyles.css">
       <DependentUpon>systemsviewstyles.less</DependentUpon>
     </Content>
@@ -42,6 +43,7 @@
       <DependentUpon>systemsviewstyles.css</DependentUpon>
     </Content>
     <Content Include="app\areas\systems\views\systemsView.htm" />
+    <Content Include="app\areas\systems\views\trackedSystemsView.htm" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1018,10 +1020,12 @@
     <TypeScriptCompile Include="app\areas\home\controllers\EICSystemDataController.ts" />
     <TypeScriptCompile Include="app\areas\home\manifest.ts" />
     <TypeScriptCompile Include="app\areas\home\viewmodels\startViewModel.ts" />
+    <TypeScriptCompile Include="app\areas\systems\viewmodels\systemViewModel.ts" />
     <TypeScriptCompile Include="app\areas\systems\controllers\EDStarMapController.ts" />
     <TypeScriptCompile Include="app\areas\systems\controllers\EICSystemTrackerDataController.ts" />
     <TypeScriptCompile Include="app\areas\systems\manifest.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\systemsViewModel.ts" />
+    <TypeScriptCompile Include="app\areas\systems\viewmodels\trackedSystemsViewModel.ts" />
     <TypeScriptCompile Include="app\framework\domain\PageViewModel.ts" />
     <TypeScriptCompile Include="app\framework\SystemUtils.ts" />
     <TypeScriptCompile Include="app\lib\jquery.ts" />
