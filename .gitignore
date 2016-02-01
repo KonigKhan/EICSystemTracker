@@ -33,3 +33,6 @@ Release
 /EICSystemTracker.sln.DotSettings
 
 /EICSystemTracker.Web/*.js
+/EICSystemTracker.Web/*.js.map
+/EICSystemTracker.Web/Content/site_plugins.css
+/EICSystemTracker.Web/Content/site_plugins.min.css

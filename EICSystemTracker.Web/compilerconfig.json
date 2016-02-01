@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "appStyles.css",
+    "inputFile": "appStyles.less"
+  },
+  {
+    "outputFile": "Content/site_plugins.css",
+    "inputFile": "Content/site_plugins.less"
+  }
+]
