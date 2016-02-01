@@ -17,6 +17,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -1038,7 +1040,7 @@
     <TypeScriptCompile Include="Scripts\Typings\eic\eicsystemtracker.web.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\es6Promise\es6Promise.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Scripts\Typings\kendo\kendo-ui.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\kendo-ui\kendo-ui.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\pager\pager.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\systemjs\systemjs.d.ts" />
@@ -1171,4 +1173,11 @@
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="..\packages\BuildWebCompiler.1.10.300\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.10.300\build\BuildWebCompiler.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\BuildWebCompiler.1.10.300\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildWebCompiler.1.10.300\build\BuildWebCompiler.targets'))" />
+  </Target>
 </Project>
