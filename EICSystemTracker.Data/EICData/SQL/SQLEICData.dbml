@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EICData" Class="SQLEICDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com;Initial Catalog=EICData;Persist Security Info=True;User ID=admin" SettingsObjectName="EICSystemTracker.Data.Properties.Settings" SettingsPropertyName="EICDataConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Faction" Member="Factions">
+    <Type Name="Faction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Faction_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="Faction" Type="Track_SystemFaction" />
+      <Association Name="Faction_Track_Faction" Member="Track_Factions" ThisKey="Id" OtherKey="Faction" Type="Track_Faction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Track_SystemFaction" Member="Track_SystemFactions">
+    <Type Name="Track_SystemFaction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="System" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Faction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Influence" Type="System.Decimal" DbType="Decimal(3,1)" CanBeNull="true" />
+      <Column Name="CurrentState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PendingState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RecoveringState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Faction_Track_SystemFaction" Member="Faction1" ThisKey="Faction" OtherKey="Id" Type="Faction" IsForeignKey="true" />
+      <Association Name="System_Track_SystemFaction" Member="System1" ThisKey="System" OtherKey="Id" Type="System" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.System" Member="Systems">
+    <Type Name="System">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="System_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="System" Type="Track_SystemFaction" />
+      <Association Name="System_Track_System" Member="Track_Systems" ThisKey="Id" OtherKey="System" Type="Track_System" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Track_Faction" Member="Track_Factions">
+    <Type Name="Track_Faction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Faction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Allegiance" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Faction_Track_Faction" Member="Faction1" ThisKey="Faction" OtherKey="Id" Type="Faction" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Track_System" Member="Track_Systems">
+    <Type Name="Track_System">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="System" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ControllingFaction" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Traffic" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Population" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Government" Type="System.String" DbType="NVarChar(75)" CanBeNull="true" />
+      <Column Name="Allegiance" Type="System.String" DbType="NVarChar(75)" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Security" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Economy" Type="System.String" DbType="NVarChar(75)" CanBeNull="true" />
+      <Column Name="ControllingPower" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ControllingPowerState" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="NeedPermit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="System_Track_System" Member="System1" ThisKey="System" OtherKey="Id" Type="System" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

@@ -4,6 +4,5 @@
     {
         int Id { get; }
         string Name { get; set; }
-        string Allegiance { get; set; }
     }
 }
