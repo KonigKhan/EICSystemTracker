@@ -21,17 +21,17 @@ namespace EICSystemTracker.Service
 
         public List<IEICSystemFaction> GetLatestSystemTrackingData()
         {
-            using (var mySqlAdapter = EICDataFactory.GetDataAdapter(DataAdapterType.MySql))
+            using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
             {
-                return mySqlAdapter.GetLatestEICSystemFactionTracking();
+                return da.GetLatestEICSystemFactionTracking();
             }
         }
 
         public void UpdateSystemFactionInfo(IEICSystemFaction systemFaction)
         {
-            using (var mySqlAdapter = EICDataFactory.GetDataAdapter(DataAdapterType.MySql))
+            using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
             {
-                mySqlAdapter.AddSystemFactionTracking(systemFaction);
+                da.AddSystemFactionTracking(systemFaction);
             }
         }
     }

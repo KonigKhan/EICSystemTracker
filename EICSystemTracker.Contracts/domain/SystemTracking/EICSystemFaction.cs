@@ -12,5 +12,6 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
         public string PendingState { get; set; }
         public string RecoveringState { get; set; }
         public string UpdatedBy { get; set; }
+        public System.DateTime LastUpdated { get; set; }
     }
 }

@@ -18,9 +18,19 @@ namespace EICSystemTracker.Data
         {
             // This will allow for easier switching between data adapters if the application is decided to change source types (Sql, Nosql, Text, etc)
             // The passed in data adapter only needs to implement the IEICData interface.
+
+            //builder.DataSource = "";
+            //builder.InitialCatalog = "EICData";
+            //builder.UserID = "admin";
+            //builder.Password = "Wur3rat6";
+
             switch (dataAdapterType)
             {
-                case DataAdapterType.MySql: return new EICData.MySqlEICData("[SERVER]", "[DB]", "[USER]", "[PWD]");
+                case DataAdapterType.MySql: return new EICData.MySqlEICData("[SERVER]", "[DB]", "[USER]", "[PWD]"); break;
+                case DataAdapterType.MSSql: return new EICData.SQLEICData(server: "pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com", 
+                                                                          dataBase: "EICData", 
+                                                                          userName: "admin", 
+                                                                          password: "Wur3rat6");
                 default: return null;
             }
         }

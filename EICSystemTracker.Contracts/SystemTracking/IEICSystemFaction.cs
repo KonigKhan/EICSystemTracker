@@ -16,5 +16,6 @@ namespace EICSystemTracker.Contracts.SystemTracking
         string PendingState { get; set; }
         string RecoveringState { get; set; }
         string UpdatedBy { get; set; }
+        DateTime LastUpdated { get; set; }
     }
 }

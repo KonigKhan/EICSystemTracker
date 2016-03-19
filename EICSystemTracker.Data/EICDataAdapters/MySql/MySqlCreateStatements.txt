@@ -1,0 +1,50 @@
+﻿USE EICData;
+
+DELIMITER $$
+CREATE PROCEDURE `get_latestsystemfaction_tracking`()
+BEGIN
+select 
+	
+    es.`name` `system_name`,
+    est.traffic `system_traffic`,
+    est.population `system_population`,
+    est.government `system_government`,
+    est.`allegiance` `system_allegiance`,
+    est.state `system_state`,
+    est.`security` `system_security`,
+    est.economy `system_economy`,
+    est.power `system_power`,
+    est.power_state `system_power_state`,
+    
+    ef.`name` `faction_name`,
+    
+	eft1.influence `systemfaction_influence`, 
+    eft1.currentstate `systemfaction_currentstate`, 
+    eft1.pendingstate `systemfaction_pendingstate`,
+    eft1.recoveringstate `systemfaction_recoveringstate`, 
+    eft1.`timestamp`,
+    eft1.updatedby
+from eicsystemfaction_tracking eft1
+	join (select 
+			eicsystem, 
+            eicfaction, MAX(`timestamp`) `timestamp` 
+		  from eicsystemfaction_tracking 
+          group by eicsystem, eicfaction
+		 ) eft2
+		on eft1.eicsystem = eft2.eicsystem and eft1.eicfaction = eft2.eicfaction and eft1.`timestamp` = eft2.`timestamp`
+	join (select st1.* 
+			from eicsystem_tracking st1
+				join (select 
+							systemid, 
+							MAX(`timestamp`) `timestamp`
+						from eicsystem_tracking
+						group by systemid
+					) st2
+				on st1.systemid = st2.systemid and st1.`timestamp` = st2.`timestamp`) est
+		on eft1.eicsystem = est.systemid
+     left join eicsystem es 
+		on es.id = eft1.eicsystem
+	left join eicfaction ef
+		on ef.id = eft1.eicfaction;
+END$$
+DELIMITER ;

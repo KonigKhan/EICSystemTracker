@@ -13,7 +13,6 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
         {
             this.Id = eicFaction.Id;
             this.Name = eicFaction.Name;
-            this.Allegiance = eicFaction.Allegiance;
         }
     }
 }

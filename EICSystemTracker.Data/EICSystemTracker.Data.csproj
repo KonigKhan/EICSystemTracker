@@ -54,15 +54,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EICDataFactory.cs" />
-    <Compile Include="EICDataAdapters\MySqlEICDataAdapter.cs" />
-    <Compile Include="EICData\MySqlEICData.cs" />
-    <Compile Include="EICData\SQLEICData.cs" />
-    <Compile Include="EICData\SQL\SQLEICData.designer.cs">
+    <Compile Include="EICDataAdapters\MSSql\MSSqlEICData.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SQLEICData.dbml</DependentUpon>
+      <DependentUpon>MSSqlEICData.dbml</DependentUpon>
     </Compile>
+    <Compile Include="EICDataFactory.cs" />
+    <Compile Include="EICDataAdapters\MySql\MySqlEICDataAdapter.cs" />
+    <Compile Include="EICData\MySqlEICData.cs" />
+    <Compile Include="EICData\SQLEICData.cs" />
     <Compile Include="EliteDangerousApiData\EddbData.cs" />
     <Compile Include="EliteDangerousApiData\EDSMData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,9 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="EICData\SQL\SQLEICData.dbml">
+    <None Include="EICDataAdapters\MSSql\MSSqlEICData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>SQLEICData.designer.cs</LastGenOutput>
+      <LastGenOutput>MSSqlEICData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -92,14 +92,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EICDataAdapters\MySqlCreateStatements.txt" />
+    <Content Include="EICDataAdapters\MySql\MySqlCreateStatements.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="EICData\SQL\SQLEICData.dbml.layout">
-      <DependentUpon>SQLEICData.dbml</DependentUpon>
+    <None Include="EICDataAdapters\MSSql\MSSqlEICData.dbml.layout">
+      <DependentUpon>MSSqlEICData.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

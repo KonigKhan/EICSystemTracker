@@ -43,7 +43,6 @@ namespace EICSystemTracker.Data.EICData
                     ["@sysSecurity"] = systemFaction.System.Security,
                     ["@sysPower"] = systemFaction.System.Power,
                     ["@facName"] = systemFaction.Faction.Name,
-                    ["@facAllegiance"] = systemFaction.Faction.Allegiance,
                     ["@facInfluence"] = systemFaction.Influence,
                     ["@facCurrentState"] = systemFaction.CurrentState,
                     ["@facPendingState"] = systemFaction.PendingState,

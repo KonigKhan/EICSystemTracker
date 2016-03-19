@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EICSystemTracker.Data.EICData.SQL
+namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -23,22 +23,22 @@ namespace EICSystemTracker.Data.EICData.SQL
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="EICData")]
-	public partial class SQLEICDataDataContext : System.Data.Linq.DataContext
+	public partial class MSSqlEICDataDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertFaction(Faction instance);
-    partial void UpdateFaction(Faction instance);
-    partial void DeleteFaction(Faction instance);
+    partial void InsertEDFaction(EDFaction instance);
+    partial void UpdateEDFaction(EDFaction instance);
+    partial void DeleteEDFaction(EDFaction instance);
     partial void InsertTrack_SystemFaction(Track_SystemFaction instance);
     partial void UpdateTrack_SystemFaction(Track_SystemFaction instance);
     partial void DeleteTrack_SystemFaction(Track_SystemFaction instance);
-    partial void InsertSystem(System instance);
-    partial void UpdateSystem(System instance);
-    partial void DeleteSystem(System instance);
+    partial void InsertEDSystem(EDSystem instance);
+    partial void UpdateEDSystem(EDSystem instance);
+    partial void DeleteEDSystem(EDSystem instance);
     partial void InsertTrack_Faction(Track_Faction instance);
     partial void UpdateTrack_Faction(Track_Faction instance);
     partial void DeleteTrack_Faction(Track_Faction instance);
@@ -47,41 +47,41 @@ namespace EICSystemTracker.Data.EICData.SQL
     partial void DeleteTrack_System(Track_System instance);
     #endregion
 		
-		public SQLEICDataDataContext() : 
+		public MSSqlEICDataDataContext() : 
 				base(global::EICSystemTracker.Data.Properties.Settings.Default.EICDataConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public SQLEICDataDataContext(string connection) : 
+		public MSSqlEICDataDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public SQLEICDataDataContext(System.Data.IDbConnection connection) : 
+		public MSSqlEICDataDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public SQLEICDataDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public MSSqlEICDataDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public SQLEICDataDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public MSSqlEICDataDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Faction> Factions
+		public System.Data.Linq.Table<EDFaction> EDFactions
 		{
 			get
 			{
-				return this.GetTable<Faction>();
+				return this.GetTable<EDFaction>();
 			}
 		}
 		
@@ -93,11 +93,11 @@ namespace EICSystemTracker.Data.EICData.SQL
 			}
 		}
 		
-		public System.Data.Linq.Table<System> Systems
+		public System.Data.Linq.Table<EDSystem> EDSystems
 		{
 			get
 			{
-				return this.GetTable<System>();
+				return this.GetTable<EDSystem>();
 			}
 		}
 		
@@ -119,7 +119,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Faction")]
-	public partial class Faction : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class EDFaction : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -142,14 +142,14 @@ namespace EICSystemTracker.Data.EICData.SQL
     partial void OnNameChanged();
     #endregion
 		
-		public Faction()
+		public EDFaction()
 		{
 			this._Track_SystemFactions = new EntitySet<Track_SystemFaction>(new Action<Track_SystemFaction>(this.attach_Track_SystemFactions), new Action<Track_SystemFaction>(this.detach_Track_SystemFactions));
 			this._Track_Factions = new EntitySet<Track_Faction>(new Action<Track_Faction>(this.attach_Track_Factions), new Action<Track_Faction>(this.detach_Track_Factions));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -238,25 +238,25 @@ namespace EICSystemTracker.Data.EICData.SQL
 		private void attach_Track_SystemFactions(Track_SystemFaction entity)
 		{
 			this.SendPropertyChanging();
-			entity.Faction1 = this;
+			entity.EDFaction = this;
 		}
 		
 		private void detach_Track_SystemFactions(Track_SystemFaction entity)
 		{
 			this.SendPropertyChanging();
-			entity.Faction1 = null;
+			entity.EDFaction = null;
 		}
 		
 		private void attach_Track_Factions(Track_Faction entity)
 		{
 			this.SendPropertyChanging();
-			entity.Faction1 = this;
+			entity.EDFaction = this;
 		}
 		
 		private void detach_Track_Factions(Track_Faction entity)
 		{
 			this.SendPropertyChanging();
-			entity.Faction1 = null;
+			entity.EDFaction = null;
 		}
 	}
 	
@@ -284,9 +284,9 @@ namespace EICSystemTracker.Data.EICData.SQL
 		
 		private string _UpdateBy;
 		
-		private EntityRef<Faction> _Faction1;
+		private EntityRef<EDFaction> _Faction1;
 		
-		private EntityRef<System> _System1;
+		private EntityRef<EDSystem> _System1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -314,8 +314,8 @@ namespace EICSystemTracker.Data.EICData.SQL
 		
 		public Track_SystemFaction()
 		{
-			this._Faction1 = default(EntityRef<Faction>);
-			this._System1 = default(EntityRef<System>);
+			this._Faction1 = default(EntityRef<EDFaction>);
+			this._System1 = default(EntityRef<EDSystem>);
 			OnCreated();
 		}
 		
@@ -508,7 +508,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_SystemFaction", Storage="_Faction1", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
-		public Faction Faction1
+		public EDFaction EDFaction
 		{
 			get
 			{
@@ -516,7 +516,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 			}
 			set
 			{
-				Faction previousValue = this._Faction1.Entity;
+				EDFaction previousValue = this._Faction1.Entity;
 				if (((previousValue != value) 
 							|| (this._Faction1.HasLoadedOrAssignedValue == false)))
 				{
@@ -536,13 +536,13 @@ namespace EICSystemTracker.Data.EICData.SQL
 					{
 						this._Faction = default(int);
 					}
-					this.SendPropertyChanged("Faction1");
+					this.SendPropertyChanged("EDFaction");
 				}
 			}
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_SystemFaction", Storage="_System1", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
-		public System System1
+		public EDSystem EDSystem
 		{
 			get
 			{
@@ -550,7 +550,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 			}
 			set
 			{
-				System previousValue = this._System1.Entity;
+				EDSystem previousValue = this._System1.Entity;
 				if (((previousValue != value) 
 							|| (this._System1.HasLoadedOrAssignedValue == false)))
 				{
@@ -570,7 +570,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 					{
 						this._System = default(int);
 					}
-					this.SendPropertyChanged("System1");
+					this.SendPropertyChanged("EDSystem");
 				}
 			}
 		}
@@ -597,7 +597,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.System")]
-	public partial class System : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class EDSystem : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -620,7 +620,7 @@ namespace EICSystemTracker.Data.EICData.SQL
     partial void OnNameChanged();
     #endregion
 		
-		public System()
+		public EDSystem()
 		{
 			this._Track_SystemFactions = new EntitySet<Track_SystemFaction>(new Action<Track_SystemFaction>(this.attach_Track_SystemFactions), new Action<Track_SystemFaction>(this.detach_Track_SystemFactions));
 			this._Track_Systems = new EntitySet<Track_System>(new Action<Track_System>(this.attach_Track_Systems), new Action<Track_System>(this.detach_Track_Systems));
@@ -716,25 +716,25 @@ namespace EICSystemTracker.Data.EICData.SQL
 		private void attach_Track_SystemFactions(Track_SystemFaction entity)
 		{
 			this.SendPropertyChanging();
-			entity.System1 = this;
+			entity.EDSystem = this;
 		}
 		
 		private void detach_Track_SystemFactions(Track_SystemFaction entity)
 		{
 			this.SendPropertyChanging();
-			entity.System1 = null;
+			entity.EDSystem = null;
 		}
 		
 		private void attach_Track_Systems(Track_System entity)
 		{
 			this.SendPropertyChanging();
-			entity.System1 = this;
+			entity.EDSystem = this;
 		}
 		
 		private void detach_Track_Systems(Track_System entity)
 		{
 			this.SendPropertyChanging();
-			entity.System1 = null;
+			entity.EDSystem = null;
 		}
 	}
 	
@@ -754,7 +754,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 		
 		private string _UpdateBy;
 		
-		private EntityRef<Faction> _Faction1;
+		private EntityRef<EDFaction> _Faction1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -774,11 +774,11 @@ namespace EICSystemTracker.Data.EICData.SQL
 		
 		public Track_Faction()
 		{
-			this._Faction1 = default(EntityRef<Faction>);
+			this._Faction1 = default(EntityRef<EDFaction>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -883,7 +883,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_Faction", Storage="_Faction1", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
-		public Faction Faction1
+		public EDFaction EDFaction
 		{
 			get
 			{
@@ -891,7 +891,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 			}
 			set
 			{
-				Faction previousValue = this._Faction1.Entity;
+				EDFaction previousValue = this._Faction1.Entity;
 				if (((previousValue != value) 
 							|| (this._Faction1.HasLoadedOrAssignedValue == false)))
 				{
@@ -911,7 +911,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 					{
 						this._Faction = default(int);
 					}
-					this.SendPropertyChanged("Faction1");
+					this.SendPropertyChanged("EDFaction");
 				}
 			}
 		}
@@ -973,7 +973,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 		
 		private string _UpdateBy;
 		
-		private EntityRef<System> _System1;
+		private EntityRef<EDSystem> _System1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1013,11 +1013,11 @@ namespace EICSystemTracker.Data.EICData.SQL
 		
 		public Track_System()
 		{
-			this._System1 = default(EntityRef<System>);
+			this._System1 = default(EntityRef<EDSystem>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -1322,7 +1322,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_System", Storage="_System1", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
-		public System System1
+		public EDSystem EDSystem
 		{
 			get
 			{
@@ -1330,7 +1330,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 			}
 			set
 			{
-				System previousValue = this._System1.Entity;
+				EDSystem previousValue = this._System1.Entity;
 				if (((previousValue != value) 
 							|| (this._System1.HasLoadedOrAssignedValue == false)))
 				{
@@ -1350,7 +1350,7 @@ namespace EICSystemTracker.Data.EICData.SQL
 					{
 						this._System = default(int);
 					}
-					this.SendPropertyChanged("System1");
+					this.SendPropertyChanged("EDSystem");
 				}
 			}
 		}
