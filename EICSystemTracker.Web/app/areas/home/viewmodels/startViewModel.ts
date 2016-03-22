@@ -1,6 +1,7 @@
 ﻿import PageViewModel from '../../../framework/domain/PageViewModel';
 import ko from '../../../lib/knockout';
 import eicDataController from '../controllers/EICSystemDataController';
+import trackingData from './factionTrackingViewModel';
 
 class startViewModel extends PageViewModel {
 
@@ -53,8 +54,7 @@ class startViewModel extends PageViewModel {
     public partyAllegiance: KnockoutObservable<string> = ko.observable("");
 
     public cmdrName: KnockoutObservable<string> = ko.observable("");
-
-
+    public factions: KnockoutObservableArray<trackingData> = ko.observableArray([]);
 
     constructor() {
         super();
@@ -104,7 +104,6 @@ class startViewModel extends PageViewModel {
         this.isLoading(true);
         eicDataController.UpdateSystemFactionInfo(submitSystemFaction).done((result) => {
             console.debug("eicDataController.UpdateSystemFactionInfo Result: " + JSON.stringify(result));
-            this.resetValues();
             this.isLoading(false);
         }).fail((res) => {
             //console.debug("eicDataController.UpdateSystemFactionInfo Failure: " + JSON.stringify(res));
@@ -115,20 +114,26 @@ class startViewModel extends PageViewModel {
 
     }
 
-    private resetValues() {
+    public addFaction = () => {
 
-        this.systemName("");
-        this.traffic(0);
-        this.population(0);
-        this.security("");
-        this.government("");
-        this.allegiance("");
-        this.partyName("");
-        this.partyInfluence(0);
-        this.partyState("");
-        this.partyPendingStates([]);
-        this.partyRecoveringStates([]);
-        this.partyAllegiance("");
+        console.debug('addNewFaction');
+
+        var newFactionTrackingData = new trackingData();
+        this.factions.push(newFactionTrackingData);
+    }
+
+    public removeFaction = (trackedFaction: trackingData) => {
+        this.factions.remove(trackedFaction);
+    }
+
+    public setControllingFaction = (faction: trackingData) => {
+
+        var arrLen = this.factions().length;
+        for (var i = 0; i < arrLen; i++) {
+            // todo: set is controlling to false.
+        }
+
+        // TODO: set faction to controlling true
     }
 }
 

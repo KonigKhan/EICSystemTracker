@@ -109,6 +109,8 @@ namespace EICSystemTracker.Data.EICData
             _eicData.SubmitChanges();
         }
 
+        // TODO: Bulk add system faction data for 1 system.
+
         public List<IEICFaction> GetAllFactions()
         {
             throw new NotImplementedException();

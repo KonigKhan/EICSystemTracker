@@ -1021,6 +1021,7 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="app\areas\home\controllers\EICSystemDataController.ts" />
     <TypeScriptCompile Include="app\areas\home\manifest.ts" />
+    <TypeScriptCompile Include="app\areas\home\viewmodels\factionTrackingViewModel.ts" />
     <TypeScriptCompile Include="app\areas\home\viewmodels\startViewModel.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\systemViewModel.ts" />
     <TypeScriptCompile Include="app\areas\systems\controllers\EDStarMapController.ts" />
