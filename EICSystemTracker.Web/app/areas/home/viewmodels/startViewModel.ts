@@ -81,36 +81,44 @@ class startViewModel extends PageViewModel {
             LastUpdated: ""
         };
 
-        var submitFaction: IEICFaction = {
-            Id: 0,
-            Allegiance: this.partyAllegiance(),
-            Name: this.partyName()
-        };
+        var reqs: Array<JQueryPromise<any>> = [];
+        var arrLen = this.factions().length;
+        for (var i = 0; i < arrLen; i++) {
 
-        // TODO: Add missing properties to entry form.
-        var submitSystemFaction: IEICSystemFaction = {
-            Id: 0,
-            System: submitSystem,
-            Faction: submitFaction,
-            Influence: this.partyInfluence(),
-            CurrentState: this.partyState(),
-            PendingState: this.partyPendingStates().toString(),
-            RecoveringState: this.partyRecoveringStates().toString(),
-            UpdatedBy: this.cmdrName()
-        };
+            var curData: IEICSystemFaction = this.factions()[i].getTrackingData();
+            curData.System = submitSystem;
+            curData.UpdatedBy = "Test abc 123";
 
-        console.debug("Submitting form with data: " + JSON.stringify(submitSystemFaction));
+            reqs.push(eicDataController.UpdateSystemFactionInfo(curData));
+        }
 
-        this.isLoading(true);
-        eicDataController.UpdateSystemFactionInfo(submitSystemFaction).done((result) => {
-            console.debug("eicDataController.UpdateSystemFactionInfo Result: " + JSON.stringify(result));
+        try {
+            this.isLoading(true);
+            $.when(reqs).done((result) => {
+                console.debug("eicDataController.UpdateSystemFactionInfo Result: " + JSON.stringify(result));
+            }).fail((result) => {
+                var errorobj = JSON.parse(result.error().responseText);
+                alert("Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage);
+            }).always(() => {
+                this.isLoading(false);
+            });
+        }
+        catch (e) {
             this.isLoading(false);
-        }).fail((res) => {
-            //console.debug("eicDataController.UpdateSystemFactionInfo Failure: " + JSON.stringify(res));
-            var errorobj = JSON.parse(res.error().responseText);
-            alert("Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage);
-            this.isLoading(false);
-        });
+        }
+
+        //console.debug("Submitting form with data: " + JSON.stringify(submitSystemFaction));
+
+        //this.isLoading(true);
+        //eicDataController.UpdateSystemFactionInfo(submitSystemFaction).done((result) => {
+        //    console.debug("eicDataController.UpdateSystemFactionInfo Result: " + JSON.stringify(result));
+        //    this.isLoading(false);
+        //}).fail((res) => {
+        //    //console.debug("eicDataController.UpdateSystemFactionInfo Failure: " + JSON.stringify(res));
+        //    var errorobj = JSON.parse(res.error().responseText);
+        //    alert("Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage);
+        //    this.isLoading(false);
+        //});
 
     }
 
