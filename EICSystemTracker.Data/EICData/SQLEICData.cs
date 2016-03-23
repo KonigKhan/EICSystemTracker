@@ -92,16 +92,30 @@ namespace EICSystemTracker.Data.EICData
             _eicData.SubmitChanges();
         }
 
-        // TODO: Bulk add system faction data for 1 system.
-
         public List<IEICFaction> GetAllFactions()
         {
-            throw new NotImplementedException();
+            var allFactions = new List<IEICFaction>();
+
+            allFactions = (from f in _eicData.EDFactions
+                          select new EICFaction()
+                          {
+                              Name = f.Name
+                          }).ToList<IEICFaction>();
+
+            return allFactions;
         }
 
         public List<IEICSystem> GetAllSystems()
         {
-            throw new NotImplementedException();
+            var allSystems = new List<IEICSystem>();
+
+            allSystems = (from s in _eicData.EDSystems
+                          select new EICSystem()
+                          {
+                              Name = s.Name
+                          }).ToList<IEICSystem>();
+
+            return allSystems;
         }
 
         public List<IEICSystemFaction> GetLatestEICSystemFactionTracking()
