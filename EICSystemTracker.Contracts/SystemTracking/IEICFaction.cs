@@ -2,7 +2,6 @@
 {
     public interface IEICFaction
     {
-        int Id { get; }
         string Name { get; set; }
     }
 }

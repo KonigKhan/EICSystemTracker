@@ -33,9 +33,6 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
     partial void InsertEDFaction(EDFaction instance);
     partial void UpdateEDFaction(EDFaction instance);
     partial void DeleteEDFaction(EDFaction instance);
-    partial void InsertTrack_SystemFaction(Track_SystemFaction instance);
-    partial void UpdateTrack_SystemFaction(Track_SystemFaction instance);
-    partial void DeleteTrack_SystemFaction(Track_SystemFaction instance);
     partial void InsertEDSystem(EDSystem instance);
     partial void UpdateEDSystem(EDSystem instance);
     partial void DeleteEDSystem(EDSystem instance);
@@ -45,6 +42,9 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
     partial void InsertTrack_System(Track_System instance);
     partial void UpdateTrack_System(Track_System instance);
     partial void DeleteTrack_System(Track_System instance);
+    partial void InsertTrack_SystemFaction(Track_SystemFaction instance);
+    partial void UpdateTrack_SystemFaction(Track_SystemFaction instance);
+    partial void DeleteTrack_SystemFaction(Track_SystemFaction instance);
     #endregion
 		
 		public MSSqlEICDataDataContext() : 
@@ -85,14 +85,6 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		public System.Data.Linq.Table<Track_SystemFaction> Track_SystemFactions
-		{
-			get
-			{
-				return this.GetTable<Track_SystemFaction>();
-			}
-		}
-		
 		public System.Data.Linq.Table<EDSystem> EDSystems
 		{
 			get
@@ -116,6 +108,14 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 				return this.GetTable<Track_System>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Track_SystemFaction> Track_SystemFactions
+		{
+			get
+			{
+				return this.GetTable<Track_SystemFaction>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Faction")]
@@ -128,9 +128,9 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		
 		private string _Name;
 		
-		private EntitySet<Track_SystemFaction> _Track_SystemFactions;
-		
 		private EntitySet<Track_Faction> _Track_Factions;
+		
+		private EntitySet<Track_SystemFaction> _Track_SystemFactions;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -144,8 +144,8 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		
 		public EDFaction()
 		{
-			this._Track_SystemFactions = new EntitySet<Track_SystemFaction>(new Action<Track_SystemFaction>(this.attach_Track_SystemFactions), new Action<Track_SystemFaction>(this.detach_Track_SystemFactions));
 			this._Track_Factions = new EntitySet<Track_Faction>(new Action<Track_Faction>(this.attach_Track_Factions), new Action<Track_Faction>(this.detach_Track_Factions));
+			this._Track_SystemFactions = new EntitySet<Track_SystemFaction>(new Action<Track_SystemFaction>(this.attach_Track_SystemFactions), new Action<Track_SystemFaction>(this.detach_Track_SystemFactions));
 			OnCreated();
 		}
 		
@@ -189,20 +189,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_SystemFaction", Storage="_Track_SystemFactions", ThisKey="Id", OtherKey="Faction")]
-		public EntitySet<Track_SystemFaction> Track_SystemFactions
-		{
-			get
-			{
-				return this._Track_SystemFactions;
-			}
-			set
-			{
-				this._Track_SystemFactions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_Faction", Storage="_Track_Factions", ThisKey="Id", OtherKey="Faction")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDFaction_Track_Faction", Storage="_Track_Factions", ThisKey="Id", OtherKey="Faction")]
 		public EntitySet<Track_Faction> Track_Factions
 		{
 			get
@@ -212,6 +199,19 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			set
 			{
 				this._Track_Factions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDFaction_Track_SystemFaction", Storage="_Track_SystemFactions", ThisKey="Id", OtherKey="Faction")]
+		public EntitySet<Track_SystemFaction> Track_SystemFactions
+		{
+			get
+			{
+				return this._Track_SystemFactions;
+			}
+			set
+			{
+				this._Track_SystemFactions.Assign(value);
 			}
 		}
 		
@@ -233,18 +233,6 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Track_SystemFactions(Track_SystemFaction entity)
-		{
-			this.SendPropertyChanging();
-			entity.EDFaction = this;
-		}
-		
-		private void detach_Track_SystemFactions(Track_SystemFaction entity)
-		{
-			this.SendPropertyChanging();
-			entity.EDFaction = null;
 		}
 		
 		private void attach_Track_Factions(Track_Faction entity)
@@ -258,341 +246,17 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			this.SendPropertyChanging();
 			entity.EDFaction = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Track_SystemFaction")]
-	public partial class Track_SystemFaction : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _System;
-		
-		private int _Faction;
-		
-		private System.Nullable<decimal> _Influence;
-		
-		private string _CurrentState;
-		
-		private string _PendingState;
-		
-		private string _RecoveringState;
-		
-		private System.DateTime _Timestamp;
-		
-		private string _UpdateBy;
-		
-		private EntityRef<EDFaction> _Faction1;
-		
-		private EntityRef<EDSystem> _System1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnSystemChanging(int value);
-    partial void OnSystemChanged();
-    partial void OnFactionChanging(int value);
-    partial void OnFactionChanged();
-    partial void OnInfluenceChanging(System.Nullable<decimal> value);
-    partial void OnInfluenceChanged();
-    partial void OnCurrentStateChanging(string value);
-    partial void OnCurrentStateChanged();
-    partial void OnPendingStateChanging(string value);
-    partial void OnPendingStateChanged();
-    partial void OnRecoveringStateChanging(string value);
-    partial void OnRecoveringStateChanged();
-    partial void OnTimestampChanging(System.DateTime value);
-    partial void OnTimestampChanged();
-    partial void OnUpdateByChanging(string value);
-    partial void OnUpdateByChanged();
-    #endregion
-		
-		public Track_SystemFaction()
+		private void attach_Track_SystemFactions(Track_SystemFaction entity)
 		{
-			this._Faction1 = default(EntityRef<EDFaction>);
-			this._System1 = default(EntityRef<EDSystem>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.EDFaction = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		private void detach_Track_SystemFactions(Track_SystemFaction entity)
 		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_System", DbType="Int NOT NULL")]
-		public int System
-		{
-			get
-			{
-				return this._System;
-			}
-			set
-			{
-				if ((this._System != value))
-				{
-					if (this._System1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSystemChanging(value);
-					this.SendPropertyChanging();
-					this._System = value;
-					this.SendPropertyChanged("System");
-					this.OnSystemChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Faction", DbType="Int NOT NULL")]
-		public int Faction
-		{
-			get
-			{
-				return this._Faction;
-			}
-			set
-			{
-				if ((this._Faction != value))
-				{
-					if (this._Faction1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFactionChanging(value);
-					this.SendPropertyChanging();
-					this._Faction = value;
-					this.SendPropertyChanged("Faction");
-					this.OnFactionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Influence", DbType="Decimal(3,1)")]
-		public System.Nullable<decimal> Influence
-		{
-			get
-			{
-				return this._Influence;
-			}
-			set
-			{
-				if ((this._Influence != value))
-				{
-					this.OnInfluenceChanging(value);
-					this.SendPropertyChanging();
-					this._Influence = value;
-					this.SendPropertyChanged("Influence");
-					this.OnInfluenceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string CurrentState
-		{
-			get
-			{
-				return this._CurrentState;
-			}
-			set
-			{
-				if ((this._CurrentState != value))
-				{
-					this.OnCurrentStateChanging(value);
-					this.SendPropertyChanging();
-					this._CurrentState = value;
-					this.SendPropertyChanged("CurrentState");
-					this.OnCurrentStateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PendingState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string PendingState
-		{
-			get
-			{
-				return this._PendingState;
-			}
-			set
-			{
-				if ((this._PendingState != value))
-				{
-					this.OnPendingStateChanging(value);
-					this.SendPropertyChanging();
-					this._PendingState = value;
-					this.SendPropertyChanged("PendingState");
-					this.OnPendingStateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecoveringState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string RecoveringState
-		{
-			get
-			{
-				return this._RecoveringState;
-			}
-			set
-			{
-				if ((this._RecoveringState != value))
-				{
-					this.OnRecoveringStateChanging(value);
-					this.SendPropertyChanging();
-					this._RecoveringState = value;
-					this.SendPropertyChanged("RecoveringState");
-					this.OnRecoveringStateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timestamp", DbType="DateTime NOT NULL")]
-		public System.DateTime Timestamp
-		{
-			get
-			{
-				return this._Timestamp;
-			}
-			set
-			{
-				if ((this._Timestamp != value))
-				{
-					this.OnTimestampChanging(value);
-					this.SendPropertyChanging();
-					this._Timestamp = value;
-					this.SendPropertyChanged("Timestamp");
-					this.OnTimestampChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateBy", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string UpdateBy
-		{
-			get
-			{
-				return this._UpdateBy;
-			}
-			set
-			{
-				if ((this._UpdateBy != value))
-				{
-					this.OnUpdateByChanging(value);
-					this.SendPropertyChanging();
-					this._UpdateBy = value;
-					this.SendPropertyChanged("UpdateBy");
-					this.OnUpdateByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_SystemFaction", Storage="_Faction1", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
-		public EDFaction EDFaction
-		{
-			get
-			{
-				return this._Faction1.Entity;
-			}
-			set
-			{
-				EDFaction previousValue = this._Faction1.Entity;
-				if (((previousValue != value) 
-							|| (this._Faction1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Faction1.Entity = null;
-						previousValue.Track_SystemFactions.Remove(this);
-					}
-					this._Faction1.Entity = value;
-					if ((value != null))
-					{
-						value.Track_SystemFactions.Add(this);
-						this._Faction = value.Id;
-					}
-					else
-					{
-						this._Faction = default(int);
-					}
-					this.SendPropertyChanged("EDFaction");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_SystemFaction", Storage="_System1", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
-		public EDSystem EDSystem
-		{
-			get
-			{
-				return this._System1.Entity;
-			}
-			set
-			{
-				EDSystem previousValue = this._System1.Entity;
-				if (((previousValue != value) 
-							|| (this._System1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._System1.Entity = null;
-						previousValue.Track_SystemFactions.Remove(this);
-					}
-					this._System1.Entity = value;
-					if ((value != null))
-					{
-						value.Track_SystemFactions.Add(this);
-						this._System = value.Id;
-					}
-					else
-					{
-						this._System = default(int);
-					}
-					this.SendPropertyChanged("EDSystem");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.EDFaction = null;
 		}
 	}
 	
@@ -606,9 +270,9 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		
 		private string _Name;
 		
-		private EntitySet<Track_SystemFaction> _Track_SystemFactions;
-		
 		private EntitySet<Track_System> _Track_Systems;
+		
+		private EntitySet<Track_SystemFaction> _Track_SystemFactions;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -622,8 +286,8 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		
 		public EDSystem()
 		{
-			this._Track_SystemFactions = new EntitySet<Track_SystemFaction>(new Action<Track_SystemFaction>(this.attach_Track_SystemFactions), new Action<Track_SystemFaction>(this.detach_Track_SystemFactions));
 			this._Track_Systems = new EntitySet<Track_System>(new Action<Track_System>(this.attach_Track_Systems), new Action<Track_System>(this.detach_Track_Systems));
+			this._Track_SystemFactions = new EntitySet<Track_SystemFaction>(new Action<Track_SystemFaction>(this.attach_Track_SystemFactions), new Action<Track_SystemFaction>(this.detach_Track_SystemFactions));
 			OnCreated();
 		}
 		
@@ -667,20 +331,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_SystemFaction", Storage="_Track_SystemFactions", ThisKey="Id", OtherKey="System")]
-		public EntitySet<Track_SystemFaction> Track_SystemFactions
-		{
-			get
-			{
-				return this._Track_SystemFactions;
-			}
-			set
-			{
-				this._Track_SystemFactions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_System", Storage="_Track_Systems", ThisKey="Id", OtherKey="System")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_System", Storage="_Track_Systems", ThisKey="Id", OtherKey="System")]
 		public EntitySet<Track_System> Track_Systems
 		{
 			get
@@ -690,6 +341,19 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			set
 			{
 				this._Track_Systems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_SystemFaction", Storage="_Track_SystemFactions", ThisKey="Id", OtherKey="System")]
+		public EntitySet<Track_SystemFaction> Track_SystemFactions
+		{
+			get
+			{
+				return this._Track_SystemFactions;
+			}
+			set
+			{
+				this._Track_SystemFactions.Assign(value);
 			}
 		}
 		
@@ -713,18 +377,6 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		private void attach_Track_SystemFactions(Track_SystemFaction entity)
-		{
-			this.SendPropertyChanging();
-			entity.EDSystem = this;
-		}
-		
-		private void detach_Track_SystemFactions(Track_SystemFaction entity)
-		{
-			this.SendPropertyChanging();
-			entity.EDSystem = null;
-		}
-		
 		private void attach_Track_Systems(Track_System entity)
 		{
 			this.SendPropertyChanging();
@@ -732,6 +384,18 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		}
 		
 		private void detach_Track_Systems(Track_System entity)
+		{
+			this.SendPropertyChanging();
+			entity.EDSystem = null;
+		}
+		
+		private void attach_Track_SystemFactions(Track_SystemFaction entity)
+		{
+			this.SendPropertyChanging();
+			entity.EDSystem = this;
+		}
+		
+		private void detach_Track_SystemFactions(Track_SystemFaction entity)
 		{
 			this.SendPropertyChanging();
 			entity.EDSystem = null;
@@ -882,7 +546,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_Faction", Storage="_Faction1", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDFaction_Track_Faction", Storage="_Faction1", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
 		public EDFaction EDFaction
 		{
 			get
@@ -1321,7 +985,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_System", Storage="_System1", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_System", Storage="_System1", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
 		public EDSystem EDSystem
 		{
 			get
@@ -1344,6 +1008,366 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 					if ((value != null))
 					{
 						value.Track_Systems.Add(this);
+						this._System = value.Id;
+					}
+					else
+					{
+						this._System = default(int);
+					}
+					this.SendPropertyChanged("EDSystem");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Track_SystemFaction")]
+	public partial class Track_SystemFaction : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _System;
+		
+		private int _Faction;
+		
+		private System.Nullable<decimal> _Influence;
+		
+		private string _CurrentState;
+		
+		private string _PendingState;
+		
+		private string _RecoveringState;
+		
+		private System.DateTime _Timestamp;
+		
+		private string _UpdateBy;
+		
+		private bool _ContrllingFaction;
+		
+		private EntityRef<EDFaction> _EDFaction;
+		
+		private EntityRef<EDSystem> _EDSystem;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnSystemChanging(int value);
+    partial void OnSystemChanged();
+    partial void OnFactionChanging(int value);
+    partial void OnFactionChanged();
+    partial void OnInfluenceChanging(System.Nullable<decimal> value);
+    partial void OnInfluenceChanged();
+    partial void OnCurrentStateChanging(string value);
+    partial void OnCurrentStateChanged();
+    partial void OnPendingStateChanging(string value);
+    partial void OnPendingStateChanged();
+    partial void OnRecoveringStateChanging(string value);
+    partial void OnRecoveringStateChanged();
+    partial void OnTimestampChanging(System.DateTime value);
+    partial void OnTimestampChanged();
+    partial void OnUpdateByChanging(string value);
+    partial void OnUpdateByChanged();
+    partial void OnContrllingFactionChanging(bool value);
+    partial void OnContrllingFactionChanged();
+    #endregion
+		
+		public Track_SystemFaction()
+		{
+			this._EDFaction = default(EntityRef<EDFaction>);
+			this._EDSystem = default(EntityRef<EDSystem>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_System", DbType="Int NOT NULL")]
+		public int System
+		{
+			get
+			{
+				return this._System;
+			}
+			set
+			{
+				if ((this._System != value))
+				{
+					if (this._EDSystem.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSystemChanging(value);
+					this.SendPropertyChanging();
+					this._System = value;
+					this.SendPropertyChanged("System");
+					this.OnSystemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Faction", DbType="Int NOT NULL")]
+		public int Faction
+		{
+			get
+			{
+				return this._Faction;
+			}
+			set
+			{
+				if ((this._Faction != value))
+				{
+					if (this._EDFaction.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFactionChanging(value);
+					this.SendPropertyChanging();
+					this._Faction = value;
+					this.SendPropertyChanged("Faction");
+					this.OnFactionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Influence", DbType="Decimal(3,1)")]
+		public System.Nullable<decimal> Influence
+		{
+			get
+			{
+				return this._Influence;
+			}
+			set
+			{
+				if ((this._Influence != value))
+				{
+					this.OnInfluenceChanging(value);
+					this.SendPropertyChanging();
+					this._Influence = value;
+					this.SendPropertyChanged("Influence");
+					this.OnInfluenceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string CurrentState
+		{
+			get
+			{
+				return this._CurrentState;
+			}
+			set
+			{
+				if ((this._CurrentState != value))
+				{
+					this.OnCurrentStateChanging(value);
+					this.SendPropertyChanging();
+					this._CurrentState = value;
+					this.SendPropertyChanged("CurrentState");
+					this.OnCurrentStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PendingState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string PendingState
+		{
+			get
+			{
+				return this._PendingState;
+			}
+			set
+			{
+				if ((this._PendingState != value))
+				{
+					this.OnPendingStateChanging(value);
+					this.SendPropertyChanging();
+					this._PendingState = value;
+					this.SendPropertyChanged("PendingState");
+					this.OnPendingStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecoveringState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string RecoveringState
+		{
+			get
+			{
+				return this._RecoveringState;
+			}
+			set
+			{
+				if ((this._RecoveringState != value))
+				{
+					this.OnRecoveringStateChanging(value);
+					this.SendPropertyChanging();
+					this._RecoveringState = value;
+					this.SendPropertyChanged("RecoveringState");
+					this.OnRecoveringStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timestamp", DbType="DateTime NOT NULL")]
+		public System.DateTime Timestamp
+		{
+			get
+			{
+				return this._Timestamp;
+			}
+			set
+			{
+				if ((this._Timestamp != value))
+				{
+					this.OnTimestampChanging(value);
+					this.SendPropertyChanging();
+					this._Timestamp = value;
+					this.SendPropertyChanged("Timestamp");
+					this.OnTimestampChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateBy", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string UpdateBy
+		{
+			get
+			{
+				return this._UpdateBy;
+			}
+			set
+			{
+				if ((this._UpdateBy != value))
+				{
+					this.OnUpdateByChanging(value);
+					this.SendPropertyChanging();
+					this._UpdateBy = value;
+					this.SendPropertyChanged("UpdateBy");
+					this.OnUpdateByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContrllingFaction", DbType="Bit NOT NULL")]
+		public bool ContrllingFaction
+		{
+			get
+			{
+				return this._ContrllingFaction;
+			}
+			set
+			{
+				if ((this._ContrllingFaction != value))
+				{
+					this.OnContrllingFactionChanging(value);
+					this.SendPropertyChanging();
+					this._ContrllingFaction = value;
+					this.SendPropertyChanged("ContrllingFaction");
+					this.OnContrllingFactionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDFaction_Track_SystemFaction", Storage="_EDFaction", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
+		public EDFaction EDFaction
+		{
+			get
+			{
+				return this._EDFaction.Entity;
+			}
+			set
+			{
+				EDFaction previousValue = this._EDFaction.Entity;
+				if (((previousValue != value) 
+							|| (this._EDFaction.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EDFaction.Entity = null;
+						previousValue.Track_SystemFactions.Remove(this);
+					}
+					this._EDFaction.Entity = value;
+					if ((value != null))
+					{
+						value.Track_SystemFactions.Add(this);
+						this._Faction = value.Id;
+					}
+					else
+					{
+						this._Faction = default(int);
+					}
+					this.SendPropertyChanged("EDFaction");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_SystemFaction", Storage="_EDSystem", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
+		public EDSystem EDSystem
+		{
+			get
+			{
+				return this._EDSystem.Entity;
+			}
+			set
+			{
+				EDSystem previousValue = this._EDSystem.Entity;
+				if (((previousValue != value) 
+							|| (this._EDSystem.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EDSystem.Entity = null;
+						previousValue.Track_SystemFactions.Remove(this);
+					}
+					this._EDSystem.Entity = value;
+					if ((value != null))
+					{
+						value.Track_SystemFactions.Add(this);
 						this._System = value.Id;
 					}
 					else

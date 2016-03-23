@@ -6,8 +6,13 @@ class SystemViewModel extends PageViewModel {
 
     constructor() {
         super();
+
+        console.log('SystemViewModel ctor');
     }
 
+    Shown() {
+        // TODO: Get System & It's tracked factions
+    }
 }
 
 export default SystemViewModel;

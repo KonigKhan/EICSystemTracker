@@ -6,7 +6,7 @@ namespace EICSystemTracker.Contracts.Data
 {
     public interface IEICData : IDisposable
     {
-        void AddSystemFactionTracking(IEICSystemFaction systemFaction);
+        void TrackSystem(IEICSystem system);
 
         List<IEICSystem> GetAllSystems();
         List<IEICFaction> GetAllFactions();

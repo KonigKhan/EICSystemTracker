@@ -22,8 +22,9 @@ class systemsViewModel extends PageViewModel {
     constructor() {
         super();
         console.debug('New Systems View Model!');
+    }
 
-
+    Shown() {
         location.hash = 'start/systems/trackedSystems';
     }
 }

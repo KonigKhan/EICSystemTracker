@@ -8,6 +8,8 @@ using System.Web.Http;
 using EICSystemTracker.Contracts.domain.SystemTracking;
 using EICSystemTracker.Contracts.SystemTracking;
 using EICSystemTracker.Service;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EICSystemTracker.Host.api
 {
@@ -35,45 +37,39 @@ namespace EICSystemTracker.Host.api
         }
 
         [HttpPost]
-        public HttpResponseMessage UpdateSystemFactionInfo([FromBody]SystemFactionDTO systemFaction)
+        public HttpResponseMessage UpdateSystemFactionInfo([FromBody]EICSystemDTO system)
         {
-            var sys = systemFaction.System != null
-                ? new EICSystem()
-                {
-                    Name = systemFaction.System.Name,
-                    ControllingFaction = systemFaction.System.ControllingFaction,
-                    Traffic = systemFaction.System.Traffic,
-                    Population = systemFaction.System.Population,
-                    Government = systemFaction.System.Government,
-                    Allegiance = systemFaction.System.Allegiance,
-                    State = systemFaction.System.State,
-                    Security = systemFaction.System.Security,
-                    Economy = systemFaction.System.Economy,
-                    Power = systemFaction.System.Power,
-                    PowerState = systemFaction.System.PowerState,
-                    NeedPermit = systemFaction.System.NeedPermit,
-                    LastUpdated = DateTime.UtcNow
-                } : null;
-
-            var fac = systemFaction.Faction != null
-                ? new EICFaction()
-                {
-                    Name = systemFaction.Faction.Name,
-                    Allegiance = systemFaction.Faction.Allegiance
-                } : null;
-
-            var sysFac = new EICSystemFaction()
+            var sys = new EICSystem()
             {
-                System = sys,
-                Faction = fac,
-                Influence = systemFaction.Influence,
-                CurrentState = systemFaction.CurrentState,
-                PendingState = systemFaction.PendingState,
-                RecoveringState = systemFaction.RecoveringState,
-                UpdatedBy = systemFaction.UpdatedBy
+                Name = system.Name,
+                Allegiance = system.Allegiance,
+                Economy = system.Economy,
+                Government = system.Government,
+                NeedPermit = system.NeedPermit,
+                Population = system.Population,
+                Power = system.Power,
+                PowerState = system.PowerState,
+                Security = system.Security,
+                State = system.State,
+                Traffic = system.Traffic,
+                LastUpdated = system.LastUpdated,
+                TrackedFactions = system.TrackedFactions == null
+                    ? new List<IEICSystemFaction>()
+                    : system.TrackedFactions.Select(tf => new EICSystemFaction()
+                    {
+                        Faction = new EICFaction()
+                        {
+                            Name = tf.Faction.Name
+                        },
+                        Influence = tf.Influence,
+                        CurrentState = tf.CurrentState,
+                        PendingState = tf.PendingState,
+                        RecoveringState = tf.RecoveringState,
+                        UpdatedBy = tf.UpdatedBy
+                    }).ToList<IEICSystemFaction>()
             };
 
-            _systemTrackerService.UpdateSystemFactionInfo(sysFac);
+            _systemTrackerService.TrackSystem(sys);
 
             HttpResponseMessage response = Request.CreateResponse(System.Net.HttpStatusCode.OK);
             return response;
@@ -84,7 +80,6 @@ namespace EICSystemTracker.Host.api
     {
         public int Id { get; }
         public string Name { get; set; }
-        public string ControllingFaction { get; set; }
         public int Traffic { get; set; }
         public int Population { get; set; }
         public string Government { get; set; }
@@ -96,19 +91,16 @@ namespace EICSystemTracker.Host.api
         public string PowerState { get; set; }
         public bool NeedPermit { get; set; }
         public DateTime LastUpdated { get; set; }
+        public List<SystemFactionDTO> TrackedFactions { get; set; }
     }
 
     public class EICFactionDTO
     {
-        public int Id { get; }
         public string Name { get; set; }
-        public string Allegiance { get; set; }
     }
 
     public class SystemFactionDTO
     {
-        public int Id { get; }
-        public EICSystemDTO System { get; set; }
         public EICFactionDTO Faction { get; set; }
         public double Influence { get; set; }
         public string CurrentState { get; set; }

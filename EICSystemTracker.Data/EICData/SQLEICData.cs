@@ -26,85 +26,68 @@ namespace EICSystemTracker.Data.EICData
             _eicData = new MSSqlEICDataDataContext(builder.ConnectionString);
         }
 
-        public void AddSystemFactionTracking(IEICSystemFaction systemFaction)
+        public void TrackSystem(IEICSystem system)
         {
-
             var timestamp = DateTime.UtcNow;
 
             // get system
-            EDSystem sys = (from s in _eicData.EDSystems where s.Name == systemFaction.System.Name select s).FirstOrDefault();
+            EDSystem sys = (from s in _eicData.EDSystems where s.Name == system.Name select s).FirstOrDefault();
+
+            var trackSys = new Track_System()
+            {
+                Traffic = system.Traffic,
+                Population = system.Population,
+                Government = system.Government,
+                Allegiance = system.Allegiance,
+                State = system.State,
+                Security = system.Security,
+                Economy = system.Economy,
+                ControllingPower = system.Power,
+                ControllingPowerState = system.PowerState,
+                NeedPermit = system.NeedPermit,
+                Timestamp = timestamp
+            };
+
             if (sys == null)
             {
                 sys = new EDSystem();
-                sys.Name = systemFaction.System.Name;
-                sys.Track_Systems.Add(new Track_System()
-                {
-                    Traffic = systemFaction.System.Traffic,
-                    Population = systemFaction.System.Population,
-                    Government = systemFaction.System.Government,
-                    Allegiance = systemFaction.System.Allegiance,
-                    State = systemFaction.System.State,
-                    Security = systemFaction.System.Security,
-                    Economy = systemFaction.System.Economy,
-                    ControllingPower = systemFaction.System.Power,
-                    ControllingPowerState = systemFaction.System.PowerState,
-                    NeedPermit = systemFaction.System.NeedPermit,
-                    Timestamp = timestamp
-                });
+                sys.Name = system.Name;
+                sys.Track_Systems.Add(trackSys);
                 _eicData.EDSystems.InsertOnSubmit(sys);
             }
             else
             {
-                sys.Name = systemFaction.System.Name;
-                sys.Track_Systems.Add(new Track_System()
-                {
-                    Traffic = systemFaction.System.Traffic,
-                    Population = systemFaction.System.Population,
-                    Government = systemFaction.System.Government,
-                    Allegiance = systemFaction.System.Allegiance,
-                    State = systemFaction.System.State,
-                    Security = systemFaction.System.Security,
-                    Economy = systemFaction.System.Economy,
-                    ControllingPower = systemFaction.System.Power,
-                    ControllingPowerState = systemFaction.System.PowerState,
-                    NeedPermit = systemFaction.System.NeedPermit,
-                    Timestamp = timestamp
-                });
+                sys.Name = system.Name;
+                sys.Track_Systems.Add(trackSys);
             }
 
-            EDFaction fac = (from f in _eicData.EDFactions where f.Name == systemFaction.Faction.Name select f).FirstOrDefault();
-            if (fac == null)
+            foreach (IEICSystemFaction trackedFaction in system.TrackedFactions)
             {
-                fac = new EDFaction();
-                fac.Name = systemFaction.Faction.Name;
-                fac.Track_Factions.Add(new Track_Faction()
-                {
-                    Allegiance = "TODO",
-                    Timestamp = timestamp
-                });
-                _eicData.EDFactions.InsertOnSubmit(fac);
-            }
-            else
-            {
-                fac.Name = systemFaction.Faction.Name;
-                fac.Track_Factions.Add(new Track_Faction()
-                {
-                    Allegiance = "TODO",
-                    Timestamp = timestamp
-                });
-            }
+                EDFaction fac = (from f in _eicData.EDFactions where f.Name == trackedFaction.Faction.Name select f).FirstOrDefault();
 
-            Track_SystemFaction tracking = new Track_SystemFaction();
-            tracking.EDSystem = sys;
-            tracking.EDFaction = fac;
-            tracking.Influence = Convert.ToDecimal(systemFaction.Influence);
-            tracking.CurrentState = systemFaction.CurrentState;
-            tracking.PendingState = systemFaction.PendingState;
-            tracking.RecoveringState = systemFaction.RecoveringState;
-            tracking.UpdateBy = systemFaction.UpdatedBy;
-            tracking.Timestamp = timestamp;
+                if (fac == null)
+                {
+                    fac = new EDFaction();
+                    fac.Name = trackedFaction.Faction.Name;
+                    _eicData.EDFactions.InsertOnSubmit(fac);
+                }
+                else
+                {
+                    fac.Name = trackedFaction.Faction.Name;
+                }
 
-            _eicData.Track_SystemFactions.InsertOnSubmit(tracking);
+                Track_SystemFaction tracking = new Track_SystemFaction();
+                tracking.EDSystem = sys;
+                tracking.EDFaction = fac;
+                tracking.Influence = Convert.ToDecimal(trackedFaction.Influence);
+                tracking.CurrentState = trackedFaction.CurrentState;
+                tracking.PendingState = trackedFaction.PendingState;
+                tracking.RecoveringState = trackedFaction.RecoveringState;
+                tracking.UpdateBy = trackedFaction.UpdatedBy;
+                tracking.Timestamp = timestamp;
+
+                _eicData.Track_SystemFactions.InsertOnSubmit(tracking);
+            }
 
             _eicData.SubmitChanges();
         }

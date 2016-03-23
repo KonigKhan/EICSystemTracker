@@ -11,7 +11,6 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
         public EICFaction() { }
         public EICFaction(IEICFaction eicFaction)
         {
-            this.Id = eicFaction.Id;
             this.Name = eicFaction.Name;
         }
     }

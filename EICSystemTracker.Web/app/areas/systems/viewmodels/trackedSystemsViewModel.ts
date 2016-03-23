@@ -14,7 +14,9 @@ class TrackedSystemsViewModel extends PageViewModel {
     constructor() {
         super();
         console.debug('New Tracked Systems View Model!');
+    }
 
+    Shown() {
         this._init();
     }
 

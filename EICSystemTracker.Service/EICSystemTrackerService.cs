@@ -27,11 +27,11 @@ namespace EICSystemTracker.Service
             }
         }
 
-        public void UpdateSystemFactionInfo(IEICSystemFaction systemFaction)
+        public void TrackSystem(IEICSystem system)
         {
             using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
             {
-                da.AddSystemFactionTracking(systemFaction);
+                da.TrackSystem(system);
             }
         }
     }

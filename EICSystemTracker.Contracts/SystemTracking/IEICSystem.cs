@@ -8,9 +8,7 @@ namespace EICSystemTracker.Contracts.SystemTracking
 {
     public interface IEICSystem
     {
-        int Id { get; }
         string Name { get; set; }
-        string ControllingFaction { get; set; }
         int Traffic { get; set; }
         int Population { get; set; }
         string Government { get; set; }
@@ -22,5 +20,7 @@ namespace EICSystemTracker.Contracts.SystemTracking
         string PowerState { get; set; }
         bool NeedPermit { get; set; }
         DateTime LastUpdated { get; set; }
+
+        List<IEICSystemFaction> TrackedFactions { get; set; }
     }
 }

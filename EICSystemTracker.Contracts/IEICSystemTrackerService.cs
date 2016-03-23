@@ -7,6 +7,6 @@ namespace EICSystemTracker.Contracts
     {
         List<IEICSystem> GetSystems();
         List<IEICSystemFaction> GetLatestSystemTrackingData();
-        void UpdateSystemFactionInfo(IEICSystemFaction systemFaction);
+        void TrackSystem(IEICSystem systemFaction);
     }
 }

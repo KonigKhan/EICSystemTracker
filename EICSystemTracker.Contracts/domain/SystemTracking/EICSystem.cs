@@ -1,5 +1,6 @@
 ﻿using System;
 using EICSystemTracker.Contracts.SystemTracking;
+using System.Collections.Generic;
 
 namespace EICSystemTracker.Contracts.domain.SystemTracking
 {
@@ -7,7 +8,6 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
     {
         public int Id { get; }
         public string Name { get; set; }
-        public string ControllingFaction { get; set; }
         public int Traffic { get; set; }
         public int Population { get; set; }
         public string Government { get; set; }
@@ -19,13 +19,12 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
         public string PowerState { get; set; }
         public bool NeedPermit { get; set; }
         public DateTime LastUpdated { get; set; }
+        public List<IEICSystemFaction> TrackedFactions { get; set; }
 
         public EICSystem() { }
         public EICSystem(IEICSystem system)
         {
-            this.Id = system.Id;
             this.Name = system.Name;
-            this.ControllingFaction = system.ControllingFaction;
             this.Traffic = system.Traffic;
             this.Population = system.Population;
             this.Government = system.Government;
@@ -37,6 +36,7 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
             this.PowerState = system.PowerState;
             this.NeedPermit = system.NeedPermit;
             this.LastUpdated = system.LastUpdated;
+            this.TrackedFactions = system.TrackedFactions;
         }
     }
 }

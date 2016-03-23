@@ -4,31 +4,16 @@
     <Type Name="EDFaction">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Association Name="Faction_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="Faction" Type="Track_SystemFaction" />
-      <Association Name="Faction_Track_Faction" Member="Track_Factions" ThisKey="Id" OtherKey="Faction" Type="Track_Faction" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Track_SystemFaction" Member="Track_SystemFactions">
-    <Type Name="Track_SystemFaction">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="System" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Faction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Influence" Type="System.Decimal" DbType="Decimal(3,1)" CanBeNull="true" />
-      <Column Name="CurrentState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="PendingState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="RecoveringState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Association Name="Faction_Track_SystemFaction" Member="EDFaction" Storage="_Faction1" ThisKey="Faction" OtherKey="Id" Type="EDFaction" IsForeignKey="true" />
-      <Association Name="System_Track_SystemFaction" Member="EDSystem" Storage="_System1" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
+      <Association Name="EDFaction_Track_Faction" Member="Track_Factions" ThisKey="Id" OtherKey="Faction" Type="Track_Faction" />
+      <Association Name="EDFaction_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="Faction" Type="Track_SystemFaction" />
     </Type>
   </Table>
   <Table Name="dbo.System" Member="EDSystems">
     <Type Name="EDSystem">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Association Name="System_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="System" Type="Track_SystemFaction" />
-      <Association Name="System_Track_System" Member="Track_Systems" ThisKey="Id" OtherKey="System" Type="Track_System" />
+      <Association Name="EDSystem_Track_System" Member="Track_Systems" ThisKey="Id" OtherKey="System" Type="Track_System" />
+      <Association Name="EDSystem_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="System" Type="Track_SystemFaction" />
     </Type>
   </Table>
   <Table Name="dbo.Track_Faction" Member="Track_Factions">
@@ -38,7 +23,7 @@
       <Column Name="Allegiance" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="Faction_Track_Faction" Member="EDFaction" Storage="_Faction1" ThisKey="Faction" OtherKey="Id" Type="EDFaction" IsForeignKey="true" />
+      <Association Name="EDFaction_Track_Faction" Member="EDFaction" Storage="_Faction1" ThisKey="Faction" OtherKey="Id" Type="EDFaction" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Track_System" Member="Track_Systems">
@@ -58,7 +43,23 @@
       <Column Name="NeedPermit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="System_Track_System" Member="EDSystem" Storage="_System1" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
+      <Association Name="EDSystem_Track_System" Member="EDSystem" Storage="_System1" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Track_SystemFaction" Member="Track_SystemFactions">
+    <Type Name="Track_SystemFaction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="System" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Faction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Influence" Type="System.Decimal" DbType="Decimal(3,1)" CanBeNull="true" />
+      <Column Name="CurrentState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PendingState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RecoveringState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ContrllingFaction" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="EDFaction_Track_SystemFaction" Member="EDFaction" ThisKey="Faction" OtherKey="Id" Type="EDFaction" IsForeignKey="true" />
+      <Association Name="EDSystem_Track_SystemFaction" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -34,22 +34,22 @@ namespace EICSystemTracker.Data.EICData
             var sprocConfig = new StoredProcedureConfig
             {
                 ProcedureName = "add_systemfactiontracking",
-                Parameters =
-                {
-                    ["@sysName"] = systemFaction.System.Name,
-                    ["@sysTraffic"] = systemFaction.System.Traffic,
-                    ["@sysPopulation"] = systemFaction.System.Population,
-                    ["@sysGovernment"] = systemFaction.System.Government,
-                    ["@sysSecurity"] = systemFaction.System.Security,
-                    ["@sysPower"] = systemFaction.System.Power,
-                    ["@facName"] = systemFaction.Faction.Name,
-                    ["@facInfluence"] = systemFaction.Influence,
-                    ["@facCurrentState"] = systemFaction.CurrentState,
-                    ["@facPendingState"] = systemFaction.PendingState,
-                    ["@facRecoverState"] = systemFaction.RecoveringState,
-                    ["@controllingFaction"] = false,
-                    ["@updatedBy"] = systemFaction.UpdatedBy
-                }
+                //Parameters =
+                //{
+                //    ["@sysName"] = systemFaction.System.Name,
+                //    ["@sysTraffic"] = systemFaction.System.Traffic,
+                //    ["@sysPopulation"] = systemFaction.System.Population,
+                //    ["@sysGovernment"] = systemFaction.System.Government,
+                //    ["@sysSecurity"] = systemFaction.System.Security,
+                //    ["@sysPower"] = systemFaction.System.Power,
+                //    ["@facName"] = systemFaction.Faction.Name,
+                //    ["@facInfluence"] = systemFaction.Influence,
+                //    ["@facCurrentState"] = systemFaction.CurrentState,
+                //    ["@facPendingState"] = systemFaction.PendingState,
+                //    ["@facRecoverState"] = systemFaction.RecoveringState,
+                //    ["@controllingFaction"] = false,
+                //    ["@updatedBy"] = systemFaction.UpdatedBy
+                //}
             };
 
             _dataAdapter.ExecuteNonQueryProcedure(sprocConfig);
@@ -105,6 +105,11 @@ namespace EICSystemTracker.Data.EICData
         public void Dispose()
         {
             _dataAdapter.Dispose();
+        }
+
+        public void TrackSystem(IEICSystem system)
+        {
+            throw new NotImplementedException();
         }
     }
 }

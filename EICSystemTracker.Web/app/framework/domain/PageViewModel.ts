@@ -9,6 +9,8 @@ class PageViewModel {
     SourceLoaded() {
         console.info("VM - Source Loaded: " + (<any>this.constructor).name);
     }
+
+    // Intended to be overridden by child class.
     Shown() {
         console.info("VM - Shown: " + (<any>this.constructor).name);
     }

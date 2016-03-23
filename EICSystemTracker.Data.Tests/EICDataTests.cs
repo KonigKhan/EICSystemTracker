@@ -44,7 +44,8 @@ namespace EICSystemTracker.Data.Tests
             };
 
             // act
-            eicData.AddSystemFactionTracking(sysFaction);
+            // TODO: Update This
+            //eicData.TrackSystem(sysFaction);
 
             // assert
             // if exception, we fail.
@@ -91,7 +92,8 @@ namespace EICSystemTracker.Data.Tests
             };
 
             // act
-            eicData.AddSystemFactionTracking(sysFaction);
+            // TODO: Update This
+            //eicData.TrackSystem(sysFaction);
         }
 
         [TestMethod]

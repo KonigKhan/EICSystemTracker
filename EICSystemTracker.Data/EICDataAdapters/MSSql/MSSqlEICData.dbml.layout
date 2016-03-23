@@ -8,12 +8,6 @@
         <elementListCompartment Id="93632f63-b761-4820-9596-7712acb7b731" absoluteBounds="0.765, 3.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6799ffae-a57b-487f-a413-4a0040c71e7a" absoluteBounds="3.5, 3.375, 2, 2.5401025390625005">
-      <DataClassMoniker Name="/MSSqlEICDataDataContext/Track_SystemFaction" />
-      <nestedChildShapes>
-        <elementListCompartment Id="54a2613b-9a8c-4ca6-a98a-9b58c8214e6a" absoluteBounds="3.515, 3.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="bfd41540-7c46-4448-a171-86e636cf1844" absoluteBounds="0.75, 5, 2, 1.1939925130208344">
       <DataClassMoniker Name="/MSSqlEICDataDataContext/EDSystem" />
       <nestedChildShapes>
@@ -32,32 +26,38 @@
         <elementListCompartment Id="78c70f21-fe87-4a5c-8dcf-49918820f166" absoluteBounds="3.515, 7.585, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 3.78449625651042); (3.5 : 3.78449625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/MSSqlEICDataDataContext/EDFaction/Faction_Track_SystemFaction" />
-      <nodes>
-        <classShapeMoniker Id="ce288cd0-a83b-4825-8ac3-c8e9944f0160" />
-        <classShapeMoniker Id="6799ffae-a57b-487f-a413-4a0040c71e7a" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 5.45755126953125); (3.5 : 5.45755126953125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/MSSqlEICDataDataContext/EDSystem/System_Track_SystemFaction" />
-      <nodes>
-        <classShapeMoniker Id="bfd41540-7c46-4448-a171-86e636cf1844" />
-        <classShapeMoniker Id="6799ffae-a57b-487f-a413-4a0040c71e7a" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 3); (1.75 : 1.63544840494792); (3.5 : 1.63544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/MSSqlEICDataDataContext/EDFaction/Faction_Track_Faction" />
+    <associationConnector edgePoints="[(2.75 : 3.28125); (3.65625 : 3.28125); (3.65625 : 2.52089680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MSSqlEICDataDataContext/EDFaction/EDFaction_Track_Faction" />
       <nodes>
         <classShapeMoniker Id="ce288cd0-a83b-4825-8ac3-c8e9944f0160" />
         <classShapeMoniker Id="4313f15c-400e-4a83-a67f-cca31fd76e6f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 6.19399251302083); (1.75 : 8.97195556640625); (3.5 : 8.97195556640625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/MSSqlEICDataDataContext/EDSystem/System_Track_System" />
+    <associationConnector edgePoints="[(1.75 : 6.19399251302083); (1.75 : 8.97195556640625); (3.5 : 8.97195556640625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MSSqlEICDataDataContext/EDSystem/EDSystem_Track_System" />
       <nodes>
         <classShapeMoniker Id="bfd41540-7c46-4448-a171-86e636cf1844" />
         <classShapeMoniker Id="bd2a7f79-482f-4d63-8cee-408f4ceba953" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f7d76675-a8c9-4d52-9635-bece3becb439" absoluteBounds="3.875, 3.625, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/MSSqlEICDataDataContext/Track_SystemFaction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8b98c302-6d6e-430e-adcf-db2eb0a16378" absoluteBounds="3.89, 4.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 3.90949625651042); (3.875 : 3.90949625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MSSqlEICDataDataContext/EDFaction/EDFaction_Track_SystemFaction" />
+      <nodes>
+        <classShapeMoniker Id="ce288cd0-a83b-4825-8ac3-c8e9944f0160" />
+        <classShapeMoniker Id="f7d76675-a8c9-4d52-9635-bece3becb439" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.59699625651042); (3.875 : 5.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MSSqlEICDataDataContext/EDSystem/EDSystem_Track_SystemFaction" />
+      <nodes>
+        <classShapeMoniker Id="bfd41540-7c46-4448-a171-86e636cf1844" />
+        <classShapeMoniker Id="f7d76675-a8c9-4d52-9635-bece3becb439" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
