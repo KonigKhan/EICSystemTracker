@@ -6,12 +6,16 @@ System.config(<SystemConfig>{
         'pager': 'node_modules/pagerjs/pager.js',
         'traceur': 'scripts/traceur.min.js',
         'css': '/node_modules/systemjs/plugins/css.js',
+        'chartjs': 'scripts/chart.js',
 
         // external plugin mappings.
         'bootstrapJs': 'Scripts/bootstrap.js'
     },
     meta: {
-        'scripts/kendo/2016.1.112/kendo.ui.core.min.js' : {
+        'scripts/kendo/2016.1.112/kendo.ui.core.min.js': {
+            format: "global"
+        },
+        'scripts/chart.js': {
             format: "global"
         }
     },
@@ -40,12 +44,16 @@ Promise.all([
 
         // External Plugins.
         System.import('bootstrapJs'),
-        System.import('scripts/kendo/2016.1.112/kendo.ui.core.min.js')
+        System.import('scripts/kendo/2016.1.112/kendo.ui.core.min.js'),
+        System.import('scripts/chart.js')
     ]);
 
 }).then(() => {
     // Load the main viewmodel page...
-    System.import('scripts/knockout/knockout-kendo.js').then(() => {
+    Promise.all([
+        System.import('scripts/chartjs/knockout-chartjs.js'),
+        System.import('scripts/knockout/knockout-kendo.js')
+    ]).then(() => {
         System.import('app.js');
     });
 });

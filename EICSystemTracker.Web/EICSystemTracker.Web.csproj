@@ -492,6 +492,8 @@
     <Content Include="Content\kendo\2016.1.112\fonts\DejaVu\DejaVuSans-Bold.ttf" />
     <Content Include="Content\site_plugins.less" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\kendo\2016.1.112\angular.min.js" />
@@ -1036,7 +1038,9 @@
     <TypeScriptCompile Include="app\lib\pager.ts" />
     <TypeScriptCompile Include="init.ts" />
     <TypeScriptCompile Include="manifest.ts" />
+    <TypeScriptCompile Include="Scripts\chartjs\knockout-chartjs.ts" />
     <TypeScriptCompile Include="Scripts\knockout\knockout-kendo.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\chartjs\chartjs.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\eic\EICSystemTracker.Contracts.Typings.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\eic\eicsystemtracker.web.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\es6Promise\es6Promise.d.ts" />

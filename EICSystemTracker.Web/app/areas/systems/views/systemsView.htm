@@ -3,7 +3,11 @@
     <!-- ko if: selectedSystem()-->
     <div data-bind="css: {'loader': isLoading }">
         <h1 data-bind="text: selectedSystem().Name"></h1>
-
+        <br />
+        <br />
+        <div class="pull-right">
+            <canvas data-bind="chartJsPieChart: selectedSystem" height="400" width="400" />
+        </div>
     </div>
     <!-- /ko -->
 
