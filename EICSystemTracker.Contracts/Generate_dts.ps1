@@ -58,7 +58,8 @@ $outStream.Close();
 
 
 #Copy to as many places as you like
-$outPath = "c:\s\EIC\EICSystemTracker\EICSystemTracker.Web\Scripts\Typings\eic\" + $outFileName;
+$typingsDir = [System.IO.Path]::GetFullPath((Join-Path (pwd).Path -ChildPath ..\EICSystemTracker.Web\Scripts\Typings\eic\));
+$outPath = Join-Path $typingsDir -ChildPath $outFileName;
 Write-Host ""
 Write-Host "Copying generated dts: " + $outPath 
 Write-Host ""

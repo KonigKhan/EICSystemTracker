@@ -71,7 +71,7 @@ namespace EICSystemTracker.Data.EliteDangerousApiData
         {
             throw new System.NotImplementedException();
         }
-        public List<IEICSystemFaction> GetLatestEICSystemFactionTracking()
+        public List<IEICSystem> GetLatestEICSystemFactionTracking()
         {
             throw new NotImplementedException();
         }

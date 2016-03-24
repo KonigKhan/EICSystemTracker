@@ -63,42 +63,41 @@ class startViewModel extends PageViewModel {
 
     public submitData = () => {
 
-        // TODO: Add missing properties to entry form.
-        var submitSystem: IEICSystem = {
-            Id: 0,
-            Name: this.systemName(),
-            ControllingFaction: "Test",
-            Traffic: this.traffic(),
-            Population: this.population(),
-            Government: this.government(),
-            Allegiance: this.allegiance(),
-            State: "Test",
-            Security: this.security(),
-            Economy: "Test",
-            Power: "Test",
-            PowerState: "Test",
-            NeedPermit: false,
-            LastUpdated: ""
-        };
-
-        var reqs: Array<JQueryPromise<any>> = [];
+        // TODO: Add missing properties to entry form
+        var trackedFacs: Array<IEICSystemFaction> = [];
         var arrLen = this.factions().length;
         for (var i = 0; i < arrLen; i++) {
 
             var curData: IEICSystemFaction = this.factions()[i].getTrackingData();
-            curData.System = submitSystem;
             curData.UpdatedBy = "Test abc 123";
 
-            reqs.push(eicDataController.UpdateSystemFactionInfo(curData));
+            trackedFacs.push(curData);
         }
 
+        var submitSystem: IEICSystem = {
+            Name: this.systemName(),
+            Traffic: this.traffic(),
+            Population: this.population(),
+            Government: this.government(),
+            Allegiance: this.allegiance(),
+            State: "TODO",
+            Security: this.security(),
+            Economy: "TODO",
+            Power: "TODO",
+            PowerState: "TODO",
+            NeedPermit: false,
+            LastUpdated: "",
+            TrackedFactions: trackedFacs
+        };
+
         try {
+
             this.isLoading(true);
-            $.when(reqs).done((result) => {
+            eicDataController.UpdateSystemFactionInfo(submitSystem).done((result) => {
                 console.debug("eicDataController.UpdateSystemFactionInfo Result: " + JSON.stringify(result));
-            }).fail((result) => {
-                var errorobj = JSON.parse(result.error().responseText);
-                alert("Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage);
+            }).fail((resError) => {
+                var errorobj = JSON.parse(resError.error().responseText);
+                console.error("Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage);
             }).always(() => {
                 this.isLoading(false);
             });
@@ -106,20 +105,6 @@ class startViewModel extends PageViewModel {
         catch (e) {
             this.isLoading(false);
         }
-
-        //console.debug("Submitting form with data: " + JSON.stringify(submitSystemFaction));
-
-        //this.isLoading(true);
-        //eicDataController.UpdateSystemFactionInfo(submitSystemFaction).done((result) => {
-        //    console.debug("eicDataController.UpdateSystemFactionInfo Result: " + JSON.stringify(result));
-        //    this.isLoading(false);
-        //}).fail((res) => {
-        //    //console.debug("eicDataController.UpdateSystemFactionInfo Failure: " + JSON.stringify(res));
-        //    var errorobj = JSON.parse(res.error().responseText);
-        //    alert("Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage);
-        //    this.isLoading(false);
-        //});
-
     }
 
     public addFaction = () => {
@@ -138,10 +123,11 @@ class startViewModel extends PageViewModel {
 
         var arrLen = this.factions().length;
         for (var i = 0; i < arrLen; i++) {
-            // todo: set is controlling to false.
+            var f: trackingData = this.factions()[i];
+            f.controllingFaction(false);
         }
 
-        // TODO: set faction to controlling true
+        faction.controllingFaction(true);
     }
 }
 

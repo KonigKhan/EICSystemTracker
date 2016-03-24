@@ -26,7 +26,7 @@ namespace EICSystemTracker.Data
 
             switch (dataAdapterType)
             {
-                case DataAdapterType.MySql: return new EICData.MySqlEICData("[SERVER]", "[DB]", "[USER]", "[PWD]"); break;
+                case DataAdapterType.MySql: return new EICData.MySqlEICData("[SERVER]", "[DB]", "[USER]", "[PWD]");
                 case DataAdapterType.MSSql: return new EICData.SQLEICData(server: "pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com", 
                                                                           dataBase: "EICData", 
                                                                           userName: "admin", 

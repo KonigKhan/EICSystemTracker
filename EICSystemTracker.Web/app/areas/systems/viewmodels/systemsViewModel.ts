@@ -7,25 +7,48 @@ import SystemUtils from '../../../framework/systemutils';
 
 class systemsViewModel extends PageViewModel {
 
-    public Pages = ko.observableArray<IPagerDiv>([
-        <IPagerDiv>{
-            config: this._page('trackedSystems', 'Tracked Systems', 'app/areas/systems', 'trackedSystems')
-        },
-        <IPagerDiv>{
-            config: this._page('system', 'System', 'app/areas/systems', 'system')
-        }
-    ]);
-    public Navigate = (nav: IPageNavigation) => {
-        location.hash = nav.Href;
-    }
+    public TrackedSystems: KnockoutObservableArray<IEICSystem> = ko.observableArray([]);
+    public selectedSystem: KnockoutObservable<IEICSystem> = ko.observable(null);
+    public isLoading: KnockoutObservable<boolean> = ko.observable(false);
 
     constructor() {
         super();
         console.debug('New Systems View Model!');
     }
 
+    public SelectSystem = (selected: IEICSystem) => {
+        this.selectedSystem(selected);
+    }
+
     Shown() {
-        location.hash = 'start/systems/trackedSystems';
+        this._init();
+    }
+
+    private _init(): void {
+        this.isLoading(true);
+        eicDataController.GetLatestSystemTrackingData().done((returnData: Array<IEICSystem>) => {
+            //this.SystemFactions(returnData);
+
+            //// Add to unique systems collection.
+            //var uniqueSystems: Array<IEICSystem> = [];
+            //for (var i = 0, len = this.SystemFactions().length; i < len; i++) {
+
+            //    var curItem: IEICSystemFaction = this.SystemFactions()[i];
+            //    var existingSystem = uniqueSystems.filter((s: IEICSystem) => {
+            //        return s.Name === curItem.System.Name;
+            //    })[0];
+
+            //    if (!existingSystem) {
+            //        uniqueSystems.push(curItem.System);
+            //    }
+            //}
+
+            //this.TrackedSystems(uniqueSystems);
+            this.TrackedSystems(returnData);
+
+        }).always(() => {
+            this.isLoading(false);
+        });
     }
 }
 

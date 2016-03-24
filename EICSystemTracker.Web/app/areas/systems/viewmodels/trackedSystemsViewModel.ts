@@ -22,24 +22,26 @@ class TrackedSystemsViewModel extends PageViewModel {
 
     private _init(): void {
         this.isLoading(true);
-        eicDataController.GetLatestSystemTrackingData().done((returnData: Array<IEICSystemFaction>) => {
-            this.SystemFactions(returnData);
+        eicDataController.GetLatestSystemTrackingData().done((returnData: Array<IEICSystem>) => {
+            //this.SystemFactions(returnData);
 
-            // Add to unique systems collection.
-            var uniqueSystems: Array<IEICSystem> = [];
-            for (var i = 0, len = this.SystemFactions().length; i < len; i++) {
+            //// Add to unique systems collection.
+            //var uniqueSystems: Array<IEICSystem> = [];
+            //for (var i = 0, len = this.SystemFactions().length; i < len; i++) {
 
-                var curItem: IEICSystemFaction = this.SystemFactions()[i];
-                var existingSystem = uniqueSystems.filter((s: IEICSystem) => {
-                    return s.Name === curItem.System.Name;
-                })[0];
+            //    var curItem: IEICSystemFaction = this.SystemFactions()[i];
+            //    var existingSystem = uniqueSystems.filter((s: IEICSystem) => {
+            //        return s.Name === curItem.System.Name;
+            //    })[0];
 
-                if (!existingSystem) {
-                    uniqueSystems.push(curItem.System);
-                }
-            }
+            //    if (!existingSystem) {
+            //        uniqueSystems.push(curItem.System);
+            //    }
+            //}
 
-            this.TrackedSystems(uniqueSystems);
+            //this.TrackedSystems(uniqueSystems);
+            this.TrackedSystems(returnData);
+
         }).always(() => {
             this.isLoading(false);
         });

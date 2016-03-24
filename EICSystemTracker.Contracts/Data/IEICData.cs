@@ -10,6 +10,6 @@ namespace EICSystemTracker.Contracts.Data
 
         List<IEICSystem> GetAllSystems();
         List<IEICFaction> GetAllFactions();
-        List<IEICSystemFaction> GetLatestEICSystemFactionTracking();
+        List<IEICSystem> GetLatestEICSystemFactionTracking();
     }
 }

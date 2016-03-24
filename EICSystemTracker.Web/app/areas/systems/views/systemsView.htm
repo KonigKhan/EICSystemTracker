@@ -1,14 +1,55 @@
 ﻿<div id="systems_startView">
 
-    <h1>Systems!</h1>
+    <!-- ko if: selectedSystem()-->
+    <div data-bind="css: {'loader': isLoading }">
+        <h1 data-bind="text: selectedSystem().Name"></h1>
 
-    <!-- ko foreach: Pages -->
-    <div data-bind="page: $data.config"></div>
+    </div>
     <!-- /ko -->
 
-    <!--<div class="splash" data-bind="css: {'loader': isLoading }">-->
-    <!--<div data-bind="page:_page.pageObject('contenttype', 'taxonomy/destinations', 'contenttype')"></div>-->
-    <!--<div data-bind="page:_page('systems', 'Tracked Systems', 'app/areas/systems', 'trackedSystems', 'trackedSystems')"></div>-->
-    <!--<div data-bind="page:_page('systems', 'System Details', 'app/areas/systems', 'system', 'system')"></div>-->
-    <!--</div>-->
+    <!-- ko if: !selectedSystem() -->
+    <div data-bind="css: {'loader': isLoading }">
+        <h1>Systems</h1>
+
+        <div class="row">
+            <div class="col-xs-3 col-md-2">
+                <h4>System</h4>
+            </div>
+            <div class="col-xs-2 col-md-1">
+                <h4>Traffic</h4>
+            </div>
+            <div class="col-xs-2 col-md-1 col-md-1">
+                <h4>Population</h4>
+            </div>
+            <div class="hidden-xs hidden-sm col-md-1">
+                <h4>Government</h4>
+            </div>
+            <div class="hidden-xs hidden-sm col-md-1">
+                <h4>Security</h4>
+            </div>
+            <div class="hidden-xs hidden-sm col-md-1">
+                <h4>Allegiance</h4>
+            </div>
+            <div class="hidden-xs hidden-sm col-md-1">
+                <h4>Power</h4>
+            </div>
+        </div>
+        <br />
+
+        <!-- ko foreach: TrackedSystems -->
+        <div class="row">
+            <a data-bind="click: $parent.SelectSystem">
+                <div class="col-xs-3 col-sm-2" data-bind="text: Name"></div>
+            </a>
+            <div class="col-xs-2 col-sm-1" data-bind="text: Traffic"></div>
+            <div class="col-xs-2 col-sm-1" data-bind="text: Population"></div>
+            <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Government"></div>
+            <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Security"></div>
+            <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Allegiance"></div>
+            <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Power"></div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+
 </div>

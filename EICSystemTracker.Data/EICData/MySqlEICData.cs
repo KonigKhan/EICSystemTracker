@@ -65,7 +65,7 @@ namespace EICSystemTracker.Data.EICData
             throw new NotImplementedException();
         }
 
-        public List<IEICSystemFaction> GetLatestEICSystemFactionTracking()
+        public List<IEICSystem> GetLatestEICSystemFactionTracking()
         {
             var sprocConfig = new StoredProcedureConfig
             {
@@ -99,7 +99,7 @@ namespace EICSystemTracker.Data.EICData
 
             }).ToList<IEICSystemFaction>();
 
-            return eicSystemFactions;
+            throw new NotImplementedException();
         }
 
         public void Dispose()

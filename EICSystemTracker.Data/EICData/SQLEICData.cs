@@ -97,10 +97,10 @@ namespace EICSystemTracker.Data.EICData
             var allFactions = new List<IEICFaction>();
 
             allFactions = (from f in _eicData.EDFactions
-                          select new EICFaction()
-                          {
-                              Name = f.Name
-                          }).ToList<IEICFaction>();
+                           select new EICFaction()
+                           {
+                               Name = f.Name
+                           }).ToList<IEICFaction>();
 
             return allFactions;
         }
@@ -118,24 +118,47 @@ namespace EICSystemTracker.Data.EICData
             return allSystems;
         }
 
-        public List<IEICSystemFaction> GetLatestEICSystemFactionTracking()
+        public List<IEICSystem> GetLatestEICSystemFactionTracking()
         {
-            var latestTrackedData = (from t in _eicData.Track_SystemFactions
-                                     group t by new { t.EDSystem, t.EDFaction } into t_grp
-                                     select t_grp.OrderByDescending(t => t.Timestamp).FirstOrDefault())
-                       .ToList().Select(dbsf => new EICSystemFaction()
-                       {
-                           System = GetLatestSystemInfo(dbsf.EDSystem),
-                           Faction = GetLatestFactionInfo(dbsf.EDFaction),
-                           Influence = Decimal.ToDouble(dbsf.Influence ?? 0),
-                           CurrentState = dbsf.CurrentState,
-                           PendingState = dbsf.PendingState,
-                           RecoveringState = dbsf.RecoveringState,
-                           UpdatedBy = dbsf.UpdateBy,
-                           LastUpdated = dbsf.Timestamp
-                       }).ToList<IEICSystemFaction>();
+            var systemsToReturn = new List<IEICSystem>();
 
-            return latestTrackedData;
+            var dbSystems = (from s in _eicData.EDSystems select s);
+            foreach (var dbSystem in dbSystems)
+            {
+                var latestSystemInfo = GetLatestSystemInfo(dbSystem);
+                var trackedFactions = (from tf in dbSystem.Track_SystemFactions
+                                       group tf by new { tf.EDSystem, tf.EDFaction } into tf_grp
+                                       select tf_grp.OrderByDescending(tf => tf.Timestamp).FirstOrDefault()).ToList();
+
+                var system = new EICSystem();
+                system.Name = latestSystemInfo.Name;
+                system.Traffic = latestSystemInfo.Traffic;
+                system.Population = latestSystemInfo.Population;
+                system.Government = latestSystemInfo.Government;
+                system.Allegiance = latestSystemInfo.Allegiance;
+                system.State = latestSystemInfo.State;
+                system.Security = latestSystemInfo.Security;
+                system.Economy = latestSystemInfo.Economy;
+                system.Power = latestSystemInfo.Power;
+                system.PowerState = latestSystemInfo.PowerState;
+                system.NeedPermit = latestSystemInfo.NeedPermit;
+                system.LastUpdated = latestSystemInfo.LastUpdated;
+                system.TrackedFactions = trackedFactions.Select(tf => new EICSystemFaction()
+                {
+                    Faction = GetLatestFactionInfo(tf.EDFaction),
+                    Influence = Convert.ToDouble(tf.Influence ?? 0),
+                    CurrentState = tf.CurrentState,
+                    PendingState = tf.PendingState,
+                    RecoveringState = tf.RecoveringState,
+                    UpdatedBy = tf.UpdateBy,
+                    ControllingFaction = tf.ContrllingFaction,
+                    LastUpdated = tf.Timestamp
+                }).ToList<IEICSystemFaction>();
+
+                systemsToReturn.Add(system);
+            }
+
+            return systemsToReturn;
         }
 
         private IEICFaction GetLatestFactionInfo(EDFaction dbFaction)

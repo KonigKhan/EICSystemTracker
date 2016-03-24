@@ -19,7 +19,7 @@ namespace EICSystemTracker.Service
             throw new NotImplementedException();
         }
 
-        public List<IEICSystemFaction> GetLatestSystemTrackingData()
+        public List<IEICSystem> GetLatestSystemTrackingData()
         {
             using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
             {

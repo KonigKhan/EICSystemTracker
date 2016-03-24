@@ -18,7 +18,7 @@ class EICSystemDataController implements IEICSystemTrackerService {
         return dfd.promise();
     };
 
-    public static UpdateSystemFactionInfo = (systemFaction: IEICSystemFaction): JQueryPromise<any> => {
+    public static UpdateSystemFactionInfo = (systemFaction: IEICSystem): JQueryPromise<any> => {
 
         var dfd = $.Deferred();
 

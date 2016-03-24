@@ -6,31 +6,14 @@ interface IEICSystemTrackerService{
   /*methods*/
 	GetSystems?():JQueryPromise<any>;
 	GetLatestSystemTrackingData?():JQueryPromise<any>;
-	UpdateSystemFactionInfo?(systemFaction:IEICSystemFaction/*IEICSystemFaction*/):JQueryPromise<void>;
-}
-
-
-/*EICSystemTracker.Contracts.SystemTracking.IEICSystemFaction*/
-interface IEICSystemFaction{
-  /*properties*/
-	Id: number; /*System.Int32*/
-	System: IEICSystem; /*EICSystemTracker.Contracts.SystemTracking.IEICSystem*/
-	Faction: IEICFaction; /*EICSystemTracker.Contracts.SystemTracking.IEICFaction*/
-	Influence: number; /*System.Double*/
-	CurrentState: string; /*System.String*/
-	PendingState: string; /*System.String*/
-	RecoveringState: string; /*System.String*/
-	UpdatedBy: string; /*System.String*/
-
+	TrackSystem?(systemFaction:IEICSystem/*IEICSystem*/):JQueryPromise<void>;
 }
 
 
 /*EICSystemTracker.Contracts.SystemTracking.IEICSystem*/
 interface IEICSystem{
   /*properties*/
-	Id: number; /*System.Int32*/
 	Name: string; /*System.String*/
-	ControllingFaction: string; /*System.String*/
 	Traffic: number; /*System.Int32*/
 	Population: number; /*System.Int32*/
 	Government: string; /*System.String*/
@@ -42,6 +25,7 @@ interface IEICSystem{
 	PowerState: string; /*System.String*/
 	NeedPermit: boolean; /*System.Boolean*/
 	LastUpdated: string; /*System.DateTime*/
+	TrackedFactions: any; /*System.Collections.Generic.List`1[EICSystemTracker.Contracts.SystemTracking.IEICSystemFaction]*/
 
 }
 
@@ -49,9 +33,22 @@ interface IEICSystem{
 /*EICSystemTracker.Contracts.SystemTracking.IEICFaction*/
 interface IEICFaction{
   /*properties*/
-	Id: number; /*System.Int32*/
 	Name: string; /*System.String*/
-	Allegiance: string; /*System.String*/
+
+}
+
+
+/*EICSystemTracker.Contracts.SystemTracking.IEICSystemFaction*/
+interface IEICSystemFaction{
+  /*properties*/
+	Faction: IEICFaction; /*EICSystemTracker.Contracts.SystemTracking.IEICFaction*/
+	Influence: number; /*System.Double*/
+	CurrentState: string; /*System.String*/
+	PendingState: string; /*System.String*/
+	RecoveringState: string; /*System.String*/
+	UpdatedBy: string; /*System.String*/
+	ControllingFaction: boolean; /*System.Boolean*/
+	LastUpdated: string; /*System.DateTime*/
 
 }
 
@@ -76,7 +73,7 @@ interface IDataAdapter{
 interface IEICData{
 
   /*methods*/
-	AddSystemFactionTracking?(systemFaction:IEICSystemFaction/*IEICSystemFaction*/):JQueryPromise<void>;
+	TrackSystem?(system:IEICSystem/*IEICSystem*/):JQueryPromise<void>;
 	GetAllSystems?():JQueryPromise<any>;
 	GetAllFactions?():JQueryPromise<any>;
 	GetLatestEICSystemFactionTracking?():JQueryPromise<any>;
