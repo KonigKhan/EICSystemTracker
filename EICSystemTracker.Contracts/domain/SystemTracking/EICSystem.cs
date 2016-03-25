@@ -19,24 +19,7 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
         public string PowerState { get; set; }
         public bool NeedPermit { get; set; }
         public DateTime LastUpdated { get; set; }
+        public string ChartColor { get; set; }
         public List<IEICSystemFaction> TrackedFactions { get; set; }
-
-        public EICSystem() { }
-        public EICSystem(IEICSystem system)
-        {
-            this.Name = system.Name;
-            this.Traffic = system.Traffic;
-            this.Population = system.Population;
-            this.Government = system.Government;
-            this.Allegiance = system.Allegiance;
-            this.State = system.State;
-            this.Security = system.Security;
-            this.Economy = system.Economy;
-            this.Power = system.Power;
-            this.PowerState = system.PowerState;
-            this.NeedPermit = system.NeedPermit;
-            this.LastUpdated = system.LastUpdated;
-            this.TrackedFactions = system.TrackedFactions;
-        }
     }
 }

@@ -34,7 +34,6 @@ namespace EICSystemTracker.Data.Tests
                 Faction = new EICFaction()
                 {
                     Name = "East India Company",
-                    Allegiance = "Empire"
                 },
                 Influence = 50.6,
                 CurrentState = "Expansion",

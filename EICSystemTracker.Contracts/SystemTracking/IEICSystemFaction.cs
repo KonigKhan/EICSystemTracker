@@ -8,8 +8,6 @@ namespace EICSystemTracker.Contracts.SystemTracking
 {
     public interface IEICSystemFaction
     {
-        //IEICSystem System { get; set; }
-
         IEICFaction Faction { get; set; }
         double Influence { get; set; }
         string CurrentState { get; set; }

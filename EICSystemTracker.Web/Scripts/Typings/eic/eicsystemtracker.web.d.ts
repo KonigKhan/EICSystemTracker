@@ -51,3 +51,8 @@ interface IDictionary<T> {
     keys(): string[];
     values(): T[];
 }
+
+interface IPieChartBinding {
+    PieChartData: KnockoutObservableArray<CircularChartData>;
+    PieChartOptions: PieChartOptions;
+}

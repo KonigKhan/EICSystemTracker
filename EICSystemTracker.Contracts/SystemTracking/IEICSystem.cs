@@ -20,6 +20,7 @@ namespace EICSystemTracker.Contracts.SystemTracking
         string PowerState { get; set; }
         bool NeedPermit { get; set; }
         DateTime LastUpdated { get; set; }
+        string ChartColor { get; set; }
 
         List<IEICSystemFaction> TrackedFactions { get; set; }
     }

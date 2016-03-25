@@ -13,38 +13,28 @@ import ko from '../../app/lib/knockout';
 //    }
 //};
 
-ko.bindingHandlers['chartJsPieChart'] = {
+function CheckForCanvas(el: any) {
+    // Throw exception if not a canvas
+    if (el.nodeName.toLowerCase() !== 'canvas') {
+        console.error('PieChart can only be bound to canvas elements.');
+        throw 'PieChart can only be bound to canvas elements.';
+    }
+}
+
+ko.bindingHandlers['PieChart'] = {
     init: (element, valueAccessor, allBindings, viewModel, bindingContext) => {
 
         // First get the latest data that we're bound to
-        var options = valueAccessor() || {};
+        var options: IPieChartBinding = valueAccessor() || {};
         var others = allBindings() || {};
 
-        var data = [
-            {
-                value: 300,
-                color: "#F7464A",
-                highlight: "#FF5A5E",
-                label: "Red"
-            },
-            {
-                value: 50,
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
-                label: "Green"
-            },
-            {
-                value: 100,
-                color: "#FDB45C",
-                highlight: "#FFC870",
-                label: "Yellow"
-            }
-        ];
+        CheckForCanvas(element);
 
         var canvas = <HTMLCanvasElement>$(element).get(0);
         var ctx = canvas.getContext('2d');
+        var chartOptions = options.PieChartOptions;
 
-        var testPie = new Chart(ctx).Pie(data);
+        var testPie = new Chart(ctx).Pie(options.PieChartData(), chartOptions);
 
         //create AutoComplete UI component
         //var dropDown = $(element).kendoDropDownList({
@@ -72,5 +62,10 @@ ko.bindingHandlers['chartJsPieChart'] = {
         //        dropDown.trigger("change");
         //    }
         //});
+
+        options.PieChartData.subscribe((newData) => {
+            testPie.destroy();
+            testPie = new Chart(ctx).Pie(newData, chartOptions);
+        });
     }
 };

@@ -25,6 +25,7 @@ interface IEICSystem{
 	PowerState: string; /*System.String*/
 	NeedPermit: boolean; /*System.Boolean*/
 	LastUpdated: string; /*System.DateTime*/
+	ChartColor: string; /*System.String*/
 	TrackedFactions: any; /*System.Collections.Generic.List`1[EICSystemTracker.Contracts.SystemTracking.IEICSystemFaction]*/
 
 }
@@ -34,6 +35,7 @@ interface IEICSystem{
 interface IEICFaction{
   /*properties*/
 	Name: string; /*System.String*/
+	ChartColor: string; /*System.String*/
 
 }
 

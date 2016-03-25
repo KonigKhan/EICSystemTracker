@@ -52,12 +52,17 @@ namespace EICSystemTracker.Data.EICData
             {
                 sys = new EDSystem();
                 sys.Name = system.Name;
+                sys.ChartColor = GetRandomColor();
                 sys.Track_Systems.Add(trackSys);
                 _eicData.EDSystems.InsertOnSubmit(sys);
             }
             else
             {
                 sys.Name = system.Name;
+                if (string.IsNullOrEmpty(sys.ChartColor))
+                {
+                    sys.ChartColor = GetRandomColor();
+                }
                 sys.Track_Systems.Add(trackSys);
             }
 
@@ -69,11 +74,16 @@ namespace EICSystemTracker.Data.EICData
                 {
                     fac = new EDFaction();
                     fac.Name = trackedFaction.Faction.Name;
+                    fac.ChartColor = GetRandomColor();
                     _eicData.EDFactions.InsertOnSubmit(fac);
                 }
                 else
                 {
                     fac.Name = trackedFaction.Faction.Name;
+                    if (string.IsNullOrEmpty(fac.ChartColor))
+                    {
+                        fac.ChartColor = GetRandomColor();
+                    }
                 }
 
                 Track_SystemFaction tracking = new Track_SystemFaction();
@@ -143,6 +153,7 @@ namespace EICSystemTracker.Data.EICData
                 system.PowerState = latestSystemInfo.PowerState;
                 system.NeedPermit = latestSystemInfo.NeedPermit;
                 system.LastUpdated = latestSystemInfo.LastUpdated;
+                system.ChartColor = latestSystemInfo.ChartColor;
                 system.TrackedFactions = trackedFactions.Select(tf => new EICSystemFaction()
                 {
                     Faction = GetLatestFactionInfo(tf.EDFaction),
@@ -167,8 +178,19 @@ namespace EICSystemTracker.Data.EICData
                        orderby tf.Timestamp descending
                        select new EICFaction()
                        {
-                           Name = tf.EDFaction.Name
+                           Name = tf.EDFaction.Name,
+                           ChartColor = tf.EDFaction.ChartColor                           
                        }).FirstOrDefault();
+
+            if (fac == null)
+            {
+                // No tracking data... just get from faction then.
+                fac = new EICFaction()
+                {
+                    Name = dbFaction.Name,
+                    ChartColor = dbFaction.ChartColor
+                };
+            }
 
             return fac;
         }
@@ -193,7 +215,22 @@ namespace EICSystemTracker.Data.EICData
                            LastUpdated = ts.Timestamp
                        }).FirstOrDefault();
 
+            if (sys == null)
+            {
+                sys = new EICSystem()
+                {
+                    Name = dbSystem.Name,
+                    ChartColor = dbSystem.ChartColor
+                };
+            }
+
             return sys;
+        }
+
+        private string GetRandomColor()
+        {
+            var color = String.Format("#{0:X6}", new Random((int)DateTime.UtcNow.Ticks).Next(0x1000000));
+            return color;
         }
 
         #region IDisposable Support

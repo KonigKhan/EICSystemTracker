@@ -87,7 +87,8 @@ class startViewModel extends PageViewModel {
             PowerState: "TODO",
             NeedPermit: false,
             LastUpdated: "",
-            TrackedFactions: trackedFacs
+            TrackedFactions: trackedFacs,
+            ChartColor: null
         };
 
         try {

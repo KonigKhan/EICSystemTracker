@@ -1030,7 +1030,6 @@
     <TypeScriptCompile Include="app\areas\systems\controllers\EICSystemTrackerDataController.ts" />
     <TypeScriptCompile Include="app\areas\systems\manifest.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\systemsViewModel.ts" />
-    <TypeScriptCompile Include="app\areas\systems\viewmodels\trackedSystemsViewModel.ts" />
     <TypeScriptCompile Include="app\framework\domain\PageViewModel.ts" />
     <TypeScriptCompile Include="app\framework\SystemUtils.ts" />
     <TypeScriptCompile Include="app\lib\jquery.ts" />
