@@ -2,6 +2,7 @@
 import ko from '../../../lib/knockout';
 
 import eicDataController from '../controllers/EICSystemTrackerDataController';
+import systemsCacheService from '../services/SystemsCacheService';
 import SystemUtils from '../../../framework/systemutils';
 
 class AllViewModel extends PageViewModel {
@@ -13,11 +14,14 @@ class AllViewModel extends PageViewModel {
         super();
 
         console.log('AllViewModel ctor');
+
+        this.TrackedSystems.subscribe((newListOfSystems: Array<IEICSystem>) => {
+            systemsCacheService.SetSystems(newListOfSystems);
+        });
     }
 
     Shown() {
         super.Shown();
-
         this._init();
     }
 
@@ -29,6 +33,7 @@ class AllViewModel extends PageViewModel {
     private _init(): void {
         this.isLoading(true);
         eicDataController.GetLatestSystemTrackingData().done((returnData: Array<IEICSystem>) => {
+            
             this.TrackedSystems(returnData);
 
         }).always(() => {

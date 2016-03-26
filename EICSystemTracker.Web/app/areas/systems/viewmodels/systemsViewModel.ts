@@ -3,6 +3,7 @@ import ko from '../../../lib/knockout';
 
 import PageViewModel from '../../../framework/domain/PageViewModel';
 import eicDataController from '../controllers/EICSystemTrackerDataController';
+import systemsCacheService from '../services/SystemsCacheService';
 import SystemUtils from '../../../framework/systemutils';
 
 class systemsViewModel extends PageViewModel {
@@ -26,7 +27,6 @@ class systemsViewModel extends PageViewModel {
 
     Shown() {
         super.Shown();
-
         if (location.hash === '#start/systems') {
             location.hash = 'start/systems/all';
         }
