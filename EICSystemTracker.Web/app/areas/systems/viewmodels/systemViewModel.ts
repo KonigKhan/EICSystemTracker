@@ -4,6 +4,8 @@ import ko from '../../../lib/knockout';
 
 class SystemViewModel extends PageViewModel {
 
+    SystemName: KnockoutObservable<string> = ko.observable("");
+
     constructor() {
         super();
 
@@ -11,7 +13,9 @@ class SystemViewModel extends PageViewModel {
     }
 
     Shown() {
-        // TODO: Get System & It's tracked factions
+        super.Shown();
+        var sysName: string = location.hash.substring(location.hash.lastIndexOf("/") + 1);
+        this.SystemName(sysName);
     }
 }
 
