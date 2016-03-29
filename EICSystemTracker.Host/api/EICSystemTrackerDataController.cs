@@ -36,8 +36,20 @@ namespace EICSystemTracker.Host.api
             return response;
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetSystem(string systemName)
+        {
+            var system = _systemTrackerService.GetSystem(systemName);
+            var json = JsonConvert.SerializeObject(system);
+
+            HttpResponseMessage response = Request.CreateResponse(System.Net.HttpStatusCode.OK, json, new TextPlainFormatter());
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            return response;
+        }
+
         [HttpPost]
-        public HttpResponseMessage UpdateSystemFactionInfo([FromBody]EICSystemDTO system)
+        public string UpdateSystemFactionInfo([FromBody]EICSystemDTO system)
         {
             var sys = new EICSystem()
             {
@@ -71,8 +83,10 @@ namespace EICSystemTracker.Host.api
 
             _systemTrackerService.TrackSystem(sys);
 
-            HttpResponseMessage response = Request.CreateResponse(System.Net.HttpStatusCode.OK);
-            return response;
+            //HttpResponseMessage response = Request.CreateResponse(System.Net.HttpStatusCode., "", new TextPlainFormatter());
+            //response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            return "OK";
         }
     }
 

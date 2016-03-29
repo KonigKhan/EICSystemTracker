@@ -7,6 +7,7 @@ interface IEICSystemTrackerService{
 	GetSystems?():JQueryPromise<any>;
 	GetLatestSystemTrackingData?():JQueryPromise<any>;
 	TrackSystem?(systemFaction:IEICSystem/*IEICSystem*/):JQueryPromise<void>;
+	GetSystem?(systemName:string/*String*/):JQueryPromise<IEICSystem>;
 }
 
 
@@ -79,6 +80,7 @@ interface IEICData{
 	GetAllSystems?():JQueryPromise<any>;
 	GetAllFactions?():JQueryPromise<any>;
 	GetLatestEICSystemFactionTracking?():JQueryPromise<any>;
+	GetSystem?(systemName:string/*String*/):JQueryPromise<IEICSystem>;
 }
 
 

@@ -8,5 +8,6 @@ namespace EICSystemTracker.Contracts
         List<IEICSystem> GetSystems();
         List<IEICSystem> GetLatestSystemTrackingData();
         void TrackSystem(IEICSystem systemFaction);
+        IEICSystem GetSystem(string systemName);
     }
 }

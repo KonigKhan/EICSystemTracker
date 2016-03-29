@@ -111,5 +111,10 @@ namespace EICSystemTracker.Data.EICData
         {
             throw new NotImplementedException();
         }
+
+        public IEICSystem GetSystem(string systemName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

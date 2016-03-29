@@ -172,6 +172,44 @@ namespace EICSystemTracker.Data.EICData
             return systemsToReturn;
         }
 
+        public IEICSystem GetSystem(string systemName)
+        {
+            var system = new EICSystem();
+
+            var dbSystem = (from sys in _eicData.EDSystems where sys.Name.Equals(systemName, StringComparison.InvariantCultureIgnoreCase) select sys).FirstOrDefault();
+            var latestSystemInfo = GetLatestSystemInfo(dbSystem);
+            var trackedFactions = (from tf in dbSystem.Track_SystemFactions
+                                   group tf by new { tf.EDSystem, tf.EDFaction } into tf_grp
+                                   select tf_grp.OrderByDescending(tf => tf.Timestamp).FirstOrDefault()).ToList();
+                        
+            system.Name = latestSystemInfo.Name;
+            system.Traffic = latestSystemInfo.Traffic;
+            system.Population = latestSystemInfo.Population;
+            system.Government = latestSystemInfo.Government;
+            system.Allegiance = latestSystemInfo.Allegiance;
+            system.State = latestSystemInfo.State;
+            system.Security = latestSystemInfo.Security;
+            system.Economy = latestSystemInfo.Economy;
+            system.Power = latestSystemInfo.Power;
+            system.PowerState = latestSystemInfo.PowerState;
+            system.NeedPermit = latestSystemInfo.NeedPermit;
+            system.LastUpdated = latestSystemInfo.LastUpdated;
+            system.ChartColor = latestSystemInfo.ChartColor;
+            system.TrackedFactions = trackedFactions.Select(tf => new EICSystemFaction()
+            {
+                Faction = GetLatestFactionInfo(tf.EDFaction),
+                Influence = Convert.ToDouble(tf.Influence ?? 0),
+                CurrentState = tf.CurrentState,
+                PendingState = tf.PendingState,
+                RecoveringState = tf.RecoveringState,
+                UpdatedBy = tf.UpdateBy,
+                ControllingFaction = tf.ContrllingFaction,
+                LastUpdated = tf.Timestamp
+            }).ToList<IEICSystemFaction>();
+
+            return system;
+        }
+
         private IEICFaction GetLatestFactionInfo(EDFaction dbFaction)
         {
             var fac = (from tf in dbFaction.Track_Factions

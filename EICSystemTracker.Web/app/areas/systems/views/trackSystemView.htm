@@ -1,0 +1,119 @@
+﻿<div data-bind="css: {'loader': isLoading }">
+    <!-- ko if: !isLoading() -->
+    <h1>TrackSystem!</h1>
+    <p class="fontYellow">Enter the following information for thie system.</p>
+    <div class="col-xs-12" style="padding: 10px;">
+        <div class="col-sm-12 col-md-6" style="padding:10px;">
+            <div class="col-xs-2">Cmdr Name:</div>
+            <div class="col-xs-4">
+                <input class="col-xs-12" type="text" data-bind="value: cmdrName" />
+            </div>
+        </div>
+        <br /><br />
+        <h3>System Info</h3>
+        <div class="row" style="padding-bottom: 10px;">
+            <div class="col-sm-12 col-md-4" style="padding:10px;">
+                <div class="col-xs-2">Name:</div>
+                <div class="col-xs-10">
+                    <input class="col-xs-12" type="text" data-bind="value: systemName" />
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4" style="padding:10px;">
+                <div class="col-xs-2">Security:</div>
+                <div class="col-xs-10">
+                    <input style="width: 100%;" data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select Security...', dataSource: securityOptions, value: security}" />
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4" style="padding: 10px;">
+                <div class="col-xs-2">Allegiance:</div>
+                <div class="col-xs-10">
+                    <input style="width: 100%;" data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select an Allegiance...', dataSource: allegianceOptions, value: allegiance}" />
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4" style="padding: 10px;">
+                <div class="col-xs-2">Traffic:</div>
+                <div class="col-xs-10">
+                    <input type="number" class="col-xs-12" data-bind="value: traffic" />
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4" style="padding:10px;">
+                <div class="col-xs-2">Population:</div>
+                <div class="col-xs-10">
+                    <input type="number" class="col-xs-12" data-bind="value: population" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="col-xs-12">
+            <hr />
+        </div>
+        <h4>Factions</h4>
+        <p class="fontYellow">Add Factions for this system by clicking "Add Faction".<br />If a faction is no longer in a system, set it's influence to 0.</p>
+        <div class="col-xs-12" style="margin-bottom: 10px;">
+            <div class="linkButton pull-left" data-bind="click: addFaction">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Faction
+            </div>
+        </div>
+        <div class="col-xs-12" data-bind="foreach: factions">
+            <div class="col-sm-12 col-md-4" style="margin-bottom: 10px;">
+                <div class="col-xs-12" style="padding:10px; border: solid 1px #DE1B1B;">
+                    <h3 class="pull-left">Faction:</h3>
+                    <div class="pull-right" style="padding:5px;">
+                        <div class="pull-right" data-bind="click: $parent.removeFaction">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding:5px;">
+                        <div class="col-xs-4">Name</div>
+                        <div class="col-xs-8">
+                            <input type="text" class="col-xs-12" data-bind="value: factionName" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding:5px;">
+                        <div class="col-xs-4">Allegiance</div>
+                        <div class="col-xs-8">
+                            <input style="width: 100%;" data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select an Allegiance...', dataSource: $parent.allegianceOptions, value: allegiance}" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding: 5px">
+                        <div class="col-xs-4">Influence</div>
+                        <div class="col-xs-8">
+                            <input class="col-xs-12" type="number" data-bind="value: influence" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding:5px">
+                        <div class="col-xs-4">Current State</div>
+                        <div class="col-xs-8">
+                            <input style="width: 100%;" data-bind="kendoDropDownList: {dataTextField: '', dataValueField: '', optionLabel: 'Select a State...', dataSource: $parent.stateOptions, value: currentState}" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding:5px">
+                        <div class="col-xs-4">Pending State</div>
+                        <div class="col-xs-8">
+                            <select multiple="multiple" data-bind="kendoMultiSelect: { dataTextField: '', dataValueField: '', dataSource: $parent.stateOptions, minLength: 3, maxSelectedItems: 3, filter: 'startswith', ignoreCase: true, placeholder: 'Select up to 3...', value:  pendingState}"></select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding:5px">
+                        <div class="col-xs-4">Recovering State</div>
+                        <div class="col-xs-8">
+                            <select multiple="multiple" data-bind="kendoMultiSelect: { dataTextField: '', dataValueField: '', dataSource: $parent.stateOptions, minLength: 3, maxSelectedItems: 3, filter: 'startswith', ignoreCase: true, placeholder: 'Select up to 3...', value:  recoveringState}"></select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding:5px;">
+                        <div class="col-xs-12">
+                            <input type="checkbox" data-bind="checked: $data.controllingFaction" />&nbsp;Controlling Faction
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-xs-12">
+                <button class="linkButton btn btn-default pull-left" data-bind="click: submitData">Submit</button>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

@@ -116,5 +116,10 @@ namespace EICSystemTracker.Data.EliteDangerousApiData
 
             return systems;
         }
+
+        public IEICSystem GetSystem(string systemName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

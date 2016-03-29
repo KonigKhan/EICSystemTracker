@@ -2,7 +2,7 @@
 import ko from '../../../lib/knockout';
 
 import eicDataController from '../controllers/EICSystemTrackerDataController';
-import systemsCacheService from '../services/SystemsCacheService';
+import systemsCacheService from '../../../services/systemscacheservice';
 import SystemUtils from '../../../framework/systemutils';
 
 class AllViewModel extends PageViewModel {

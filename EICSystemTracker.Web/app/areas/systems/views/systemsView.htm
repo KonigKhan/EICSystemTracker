@@ -1,6 +1,19 @@
-﻿<div id="systems_startView">
+﻿
+<ul>
+    <li data-bind="css:{active:_isCurrentPage('start/systems/all')},click:function(){location.hash = 'start/systems/all'}">
+        <a>All Systems</a>
+    </li>
+    <li data-bind="css:{active:_isCurrentPage('start/systems/trackSystem')},click:function(){location.hash = 'start/systems/trackSystem'}">
+        <a>Track A System</a>
+    </li>
+    <!--ko if:_isCurrentPage('start/systems/system')-->
+    <li class="active">
+        <a>System Details</a>
+    </li>
+    <!-- /ko -->
+</ul>
 
-    <h1>Systems!</h1>
+<div id="systems_startView">
 
     <!-- ko foreach: Pages -->
     <div data-bind="page: $data.config"></div>

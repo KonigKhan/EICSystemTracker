@@ -34,5 +34,13 @@ namespace EICSystemTracker.Service
                 da.TrackSystem(system);
             }
         }
+
+        public IEICSystem GetSystem(string systemName)
+        {
+            using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
+            {
+                return da.GetSystem(systemName);
+            }
+        }
     }
 }
