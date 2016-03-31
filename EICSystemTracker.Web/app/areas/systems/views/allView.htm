@@ -1,37 +1,32 @@
-﻿<div id="home_startView">
-
-    <div class="splash">
-        <div data-bind="css: {'loader': isLoading }">
-            <div class="row">
-                <div class="col-xs-3 col-md-2">
-                    <h4>System</h4>
-                </div>
-                <div class="col-xs-2 col-md-1">
-                    <h4>Traffic</h4>
-                </div>
-                <div class="col-xs-2 col-md-1 col-md-1">
-                    <h4>Population</h4>
-                </div>
-                <div class="hidden-xs hidden-sm col-md-1">
-                    <h4>Security</h4>
-                </div>
-                <div class="hidden-xs hidden-sm col-md-1">
-                    <h4>Allegiance</h4>
-                </div>
-            </div>
-            <br />
-
-            <!-- ko foreach: TrackedSystems -->
-            <div class="row">
-                <a data-bind="click: $parent.SelectSystem">
-                    <div class="col-xs-3 col-md-2" data-bind="text: Name"></div>
-                </a>
-                <div class="col-xs-2 col-md-1" data-bind="text: Traffic"></div>
-                <div class="col-xs-2 col-md-1" data-bind="text: Population"></div>
-                <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Security"></div>
-                <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Allegiance"></div>
-            </div>
-            <!-- /ko -->
+﻿<div data-bind="css: {'loader': isLoading }">
+    <div class="row">
+        <div class="col-xs-3 col-md-2">
+            <h4>System</h4>
+        </div>
+        <div class="col-xs-2 col-md-1">
+            <h4>Traffic</h4>
+        </div>
+        <div class="col-xs-2 col-md-1 col-md-1">
+            <h4>Population</h4>
+        </div>
+        <div class="hidden-xs hidden-sm col-md-1">
+            <h4>Security</h4>
+        </div>
+        <div class="hidden-xs hidden-sm col-md-1">
+            <h4>Allegiance</h4>
         </div>
     </div>
+    <br />
+
+    <!-- ko foreach: TrackedSystems -->
+    <div class="row">
+        <a data-bind="click: $parent.SelectSystem">
+            <div class="col-xs-3 col-md-2" data-bind="text: Name"></div>
+        </a>
+        <div class="col-xs-2 col-md-1" data-bind="text: Traffic"></div>
+        <div class="col-xs-2 col-md-1" data-bind="text: Population"></div>
+        <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Security"></div>
+        <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Allegiance"></div>
+    </div>
+    <!-- /ko -->
 </div>

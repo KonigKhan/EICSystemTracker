@@ -50,18 +50,23 @@ module SystemUtils {
     export function LoadStyleAsync(path: string): JQueryPromise<Event> {
         //path += '?v=' + parameters.version;
         var dfdLink = $.Deferred<Event>();
-        if (!document.getElementById(path)) {
-            var head = document.getElementsByTagName('head')[0];
-            var link = document.createElement('link');
-            link.id = path;
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = path;
-            link.media = 'all';
-            link.onload = dfdLink.resolve;
-            link.onerror = dfdLink.reject;
-            head.appendChild(link);
-        }
+        //if (!document.getElementById(path)) {
+        //    var head = document.getElementsByTagName('head')[0];
+        //    var link = document.createElement('link');
+        //    link.id = path;
+        //    link.rel = 'stylesheet';
+        //    link.type = 'text/css';
+        //    link.href = path;
+        //    link.media = 'all';
+        //    link.onload = dfdLink.resolve;
+        //    link.onerror = dfdLink.reject;
+        //    head.appendChild(link);
+        //}
+
+        System.import(path + '!css').then(() => {
+            dfdLink.resolve();  
+        });
+
         return dfdLink.promise();
     }
 

@@ -35,3 +35,37 @@ input {
 .fontYellow {
     color: #E9E581;
 }
+
+.tabs-left {
+    >.nav-tabs {
+        float: left;
+        margin-right: 19px;
+        border-bottom: 0;
+
+        .active{
+            >a{
+                border-color: #ddd transparent #ddd #ddd;
+                background-color: transparent;
+            }
+        }
+
+        >li{
+            float: none;
+            margin-bottom: -4px;
+
+            >a{
+                border-radius: 4px 0 0 4px;
+                margin-right: -1px;
+                min-width: 74px;
+                margin-bottom: 3px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                padding-right: 12px;
+                padding-left: 12px;
+                line-height: 20px;
+                border: 1px solid transparent;
+                border-right: 1px solid #ddd;
+            }
+        }
+    }
+}

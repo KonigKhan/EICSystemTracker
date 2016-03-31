@@ -1,21 +1,23 @@
-﻿
-<ul>
-    <li data-bind="css:{active:_isCurrentPage('start/systems/all')},click:function(){location.hash = 'start/systems/all'}">
-        <a>All Systems</a>
-    </li>
-    <li data-bind="css:{active:_isCurrentPage('start/systems/trackSystem')},click:function(){location.hash = 'start/systems/trackSystem'}">
-        <a>Track A System</a>
-    </li>
-    <!--ko if:_isCurrentPage('start/systems/system')-->
-    <li class="active">
-        <a>System Details</a>
-    </li>
-    <!-- /ko -->
-</ul>
+﻿<div id="systems_startView">
 
-<div id="systems_startView">
-
-    <!-- ko foreach: Pages -->
-    <div data-bind="page: $data.config"></div>
-    <!-- /ko -->
+    <div class="hidden-sm col-md-2 tabs-left">
+        <ul class="nav nav-tabs">
+            <li data-bind="css:{active:_isCurrentPage('start/systems/all')},click:function(){location.hash = 'start/systems/all'}">
+                <a>All Systems</a>
+            </li>
+            <li data-bind="css:{active:_isCurrentPage('start/systems/trackSystem')},click:function(){location.hash = 'start/systems/trackSystem'}">
+                <a>Track A System</a>
+            </li>
+            <!--ko if:_isCurrentPage('start/systems/system')-->
+            <li class="active">
+                <a>System Details</a>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </div>
+    <div class="col-sm-12 col-md-10">
+        <!-- ko foreach: Pages -->
+        <div data-bind="page: $data.config"></div>
+        <!-- /ko -->
+    </div>
 </div>
