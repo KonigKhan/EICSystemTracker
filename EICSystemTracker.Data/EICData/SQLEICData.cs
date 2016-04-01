@@ -45,7 +45,7 @@ namespace EICSystemTracker.Data.EICData
                 ControllingPower = system.Power,
                 ControllingPowerState = system.PowerState,
                 NeedPermit = system.NeedPermit,
-                Timestamp = timestamp
+                Timestamp = system.LastUpdated == DateTime.MinValue ? timestamp : system.LastUpdated
             };
 
             if (sys == null)
@@ -94,7 +94,7 @@ namespace EICSystemTracker.Data.EICData
                 tracking.PendingState = trackedFaction.PendingState;
                 tracking.RecoveringState = trackedFaction.RecoveringState;
                 tracking.UpdateBy = trackedFaction.UpdatedBy;
-                tracking.Timestamp = timestamp;
+                tracking.Timestamp = trackedFaction.LastUpdated == DateTime.MinValue ? timestamp : trackedFaction.LastUpdated;
 
                 _eicData.Track_SystemFactions.InsertOnSubmit(tracking);
             }

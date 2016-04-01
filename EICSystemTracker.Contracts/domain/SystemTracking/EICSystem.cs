@@ -9,7 +9,7 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
         public int Id { get; }
         public string Name { get; set; }
         public int Traffic { get; set; }
-        public int Population { get; set; }
+        public Int64 Population { get; set; }
         public string Government { get; set; }
         public string Allegiance { get; set; }
         public string State { get; set; }
