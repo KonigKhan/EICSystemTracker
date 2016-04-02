@@ -1,4 +1,3 @@
-"use strict";
 var jquery_1 = require('../../app/lib/jquery');
 var SystemUtils;
 (function (SystemUtils) {

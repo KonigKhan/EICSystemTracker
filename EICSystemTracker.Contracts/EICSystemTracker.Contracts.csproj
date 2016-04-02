@@ -49,11 +49,19 @@
     <Compile Include="domain\SystemTracking\EICFaction.cs" />
     <Compile Include="domain\SystemTracking\EICSystem.cs" />
     <Compile Include="domain\SystemTracking\EICSystemFaction.cs" />
+    <Compile Include="domain\SystemTracking\SystemActivity.cs" />
+    <Compile Include="domain\SystemTracking\SystemActivityBountyHunting.cs" />
     <Compile Include="IEICSystemTrackerService.cs" />
     <Compile Include="SystemTracking\IEICFaction.cs" />
     <Compile Include="SystemTracking\IEICSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemTracking\IEICSystemActivity.cs" />
     <Compile Include="SystemTracking\IEICSystemFaction.cs" />
+    <Compile Include="SystemTracking\ISystemActivity.cs" />
+    <Compile Include="SystemTracking\ISystemActivityBountyHunting.cs" />
+    <Compile Include="SystemTracking\ISystemActivityConflictZone.cs" />
+    <Compile Include="SystemTracking\ISystemActivityMissions.cs" />
+    <Compile Include="SystemTracking\ISystemActivityTrading.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

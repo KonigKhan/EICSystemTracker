@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -33,7 +32,7 @@ var systemsViewModel = (function (_super) {
         }
     };
     return systemsViewModel;
-}(PageViewModel_1.default));
+})(PageViewModel_1.default);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = systemsViewModel;
 //# sourceMappingURL=systemsViewModel.js.map

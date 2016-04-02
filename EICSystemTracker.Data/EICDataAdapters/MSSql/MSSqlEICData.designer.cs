@@ -45,6 +45,12 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
     partial void InsertTrack_System(Track_System instance);
     partial void UpdateTrack_System(Track_System instance);
     partial void DeleteTrack_System(Track_System instance);
+    partial void InsertActivityType(ActivityType instance);
+    partial void UpdateActivityType(ActivityType instance);
+    partial void DeleteActivityType(ActivityType instance);
+    partial void InsertTrack_SystemActivity(Track_SystemActivity instance);
+    partial void UpdateTrack_SystemActivity(Track_SystemActivity instance);
+    partial void DeleteTrack_SystemActivity(Track_SystemActivity instance);
     #endregion
 		
 		public MSSqlEICDataDataContext() : 
@@ -114,6 +120,22 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			get
 			{
 				return this.GetTable<Track_System>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ActivityType> ActivityTypes
+		{
+			get
+			{
+				return this.GetTable<ActivityType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Track_SystemActivity> Track_SystemActivities
+		{
+			get
+			{
+				return this.GetTable<Track_SystemActivity>();
 			}
 		}
 	}
@@ -693,6 +715,8 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		
 		private EntitySet<Track_System> _Track_Systems;
 		
+		private EntitySet<Track_SystemActivity> _Track_SystemActivities;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -709,6 +733,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		{
 			this._Track_SystemFactions = new EntitySet<Track_SystemFaction>(new Action<Track_SystemFaction>(this.attach_Track_SystemFactions), new Action<Track_SystemFaction>(this.detach_Track_SystemFactions));
 			this._Track_Systems = new EntitySet<Track_System>(new Action<Track_System>(this.attach_Track_Systems), new Action<Track_System>(this.detach_Track_Systems));
+			this._Track_SystemActivities = new EntitySet<Track_SystemActivity>(new Action<Track_SystemActivity>(this.attach_Track_SystemActivities), new Action<Track_SystemActivity>(this.detach_Track_SystemActivities));
 			OnCreated();
 		}
 		
@@ -798,6 +823,19 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_SystemActivity", Storage="_Track_SystemActivities", ThisKey="Id", OtherKey="System")]
+		public EntitySet<Track_SystemActivity> Track_SystemActivities
+		{
+			get
+			{
+				return this._Track_SystemActivities;
+			}
+			set
+			{
+				this._Track_SystemActivities.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -837,6 +875,18 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		}
 		
 		private void detach_Track_Systems(Track_System entity)
+		{
+			this.SendPropertyChanging();
+			entity.EDSystem = null;
+		}
+		
+		private void attach_Track_SystemActivities(Track_SystemActivity entity)
+		{
+			this.SendPropertyChanging();
+			entity.EDSystem = this;
+		}
+		
+		private void detach_Track_SystemActivities(Track_SystemActivity entity)
 		{
 			this.SendPropertyChanging();
 			entity.EDSystem = null;
@@ -1416,6 +1466,384 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 					if ((value != null))
 					{
 						value.Track_Systems.Add(this);
+						this._System = value.Id;
+					}
+					else
+					{
+						this._System = default(int);
+					}
+					this.SendPropertyChanged("EDSystem");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ActivityType")]
+	public partial class ActivityType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private EntitySet<Track_SystemActivity> _Track_SystemActivities;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public ActivityType()
+		{
+			this._Track_SystemActivities = new EntitySet<Track_SystemActivity>(new Action<Track_SystemActivity>(this.attach_Track_SystemActivities), new Action<Track_SystemActivity>(this.detach_Track_SystemActivities));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(75) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ActivityType_Track_SystemActivity", Storage="_Track_SystemActivities", ThisKey="Id", OtherKey="ActivityType")]
+		public EntitySet<Track_SystemActivity> Track_SystemActivities
+		{
+			get
+			{
+				return this._Track_SystemActivities;
+			}
+			set
+			{
+				this._Track_SystemActivities.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Track_SystemActivities(Track_SystemActivity entity)
+		{
+			this.SendPropertyChanging();
+			entity.ActivityType1 = this;
+		}
+		
+		private void detach_Track_SystemActivities(Track_SystemActivity entity)
+		{
+			this.SendPropertyChanging();
+			entity.ActivityType1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Track_SystemActivity")]
+	public partial class Track_SystemActivity : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _System;
+		
+		private int _ActivityType;
+		
+		private string _ActivityData;
+		
+		private System.DateTime _Timestamp;
+		
+		private string _CMDR;
+		
+		private EntityRef<ActivityType> _ActivityType1;
+		
+		private EntityRef<EDSystem> _EDSystem;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnSystemChanging(int value);
+    partial void OnSystemChanged();
+    partial void OnActivityTypeChanging(int value);
+    partial void OnActivityTypeChanged();
+    partial void OnActivityDataChanging(string value);
+    partial void OnActivityDataChanged();
+    partial void OnTimestampChanging(System.DateTime value);
+    partial void OnTimestampChanged();
+    partial void OnCMDRChanging(string value);
+    partial void OnCMDRChanged();
+    #endregion
+		
+		public Track_SystemActivity()
+		{
+			this._ActivityType1 = default(EntityRef<ActivityType>);
+			this._EDSystem = default(EntityRef<EDSystem>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_System", DbType="Int NOT NULL")]
+		public int System
+		{
+			get
+			{
+				return this._System;
+			}
+			set
+			{
+				if ((this._System != value))
+				{
+					if (this._EDSystem.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSystemChanging(value);
+					this.SendPropertyChanging();
+					this._System = value;
+					this.SendPropertyChanged("System");
+					this.OnSystemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityType", DbType="Int NOT NULL")]
+		public int ActivityType
+		{
+			get
+			{
+				return this._ActivityType;
+			}
+			set
+			{
+				if ((this._ActivityType != value))
+				{
+					if (this._ActivityType1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnActivityTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ActivityType = value;
+					this.SendPropertyChanged("ActivityType");
+					this.OnActivityTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityData", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string ActivityData
+		{
+			get
+			{
+				return this._ActivityData;
+			}
+			set
+			{
+				if ((this._ActivityData != value))
+				{
+					this.OnActivityDataChanging(value);
+					this.SendPropertyChanging();
+					this._ActivityData = value;
+					this.SendPropertyChanged("ActivityData");
+					this.OnActivityDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timestamp", DbType="DateTime NOT NULL")]
+		public System.DateTime Timestamp
+		{
+			get
+			{
+				return this._Timestamp;
+			}
+			set
+			{
+				if ((this._Timestamp != value))
+				{
+					this.OnTimestampChanging(value);
+					this.SendPropertyChanging();
+					this._Timestamp = value;
+					this.SendPropertyChanged("Timestamp");
+					this.OnTimestampChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CMDR", DbType="NVarChar(75) NOT NULL", CanBeNull=false)]
+		public string CMDR
+		{
+			get
+			{
+				return this._CMDR;
+			}
+			set
+			{
+				if ((this._CMDR != value))
+				{
+					this.OnCMDRChanging(value);
+					this.SendPropertyChanging();
+					this._CMDR = value;
+					this.SendPropertyChanged("CMDR");
+					this.OnCMDRChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ActivityType_Track_SystemActivity", Storage="_ActivityType1", ThisKey="ActivityType", OtherKey="Id", IsForeignKey=true)]
+		public ActivityType ActivityType1
+		{
+			get
+			{
+				return this._ActivityType1.Entity;
+			}
+			set
+			{
+				ActivityType previousValue = this._ActivityType1.Entity;
+				if (((previousValue != value) 
+							|| (this._ActivityType1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ActivityType1.Entity = null;
+						previousValue.Track_SystemActivities.Remove(this);
+					}
+					this._ActivityType1.Entity = value;
+					if ((value != null))
+					{
+						value.Track_SystemActivities.Add(this);
+						this._ActivityType = value.Id;
+					}
+					else
+					{
+						this._ActivityType = default(int);
+					}
+					this.SendPropertyChanged("ActivityType1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_SystemActivity", Storage="_EDSystem", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
+		public EDSystem EDSystem
+		{
+			get
+			{
+				return this._EDSystem.Entity;
+			}
+			set
+			{
+				EDSystem previousValue = this._EDSystem.Entity;
+				if (((previousValue != value) 
+							|| (this._EDSystem.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EDSystem.Entity = null;
+						previousValue.Track_SystemActivities.Remove(this);
+					}
+					this._EDSystem.Entity = value;
+					if ((value != null))
+					{
+						value.Track_SystemActivities.Add(this);
 						this._System = value.Id;
 					}
 					else

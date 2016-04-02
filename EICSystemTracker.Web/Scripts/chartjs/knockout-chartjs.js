@@ -1,4 +1,3 @@
-"use strict";
 var jquery_1 = require('../../app/lib/jquery');
 var knockout_1 = require('../../app/lib/knockout');
 //ko.bindingHandlers.yourBindingName = {

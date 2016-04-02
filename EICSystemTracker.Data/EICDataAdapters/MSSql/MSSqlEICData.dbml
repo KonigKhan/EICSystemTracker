@@ -33,6 +33,7 @@
       <Column Name="ChartColor" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Association Name="EDSystem_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="System" Type="Track_SystemFaction" />
       <Association Name="EDSystem_Track_System" Member="Track_Systems" ThisKey="Id" OtherKey="System" Type="Track_System" />
+      <Association Name="EDSystem_Track_SystemActivity" Member="Track_SystemActivities" ThisKey="Id" OtherKey="System" Type="Track_SystemActivity" />
     </Type>
   </Table>
   <Table Name="dbo.Faction" Member="EDFactions">
@@ -62,6 +63,25 @@
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="EDSystem_Track_System" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ActivityType" Member="ActivityTypes">
+    <Type Name="ActivityType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(75) NOT NULL" CanBeNull="false" />
+      <Association Name="ActivityType_Track_SystemActivity" Member="Track_SystemActivities" ThisKey="Id" OtherKey="ActivityType" Type="Track_SystemActivity" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Track_SystemActivity" Member="Track_SystemActivities">
+    <Type Name="Track_SystemActivity">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="System" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ActivityType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ActivityData" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CMDR" Type="System.String" DbType="NVarChar(75) NOT NULL" CanBeNull="false" />
+      <Association Name="ActivityType_Track_SystemActivity" Member="ActivityType1" ThisKey="ActivityType" OtherKey="Id" Type="ActivityType" IsForeignKey="true" />
+      <Association Name="EDSystem_Track_SystemActivity" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -1,4 +1,3 @@
-"use strict";
 var manifest = {
     Key: 'systems',
     Title: 'Systems',

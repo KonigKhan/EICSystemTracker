@@ -1,4 +1,3 @@
-"use strict";
 var knockout_1 = require('../../../lib/knockout');
 var factionTrackingViewModel = (function () {
     function factionTrackingViewModel() {
@@ -29,7 +28,7 @@ var factionTrackingViewModel = (function () {
         };
     }
     return factionTrackingViewModel;
-}());
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = factionTrackingViewModel;
 //# sourceMappingURL=factionTrackingViewModel.js.map

@@ -1,4 +1,3 @@
-"use strict";
 var jquery_1 = require('../../lib/jquery');
 var pager_1 = require('../../lib/pager');
 var manifest_1 = require('../../../manifest');
@@ -130,7 +129,7 @@ var PageViewModel = (function () {
         };
     };
     return PageViewModel;
-}());
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = PageViewModel;
 //# sourceMappingURL=PageViewModel.js.map

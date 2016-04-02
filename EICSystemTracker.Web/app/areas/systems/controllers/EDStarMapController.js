@@ -1,4 +1,3 @@
-"use strict";
 var jquery_1 = require('../../../lib/jquery');
 var EDStarMapController;
 (function (EDStarMapController) {

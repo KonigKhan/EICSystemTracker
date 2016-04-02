@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using EICSystemTracker.Contracts.SystemTracking;
 using EICSystemTracker.Data.EICDataAdapters.MSSql;
 using EICSystemTracker.Contracts.domain.SystemTracking;
+using System.Runtime.Caching;
 
 namespace EICSystemTracker.Data.EICData
 {
     class SQLEICData : IEICData
     {
         private readonly MSSqlEICDataDataContext _eicData;
+        // TODO: Caching... private static ObjectCache cache = MemoryCache.Default;
 
         public SQLEICData(string server, string dataBase, string userName, string password)
         {
@@ -24,6 +26,8 @@ namespace EICSystemTracker.Data.EICData
             builder.PersistSecurityInfo = true;
 
             _eicData = new MSSqlEICDataDataContext(builder.ConnectionString);
+
+
         }
 
         public void TrackSystem(IEICSystem system)

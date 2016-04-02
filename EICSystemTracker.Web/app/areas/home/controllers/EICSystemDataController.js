@@ -1,4 +1,3 @@
-"use strict";
 var jquery_1 = require('../../../lib/jquery');
 var EICSystemDataController = (function () {
     function EICSystemDataController() {
@@ -30,7 +29,7 @@ var EICSystemDataController = (function () {
         return dfd.promise();
     };
     return EICSystemDataController;
-}());
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = EICSystemDataController;
 //# sourceMappingURL=EICSystemDataController.js.map
