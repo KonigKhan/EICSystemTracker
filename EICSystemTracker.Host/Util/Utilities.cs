@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -43,6 +44,27 @@ namespace EICSystemTracker.Host.Util
             // Localhost URI
             uriParams.Add(new Uri(string.Format("http://localhost:{0}", port)));
             return uriParams.ToArray();
+        }
+
+        public static string GetNetLogPath()
+        {
+            // Check if there is an override in the configuration.
+            if (!string.IsNullOrEmpty(StaticProperties.UserConfig.EliteDangerousNetLogPath)) { return StaticProperties.UserConfig.EliteDangerousNetLogPath; }
+
+            // Get Launcher Default Path...
+            if (Directory.Exists(Constants.LAUNCHER_NETLOG_PATH)) { return Constants.LAUNCHER_NETLOG_PATH; }
+
+            // Get Launcher Appdata Path
+            var netLogAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.LAUNCHER_APPDATA_NETLOG_RELATIVEPATH);
+            if (Directory.Exists(netLogAppDataPath)) { return netLogAppDataPath; }
+
+            // Get Steam Horizons
+            if (Directory.Exists(Constants.HORIZONS_STEAM_NETLOG_PATH)) { return Constants.HORIZONS_STEAM_NETLOG_PATH; }
+
+            // Get Steam Non Horizons
+            if (Directory.Exists(Constants.NONHORIZONS_STEAM_NETLOG_PATH)) { return Constants.NONHORIZONS_STEAM_NETLOG_PATH; }
+
+            return string.Empty;
         }
     }
 }

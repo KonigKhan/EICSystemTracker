@@ -99,13 +99,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="api\EICSystemTrackerDataController.cs" />
+    <Compile Include="EDLogsTracker.cs" />
     <Compile Include="CustomRootPathProvider.cs" />
+    <Compile Include="EliteDangerous\EdLogLine.cs" />
+    <Compile Include="EliteDangerous\EdLogLineSystemArgs.cs" />
+    <Compile Include="EliteDangerous\EdLogWatcher.cs" />
     <Compile Include="MediaFormatter\TextPlainFormatter.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="NancyBootstrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelfHost\OwinStartup.cs" />
+    <Compile Include="Util\Constants.cs" />
+    <Compile Include="Util\EICSystemTrackerConfig.cs" />
+    <Compile Include="Util\StaticProperties.cs" />
     <Compile Include="Util\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
