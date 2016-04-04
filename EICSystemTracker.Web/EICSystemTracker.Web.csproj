@@ -38,6 +38,7 @@
     </Content>
     <Content Include="app\areas\home\views\startView.htm" />
     <Content Include="app\areas\systems\views\allView.htm" />
+    <Content Include="app\areas\systems\views\logActivityView.htm" />
     <Content Include="app\areas\systems\views\systemView.htm" />
     <Content Include="app\areas\systems\styles\systemsviewstyles.css">
       <DependentUpon>systemsviewstyles.less</DependentUpon>
@@ -1026,6 +1027,7 @@
     <TypeScriptCompile Include="app\areas\home\manifest.ts" />
     <TypeScriptCompile Include="app\areas\home\viewmodels\factionTrackingViewModel.ts" />
     <TypeScriptCompile Include="app\areas\home\viewmodels\startViewModel.ts" />
+    <TypeScriptCompile Include="app\areas\systems\viewmodels\logActivityViewModel.ts" />
     <TypeScriptCompile Include="app\services\systemsCacheService.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\allViewModel.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\factionTrackingViewModel.ts" />

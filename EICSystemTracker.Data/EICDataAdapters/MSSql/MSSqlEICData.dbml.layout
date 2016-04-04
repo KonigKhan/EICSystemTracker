@@ -72,14 +72,14 @@
         <elementListCompartment Id="06074be4-5d1b-4418-a105-6e6e9c2a89d9" absoluteBounds="0.88999999999999968, 9.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.8125 : 11.625); (1.8125 : 10.5881982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.8125 : 11.625); (1.8125 : 10.5881982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/MSSqlEICDataDataContext/ActivityType/ActivityType_Track_SystemActivity" />
       <nodes>
         <classShapeMoniker Id="2a1d39bc-df1b-41c1-9005-778a0044c227" />
         <classShapeMoniker Id="585d9b9c-4837-41bd-959a-6a4381b1b2a8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.8125 : 7.8862939453125); (1.8125 : 8.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.8125 : 7.8862939453125); (1.8125 : 8.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/MSSqlEICDataDataContext/EDSystem/EDSystem_Track_SystemActivity" />
       <nodes>
         <classShapeMoniker Id="424732df-82be-47ed-9a4f-18a36b3203f1" />

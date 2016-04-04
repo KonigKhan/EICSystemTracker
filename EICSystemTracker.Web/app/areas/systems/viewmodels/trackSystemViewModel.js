@@ -6,6 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var PageViewModel_1 = require('../../../framework/domain/PageViewModel');
 var knockout_1 = require('../../../lib/knockout');
 var EICSystemTrackerDataController_1 = require('../controllers/EICSystemTrackerDataController');
+var systemscacheservice_1 = require('../../../services/systemscacheservice');
 var factionTrackingViewModel_1 = require('./factionTrackingViewModel');
 var TrackSystemViewModel = (function (_super) {
     __extends(TrackSystemViewModel, _super);
@@ -95,9 +96,53 @@ var TrackSystemViewModel = (function (_super) {
             _this.allegiance("");
             _this.factions([]);
         };
+        this.systemName.subscribe(function (sysName) {
+            var sys = systemscacheservice_1.default.GetSystems().filter(function (s) {
+                return s.Name.toLowerCase() === sysName.toLowerCase();
+            })[0];
+            if (sys) {
+                console.info('Found System in cache! ' + sys.Name);
+                _this.preFillSystem(sys);
+            }
+            else {
+                _this.isLoading(true);
+                EICSystemTrackerDataController_1.default.GetLatestSystemTrackingData().done(function (returnData) {
+                    var sys = returnData.filter(function (item) {
+                        return item.Name.toLowerCase() === sysName.toLowerCase();
+                    })[0];
+                    if (sys) {
+                        console.info('Found System! ' + sys.Name);
+                        _this.preFillSystem(sys);
+                    }
+                }).always(function () {
+                    _this.isLoading(false);
+                });
+            }
+        });
     }
     TrackSystemViewModel.prototype.Shown = function () {
         _super.prototype.Shown.call(this);
+        this.reset();
+    };
+    TrackSystemViewModel.prototype.preFillSystem = function (system) {
+        this.traffic(system.Traffic);
+        this.population(system.Population);
+        this.security(system.Security);
+        this.government(system.Government);
+        this.allegiance(system.Allegiance);
+        var existingFactions = system.TrackedFactions
+            .filter(function (sf) { return sf.Influence > 0; })
+            .map(function (sysFac) {
+            var newTrackData = new factionTrackingViewModel_1.default();
+            newTrackData.factionName(sysFac.Faction.Name);
+            newTrackData.influence(sysFac.Influence);
+            newTrackData.currentState(sysFac.CurrentState);
+            newTrackData.pendingState(sysFac.PendingState.split(','));
+            newTrackData.recoveringState(sysFac.RecoveringState.split(','));
+            newTrackData.controllingFaction(sysFac.ControllingFaction);
+            return newTrackData;
+        });
+        this.factions(existingFactions);
     };
     return TrackSystemViewModel;
 })(PageViewModel_1.default);

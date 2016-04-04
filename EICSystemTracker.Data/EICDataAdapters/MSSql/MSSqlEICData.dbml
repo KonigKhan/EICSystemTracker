@@ -84,4 +84,28 @@
       <Association Name="EDSystem_Track_SystemActivity" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
     </Type>
   </Table>
+  <Function Name="dbo.GetLatestSystemTracking" Method="GetLatestSystemTracking">
+    <ElementType Name="GetLatestSystemTrackingResult">
+      <Column Name="SystemName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SystemChartColor" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="FactionName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FactionChartColor" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Traffic" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Population" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Government" Type="System.String" DbType="NVarChar(75)" CanBeNull="true" />
+      <Column Name="Allegiance" Type="System.String" DbType="NVarChar(75)" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Security" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Economy" Type="System.String" DbType="NVarChar(75)" CanBeNull="true" />
+      <Column Name="ControllingPower" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ControllingPowerState" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="NeedPermit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Influence" Type="System.Decimal" DbType="Decimal(3,1)" CanBeNull="true" />
+      <Column Name="CurrentState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PendingState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RecoveringState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

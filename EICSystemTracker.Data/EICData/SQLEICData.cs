@@ -136,41 +136,69 @@ namespace EICSystemTracker.Data.EICData
         {
             var systemsToReturn = new List<IEICSystem>();
 
-            var dbSystems = (from s in _eicData.EDSystems select s);
-            foreach (var dbSystem in dbSystems)
+            var sysFacTracking = _eicData.GetLatestSystemTracking().ToList();
+            foreach (var sysfac in sysFacTracking)
             {
-                var latestSystemInfo = GetLatestSystemInfo(dbSystem);
-                var trackedFactions = (from tf in dbSystem.Track_SystemFactions
-                                       group tf by new { tf.EDSystem, tf.EDFaction } into tf_grp
-                                       select tf_grp.OrderByDescending(tf => tf.Timestamp).FirstOrDefault()).ToList();
-
-                var system = new EICSystem();
-                system.Name = latestSystemInfo.Name;
-                system.Traffic = latestSystemInfo.Traffic;
-                system.Population = latestSystemInfo.Population;
-                system.Government = latestSystemInfo.Government;
-                system.Allegiance = latestSystemInfo.Allegiance;
-                system.State = latestSystemInfo.State;
-                system.Security = latestSystemInfo.Security;
-                system.Economy = latestSystemInfo.Economy;
-                system.Power = latestSystemInfo.Power;
-                system.PowerState = latestSystemInfo.PowerState;
-                system.NeedPermit = latestSystemInfo.NeedPermit;
-                system.LastUpdated = latestSystemInfo.LastUpdated;
-                system.ChartColor = latestSystemInfo.ChartColor;
-                system.TrackedFactions = trackedFactions.Select(tf => new EICSystemFaction()
+                // Create new sys fac tracking data.
+                var trackedSysFaction = new EICSystemFaction()
                 {
-                    Faction = GetLatestFactionInfo(tf.EDFaction),
-                    Influence = Convert.ToDouble(tf.Influence ?? 0),
-                    CurrentState = tf.CurrentState,
-                    PendingState = tf.PendingState,
-                    RecoveringState = tf.RecoveringState,
-                    UpdatedBy = tf.UpdateBy,
-                    ControllingFaction = tf.ContrllingFaction,
-                    LastUpdated = tf.Timestamp
-                }).ToList<IEICSystemFaction>();
+                    Faction = new EICFaction()
+                    {
+                        Name = sysfac.FactionName,
+                        ChartColor = sysfac.FactionChartColor
+                    },
+                    Influence = sysfac.Influence == null
+                            ? 0.0
+                            : Convert.ToDouble(sysfac.Influence),
+                    CurrentState = sysfac.CurrentState,
+                    PendingState = sysfac.PendingState,
+                    RecoveringState = sysfac.RecoveringState,
+                    // ControllingFaction = sysfac.ControllingFaction,
+                    LastUpdated = sysfac.Timestamp,
+                    UpdatedBy = sysfac.UpdateBy
+                };
 
-                systemsToReturn.Add(system);
+                var existing = systemsToReturn.FirstOrDefault(s => s.Name.Trim().Equals(sysfac.SystemName.Trim(), StringComparison.InvariantCultureIgnoreCase));
+                if (existing != null)
+                {
+                    // add sys faction to system.
+                    // check if faction exists in tracked factions.
+                    var existingFaction = existing.TrackedFactions.FirstOrDefault(tf => tf.Faction.Name.Trim().Equals(trackedSysFaction.Faction.Name.Trim(), StringComparison.InvariantCultureIgnoreCase));
+                    if (existingFaction == null)
+                    {
+                        existing.TrackedFactions.Add(trackedSysFaction);
+                    }
+                }
+                else
+                {
+                    // create new system and add faction to it.
+                    var newSystem = new EICSystem()
+                    {
+                        Name = sysfac.SystemName,
+                        ChartColor = sysfac.SystemChartColor,
+                        Allegiance = sysfac.Allegiance,
+                        Economy = sysfac.Economy,
+                        Government = sysfac.Government,
+                        NeedPermit = sysfac.NeedPermit,
+                        Population = sysfac.Population == null
+                                        ? 0
+                                        : Convert.ToInt64(sysfac.Population),
+                        Power = sysfac.ControllingPower,
+                        PowerState = sysfac.ControllingPowerState,
+                        Security = sysfac.Security,
+                        State = sysfac.State,
+                        Traffic = sysfac.Traffic == null
+                                    ? 0
+                                    : Convert.ToInt32(sysfac.Traffic),
+                        TrackedFactions = new List<IEICSystemFaction>()
+                    };
+
+                    // Add SystemFaction
+                    newSystem.TrackedFactions.Add(trackedSysFaction);
+
+                    // Add to systems to return collection
+                    systemsToReturn.Add(newSystem);
+                }
             }
 
             return systemsToReturn;
@@ -185,7 +213,7 @@ namespace EICSystemTracker.Data.EICData
             var trackedFactions = (from tf in dbSystem.Track_SystemFactions
                                    group tf by new { tf.EDSystem, tf.EDFaction } into tf_grp
                                    select tf_grp.OrderByDescending(tf => tf.Timestamp).FirstOrDefault()).ToList();
-                        
+
             system.Name = latestSystemInfo.Name;
             system.Traffic = latestSystemInfo.Traffic;
             system.Population = latestSystemInfo.Population;
@@ -221,7 +249,7 @@ namespace EICSystemTracker.Data.EICData
                        select new EICFaction()
                        {
                            Name = tf.EDFaction.Name,
-                           ChartColor = tf.EDFaction.ChartColor                           
+                           ChartColor = tf.EDFaction.ChartColor
                        }).FirstOrDefault();
 
             if (fac == null)
@@ -275,32 +303,9 @@ namespace EICSystemTracker.Data.EICData
             return color;
         }
 
-        #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    // TODO: dispose managed state (managed objects).
-                }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
-
-                disposedValue = true;
-            }
-        }
-
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            // TODO: Dispose this
         }
-        #endregion
     }
 }

@@ -138,6 +138,13 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 				return this.GetTable<Track_SystemActivity>();
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetLatestSystemTracking")]
+		public ISingleResult<GetLatestSystemTrackingResult> GetLatestSystemTracking()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<GetLatestSystemTrackingResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Track_Faction")]
@@ -1872,6 +1879,374 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	public partial class GetLatestSystemTrackingResult
+	{
+		
+		private string _SystemName;
+		
+		private string _SystemChartColor;
+		
+		private string _FactionName;
+		
+		private string _FactionChartColor;
+		
+		private System.Nullable<int> _Traffic;
+		
+		private System.Nullable<long> _Population;
+		
+		private string _Government;
+		
+		private string _Allegiance;
+		
+		private string _State;
+		
+		private string _Security;
+		
+		private string _Economy;
+		
+		private string _ControllingPower;
+		
+		private string _ControllingPowerState;
+		
+		private bool _NeedPermit;
+		
+		private System.Nullable<decimal> _Influence;
+		
+		private string _CurrentState;
+		
+		private string _PendingState;
+		
+		private string _RecoveringState;
+		
+		private System.DateTime _Timestamp;
+		
+		private string _UpdateBy;
+		
+		public GetLatestSystemTrackingResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemName", DbType="NVarChar(255)")]
+		public string SystemName
+		{
+			get
+			{
+				return this._SystemName;
+			}
+			set
+			{
+				if ((this._SystemName != value))
+				{
+					this._SystemName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemChartColor", DbType="NVarChar(10)")]
+		public string SystemChartColor
+		{
+			get
+			{
+				return this._SystemChartColor;
+			}
+			set
+			{
+				if ((this._SystemChartColor != value))
+				{
+					this._SystemChartColor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactionName", DbType="NVarChar(255)")]
+		public string FactionName
+		{
+			get
+			{
+				return this._FactionName;
+			}
+			set
+			{
+				if ((this._FactionName != value))
+				{
+					this._FactionName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactionChartColor", DbType="NVarChar(10)")]
+		public string FactionChartColor
+		{
+			get
+			{
+				return this._FactionChartColor;
+			}
+			set
+			{
+				if ((this._FactionChartColor != value))
+				{
+					this._FactionChartColor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Traffic", DbType="Int")]
+		public System.Nullable<int> Traffic
+		{
+			get
+			{
+				return this._Traffic;
+			}
+			set
+			{
+				if ((this._Traffic != value))
+				{
+					this._Traffic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Population", DbType="BigInt")]
+		public System.Nullable<long> Population
+		{
+			get
+			{
+				return this._Population;
+			}
+			set
+			{
+				if ((this._Population != value))
+				{
+					this._Population = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Government", DbType="NVarChar(75)")]
+		public string Government
+		{
+			get
+			{
+				return this._Government;
+			}
+			set
+			{
+				if ((this._Government != value))
+				{
+					this._Government = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Allegiance", DbType="NVarChar(75)")]
+		public string Allegiance
+		{
+			get
+			{
+				return this._Allegiance;
+			}
+			set
+			{
+				if ((this._Allegiance != value))
+				{
+					this._Allegiance = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="NVarChar(45)")]
+		public string State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this._State = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Security", DbType="NVarChar(10)")]
+		public string Security
+		{
+			get
+			{
+				return this._Security;
+			}
+			set
+			{
+				if ((this._Security != value))
+				{
+					this._Security = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Economy", DbType="NVarChar(75)")]
+		public string Economy
+		{
+			get
+			{
+				return this._Economy;
+			}
+			set
+			{
+				if ((this._Economy != value))
+				{
+					this._Economy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ControllingPower", DbType="NVarChar(255)")]
+		public string ControllingPower
+		{
+			get
+			{
+				return this._ControllingPower;
+			}
+			set
+			{
+				if ((this._ControllingPower != value))
+				{
+					this._ControllingPower = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ControllingPowerState", DbType="NVarChar(45)")]
+		public string ControllingPowerState
+		{
+			get
+			{
+				return this._ControllingPowerState;
+			}
+			set
+			{
+				if ((this._ControllingPowerState != value))
+				{
+					this._ControllingPowerState = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NeedPermit", DbType="Bit NOT NULL")]
+		public bool NeedPermit
+		{
+			get
+			{
+				return this._NeedPermit;
+			}
+			set
+			{
+				if ((this._NeedPermit != value))
+				{
+					this._NeedPermit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Influence", DbType="Decimal(3,1)")]
+		public System.Nullable<decimal> Influence
+		{
+			get
+			{
+				return this._Influence;
+			}
+			set
+			{
+				if ((this._Influence != value))
+				{
+					this._Influence = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string CurrentState
+		{
+			get
+			{
+				return this._CurrentState;
+			}
+			set
+			{
+				if ((this._CurrentState != value))
+				{
+					this._CurrentState = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PendingState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string PendingState
+		{
+			get
+			{
+				return this._PendingState;
+			}
+			set
+			{
+				if ((this._PendingState != value))
+				{
+					this._PendingState = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecoveringState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string RecoveringState
+		{
+			get
+			{
+				return this._RecoveringState;
+			}
+			set
+			{
+				if ((this._RecoveringState != value))
+				{
+					this._RecoveringState = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timestamp", DbType="DateTime NOT NULL")]
+		public System.DateTime Timestamp
+		{
+			get
+			{
+				return this._Timestamp;
+			}
+			set
+			{
+				if ((this._Timestamp != value))
+				{
+					this._Timestamp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateBy", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string UpdateBy
+		{
+			get
+			{
+				return this._UpdateBy;
+			}
+			set
+			{
+				if ((this._UpdateBy != value))
+				{
+					this._UpdateBy = value;
+				}
 			}
 		}
 	}

@@ -18,6 +18,9 @@ var systemsViewModel = (function (_super) {
             },
             {
                 config: this._page('trackSystem', 'Track System', 'app/areas/systems', 'trackSystem')
+            },
+            {
+                config: this._page('logActivity', 'Log System Activity', 'app/areas/systems', 'logActivity')
             }
         ]);
         this.Navigate = function (nav) {

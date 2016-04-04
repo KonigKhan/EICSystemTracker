@@ -9,7 +9,7 @@ var EICSystemTrackerDataController = (function () {
     }
     EICSystemTrackerDataController.GetLatestSystemTrackingData = function () {
         var dfd = jquery_1.default.Deferred();
-        jquery_1.default.get("/api/EICSystemTrackerData/GetLatestSystemTrackingData").done(function (result) {
+        jquery_1.default.get("/api/EICSystemTrackerData/GetLatestEICSystemData").done(function (result) {
             dfd.resolve(result);
         });
         return dfd.promise();

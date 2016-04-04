@@ -25,10 +25,41 @@ class TrackSystemViewModel extends PageViewModel {
 
     constructor() {
         super();
+
+        this.systemName.subscribe((sysName: string) => {
+
+            var sys: IEICSystem = systemsCacheService.GetSystems().filter((s: IEICSystem) => {
+                return s.Name.toLowerCase() === sysName.toLowerCase();
+            })[0];
+
+            if (sys) {
+                console.info('Found System in cache! ' + sys.Name);
+                this.preFillSystem(sys);
+
+            }
+            else {
+                this.isLoading(true);
+                eicDataController.GetLatestSystemTrackingData().done((returnData: Array<IEICSystem>) => {
+
+                    var sys = returnData.filter((item: IEICSystem) => {
+                        return item.Name.toLowerCase() === sysName.toLowerCase();
+                    })[0];
+
+                    if (sys) {
+                        console.info('Found System! ' + sys.Name);
+                        this.preFillSystem(sys);
+                    }
+
+                }).always(() => {
+                    this.isLoading(false);
+                });
+            }
+        });
     }
 
     Shown() {
         super.Shown();
+        this.reset();
     }
 
     public submitData = () => {
@@ -69,7 +100,7 @@ class TrackSystemViewModel extends PageViewModel {
                 this.reset();
             }).fail((resError) => {
                 var errorobj = JSON.parse(resError.error().responseText);
-                var errorMsg = "Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage; 
+                var errorMsg = "Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage;
                 console.error(errorMsg);
                 alert(errorMsg);
             }).always(() => {
@@ -104,6 +135,32 @@ class TrackSystemViewModel extends PageViewModel {
                 f.controllingFaction(false);
             }
         }
+    }
+
+    private preFillSystem(system: IEICSystem) {
+
+        this.traffic(system.Traffic);
+        this.population(system.Population);
+        this.security(system.Security);
+        this.government(system.Government);
+        this.allegiance(system.Allegiance);
+
+        var existingFactions: Array<trackingData> = system.TrackedFactions
+            .filter((sf: IEICSystemFaction) => { return sf.Influence > 0 })
+            .map((sysFac: IEICSystemFaction) => {
+                var newTrackData = new trackingData();
+                newTrackData.factionName(sysFac.Faction.Name);
+                newTrackData.influence(sysFac.Influence);
+                newTrackData.currentState(sysFac.CurrentState);
+                newTrackData.pendingState(sysFac.PendingState.split(','));
+                newTrackData.recoveringState(sysFac.RecoveringState.split(','));
+                newTrackData.controllingFaction(sysFac.ControllingFaction);
+
+                return newTrackData;
+            });
+
+        this.factions(existingFactions);
+
     }
 
     public reset = () => {

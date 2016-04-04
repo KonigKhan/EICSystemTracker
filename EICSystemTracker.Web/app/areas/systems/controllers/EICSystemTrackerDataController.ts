@@ -11,7 +11,7 @@ class EICSystemTrackerDataController implements IEICSystemTrackerService {
     public static GetLatestSystemTrackingData = (): JQueryPromise<any> => {
         var dfd = $.Deferred();
 
-        $.get("/api/EICSystemTrackerData/GetLatestSystemTrackingData").done((result) => {
+        $.get("/api/EICSystemTrackerData/GetLatestEICSystemData").done((result) => {
             dfd.resolve(result);
         });
 

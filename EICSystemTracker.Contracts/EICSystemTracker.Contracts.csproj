@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Data\DataAdapters\DataAdapterType.cs" />
     <Compile Include="Data\DataAdapters\IDataAdapter.cs" />
+    <Compile Include="Data\IEDDBData.cs" />
     <Compile Include="Data\IEICData.cs" />
     <Compile Include="Data\DataAdapters\Relational\IRelationalDataAdapter.cs" />
     <Compile Include="Data\DataAdapters\Query\IStoredProcedureConfig.cs" />

@@ -17,6 +17,9 @@ class systemsViewModel extends PageViewModel {
         },
         <IPagerDiv>{
             config: this._page('trackSystem', 'Track System', 'app/areas/systems', 'trackSystem')
+        },
+        <IPagerDiv>{
+            config: this._page('logActivity', 'Log System Activity', 'app/areas/systems', 'logActivity')
         }
     ]);
     public Navigate = (nav: IPageNavigation) => {
