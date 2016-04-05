@@ -33,5 +33,16 @@ namespace EICSystemTracker.Data.Properties {
                 return ((string)(this["EICDataConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com,1433;Initial Ca" +
+            "talog=EICData;Persist Security Info=True;User ID=admin")]
+        public string EICDataConnectionString1 {
+            get {
+                return ((string)(this["EICDataConnectionString1"]));
+            }
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace EICSystemTracker.Host
         private void OnClientArrivedtoNewSystem(object sender, EdLogLineSystemArgs e)
         {
             Util.StaticProperties.ClientCurrentSystemName = e.SystemName;
+            Console.WriteLine(string.Format("\n\n***Cmdr Entered system: {0}***", Util.StaticProperties.ClientCurrentSystemName));
         }
 
         public void Dispose()

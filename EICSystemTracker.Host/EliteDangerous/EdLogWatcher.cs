@@ -35,7 +35,12 @@ namespace EICSystemTracker.Host.EliteDangerous
             if (!string.IsNullOrEmpty(newestLog))
             {
                 logPath = Path.Combine(Util.Utilities.GetNetLogPath(), newestLog);
+                Console.Write("Netlog found: {0}", logPath);
                 scanLogfileforLastVisitedSystem(logPath);
+            }
+            else
+            {
+                Console.WriteLine("Could not find netlog.");
             }
 
             //Watch directory to always have the newest logfile

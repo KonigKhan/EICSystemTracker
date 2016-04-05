@@ -136,7 +136,7 @@ namespace EICSystemTracker.Data.EICData
         {
             var systemsToReturn = new List<IEICSystem>();
 
-            var sysFacTracking = _eicData.GetLatestSystemTracking().ToList();
+            var sysFacTracking = _eicData.GetLatestSystemTracking(null).ToList();
             foreach (var sysfac in sysFacTracking)
             {
                 // Create new sys fac tracking data.
@@ -206,38 +206,68 @@ namespace EICSystemTracker.Data.EICData
 
         public IEICSystem GetSystem(string systemName)
         {
-            var system = new EICSystem();
+            EICSystem system = null;
 
-            var dbSystem = (from sys in _eicData.EDSystems where sys.Name.Equals(systemName, StringComparison.InvariantCultureIgnoreCase) select sys).FirstOrDefault();
-            var latestSystemInfo = GetLatestSystemInfo(dbSystem);
-            var trackedFactions = (from tf in dbSystem.Track_SystemFactions
-                                   group tf by new { tf.EDSystem, tf.EDFaction } into tf_grp
-                                   select tf_grp.OrderByDescending(tf => tf.Timestamp).FirstOrDefault()).ToList();
-
-            system.Name = latestSystemInfo.Name;
-            system.Traffic = latestSystemInfo.Traffic;
-            system.Population = latestSystemInfo.Population;
-            system.Government = latestSystemInfo.Government;
-            system.Allegiance = latestSystemInfo.Allegiance;
-            system.State = latestSystemInfo.State;
-            system.Security = latestSystemInfo.Security;
-            system.Economy = latestSystemInfo.Economy;
-            system.Power = latestSystemInfo.Power;
-            system.PowerState = latestSystemInfo.PowerState;
-            system.NeedPermit = latestSystemInfo.NeedPermit;
-            system.LastUpdated = latestSystemInfo.LastUpdated;
-            system.ChartColor = latestSystemInfo.ChartColor;
-            system.TrackedFactions = trackedFactions.Select(tf => new EICSystemFaction()
+            var sysFacTracking = _eicData.GetLatestSystemTracking(systemName).ToList();
+            foreach (var sysfac in sysFacTracking)
             {
-                Faction = GetLatestFactionInfo(tf.EDFaction),
-                Influence = Convert.ToDouble(tf.Influence ?? 0),
-                CurrentState = tf.CurrentState,
-                PendingState = tf.PendingState,
-                RecoveringState = tf.RecoveringState,
-                UpdatedBy = tf.UpdateBy,
-                ControllingFaction = tf.ContrllingFaction,
-                LastUpdated = tf.Timestamp
-            }).ToList<IEICSystemFaction>();
+                // Create new sys fac tracking data.
+                var trackedSysFaction = new EICSystemFaction()
+                {
+                    Faction = new EICFaction()
+                    {
+                        Name = sysfac.FactionName,
+                        ChartColor = sysfac.FactionChartColor
+                    },
+                    Influence = sysfac.Influence == null
+                            ? 0.0
+                            : Convert.ToDouble(sysfac.Influence),
+                    CurrentState = sysfac.CurrentState,
+                    PendingState = sysfac.PendingState,
+                    RecoveringState = sysfac.RecoveringState,
+                    // ControllingFaction = sysfac.ControllingFaction,
+                    LastUpdated = sysfac.Timestamp,
+                    UpdatedBy = sysfac.UpdateBy
+                };
+
+                if (system != null)
+                {
+                    // add sys faction to system.
+                    // check if faction exists in tracked factions.
+                    var existingFaction = system.TrackedFactions.FirstOrDefault(tf => tf.Faction.Name.Trim().Equals(trackedSysFaction.Faction.Name.Trim(), StringComparison.InvariantCultureIgnoreCase));
+                    if (existingFaction == null)
+                    {
+                        system.TrackedFactions.Add(trackedSysFaction);
+                    }
+                }
+                else
+                {
+                    // create new system and add faction to it.
+                    system = new EICSystem()
+                    {
+                        Name = sysfac.SystemName,
+                        ChartColor = sysfac.SystemChartColor,
+                        Allegiance = sysfac.Allegiance,
+                        Economy = sysfac.Economy,
+                        Government = sysfac.Government,
+                        NeedPermit = sysfac.NeedPermit,
+                        Population = sysfac.Population == null
+                                        ? 0
+                                        : Convert.ToInt64(sysfac.Population),
+                        Power = sysfac.ControllingPower,
+                        PowerState = sysfac.ControllingPowerState,
+                        Security = sysfac.Security,
+                        State = sysfac.State,
+                        Traffic = sysfac.Traffic == null
+                                    ? 0
+                                    : Convert.ToInt32(sysfac.Traffic),
+                        TrackedFactions = new List<IEICSystemFaction>()
+                    };
+
+                    // Add SystemFaction
+                    system.TrackedFactions.Add(trackedSysFaction);
+                }
+            }
 
             return system;
         }
