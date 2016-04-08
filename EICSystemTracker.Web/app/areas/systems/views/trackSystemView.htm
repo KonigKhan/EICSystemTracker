@@ -55,6 +55,7 @@
             </div>
         </div>
         <div class="col-xs-12" data-bind="foreach: factions">
+            <!-- ko if: influence() > 0 -->
             <div class="col-sm-12 col-md-4" style="margin-bottom: 10px;">
                 <div class="col-xs-12" style="padding:10px; border: solid 1px #DE1B1B;">
                     <h3 class="pull-left">Faction:</h3>
@@ -106,6 +107,7 @@
                     </div>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
         <br />
         <br />

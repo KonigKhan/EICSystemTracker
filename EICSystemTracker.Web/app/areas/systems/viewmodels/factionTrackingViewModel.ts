@@ -20,9 +20,9 @@ class factionTrackingViewModel {
         var trackingData: IEICSystemFaction = {
             Faction: faction,
             Influence: this.influence(),
-            CurrentState: this.currentState().toString(),
-            PendingState: this.pendingState().toString(),
-            RecoveringState: this.recoveringState().toString(),
+            CurrentState: this.currentState() ? this.currentState().toString() : "",
+            PendingState: this.pendingState() ? this.pendingState().toString() : "",
+            RecoveringState: this.recoveringState() ? this.recoveringState().toString() : "",
             UpdatedBy: null,
             ControllingFaction: this.controllingFaction(),
             LastUpdated: null

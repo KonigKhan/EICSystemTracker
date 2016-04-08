@@ -122,7 +122,8 @@ class TrackSystemViewModel extends PageViewModel {
     }
 
     public removeFaction = (trackedFaction: trackingData) => {
-        this.factions.remove(trackedFaction);
+        trackedFaction.influence(0);
+        //this.factions.remove(trackedFaction);
     }
 
     public setControllingFaction = (faction: trackingData) => {
@@ -152,8 +153,12 @@ class TrackSystemViewModel extends PageViewModel {
                 newTrackData.factionName(sysFac.Faction.Name);
                 newTrackData.influence(sysFac.Influence);
                 newTrackData.currentState(sysFac.CurrentState);
-                newTrackData.pendingState(sysFac.PendingState.split(','));
-                newTrackData.recoveringState(sysFac.RecoveringState.split(','));
+                if (sysFac.PendingState) {
+                    newTrackData.pendingState(sysFac.PendingState.split(','));
+                }
+                if (sysFac.RecoveringState) {
+                    newTrackData.recoveringState(sysFac.RecoveringState.split(','));
+                }
                 newTrackData.controllingFaction(sysFac.ControllingFaction);
 
                 return newTrackData;
