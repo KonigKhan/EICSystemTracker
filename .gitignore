@@ -36,3 +36,5 @@ Release
 /EICSystemTracker.Web/*.js.map
 /EICSystemTracker.Web/Content/site_plugins.css
 /EICSystemTracker.Web/Content/site_plugins.min.css
+/EICSystemTracker.Web/app/areas/systems/viewmodels/logActivityViewModel.js
+/EICSystemTracker.Web/app/areas/systems/viewmodels/logActivityViewModel.js.map
