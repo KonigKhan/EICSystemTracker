@@ -61,8 +61,6 @@
       <DependentUpon>MSSqlEICData.dbml</DependentUpon>
     </Compile>
     <Compile Include="EICDataFactory.cs" />
-    <Compile Include="EICDataAdapters\MySql\MySqlEICDataAdapter.cs" />
-    <Compile Include="EICData\MySqlEICData.cs" />
     <Compile Include="EICData\SQLEICData.cs" />
     <Compile Include="EliteDangerousApiData\EddbData.cs" />
     <Compile Include="EliteDangerousApiData\EDSMData.cs" />
@@ -91,9 +89,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="EICDataAdapters\MySql\MySqlCreateStatements.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

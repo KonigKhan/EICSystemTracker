@@ -17,6 +17,24 @@ var AllViewModel = (function (_super) {
             var systemUrl = 'start/systems/system/' + selected.Name;
             location.hash = systemUrl;
         };
+        this.ToLocalDate = function (sys) {
+            var latestTrackedFaction = sys.TrackedFactions.sort(function (a, b) {
+                var dateA = new Date(a.LastUpdated);
+                var dateB = new Date(b.LastUpdated);
+                return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
+            })[0];
+            if (latestTrackedFaction) {
+                var date = new Date(latestTrackedFaction.LastUpdated);
+                var month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+                var day = date.getDate().toString().length < 2 ? '0' + date.getDate() : date.getDate();
+                var hr = date.getHours().toString().length < 2 ? '0' + date.getHours() : date.getHours();
+                var min = date.getMinutes().toString().length < 2 ? '0' + date.getMinutes() : date.getMinutes();
+                var sec = date.getSeconds().toString().length < 2 ? '0' + date.getSeconds() : date.getSeconds();
+                var formatted = date.getFullYear() + '-' + month + '-' + day + ' ' + hr + ':' + min + ':' + sec;
+                return formatted;
+            }
+            return "No Information";
+        };
         console.log('AllViewModel ctor');
         this.TrackedSystems.subscribe(function (newListOfSystems) {
             systemscacheservice_1.default.SetSystems(newListOfSystems);

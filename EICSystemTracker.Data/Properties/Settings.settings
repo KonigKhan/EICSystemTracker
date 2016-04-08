@@ -10,5 +10,13 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com;Initial Catalog=EICData;Persist Security Info=True;User ID=admin;Password=Wur3rat6</Value>
     </Setting>
+    <Setting Name="EICDataConnectionString1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com,1433;Initial Catalog=EICData;Persist Security Info=True;User ID=admin&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com,1433;Initial Catalog=EICData;Persist Security Info=True;User ID=admin</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

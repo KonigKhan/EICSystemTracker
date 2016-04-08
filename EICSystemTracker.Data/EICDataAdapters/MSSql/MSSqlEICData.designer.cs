@@ -54,7 +54,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
     #endregion
 		
 		public MSSqlEICDataDataContext() : 
-				base(global::EICSystemTracker.Data.Properties.Settings.Default.EICDataConnectionString, mappingSource)
+				base(global::EICSystemTracker.Data.Properties.Settings.Default.EICDataConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -140,9 +140,9 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetLatestSystemTracking")]
-		public ISingleResult<GetLatestSystemTrackingResult> GetLatestSystemTracking()
+		public ISingleResult<GetLatestSystemTrackingResult> GetLatestSystemTracking([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string sysName)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), sysName);
 			return ((ISingleResult<GetLatestSystemTrackingResult>)(result.ReturnValue));
 		}
 	}

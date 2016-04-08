@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EICData" Class="MSSqlEICDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com;Initial Catalog=EICData;Persist Security Info=True;User ID=admin" SettingsObjectName="EICSystemTracker.Data.Properties.Settings" SettingsPropertyName="EICDataConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com,1433;Initial Catalog=EICData;Persist Security Info=True;User ID=admin" SettingsObjectName="EICSystemTracker.Data.Properties.Settings" SettingsPropertyName="EICDataConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Track_Faction" Member="Track_Factions">
     <Type Name="Track_Faction">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -85,6 +85,7 @@
     </Type>
   </Table>
   <Function Name="dbo.GetLatestSystemTracking" Method="GetLatestSystemTracking">
+    <Parameter Name="sysName" Type="System.String" DbType="NVarChar(255)" />
     <ElementType Name="GetLatestSystemTrackingResult">
       <Column Name="SystemName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="SystemChartColor" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
