@@ -59,12 +59,12 @@
             </div>
         </div>
         <div class="col-xs-12" data-bind="foreach: factions">
-            <!-- ko if: influence() > 0 -->
+            <!-- ko if: !retiredFaction() -->
             <div class="col-sm-12 col-md-4" style="margin-bottom: 10px;">
                 <div class="col-xs-12" style="padding:10px; border: solid 1px #DE1B1B;">
                     <h3 class="pull-left">Faction:</h3>
                     <div class="pull-right" style="padding:5px;">
-                        <div class="pull-right" data-bind="click: $parent.removeFaction">
+                        <div class="pull-right" data-bind="click: retireFaction">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </div>
                     </div>

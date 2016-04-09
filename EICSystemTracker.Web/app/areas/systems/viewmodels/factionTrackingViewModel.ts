@@ -9,6 +9,12 @@ class factionTrackingViewModel {
     public pendingState: KnockoutObservableArray<string> = ko.observableArray([]);
     public recoveringState: KnockoutObservableArray<string> = ko.observableArray([]);
     public controllingFaction: KnockoutObservable<boolean> = ko.observable(false);
+    public retiredFaction: KnockoutObservable<boolean> = ko.observable(false);
+
+    public retireFaction = () => {
+        this.retiredFaction(true);
+        
+    };
 
     public getTrackingData = (): IEICSystemFaction => {
 
@@ -19,7 +25,7 @@ class factionTrackingViewModel {
 
         var trackingData: IEICSystemFaction = {
             Faction: faction,
-            Influence: this.influence(),
+            Influence: this.retiredFaction() ? 0 : this.influence(),
             CurrentState: this.currentState() ? this.currentState().toString() : "",
             PendingState: this.pendingState() ? this.pendingState().toString() : "",
             RecoveringState: this.recoveringState() ? this.recoveringState().toString() : "",

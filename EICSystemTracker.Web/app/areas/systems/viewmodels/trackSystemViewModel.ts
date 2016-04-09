@@ -114,11 +114,6 @@ class TrackSystemViewModel extends PageViewModel {
         });
     }
 
-    public removeFaction = (trackedFaction: trackingData) => {
-        trackedFaction.influence(0);
-        //this.factions.remove(trackedFaction);
-    }
-
     public setControllingFaction = (faction: trackingData) => {
 
         var arrLen = this.factions().length;
