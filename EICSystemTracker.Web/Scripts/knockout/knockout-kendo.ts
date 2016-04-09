@@ -20,15 +20,30 @@ ko.bindingHandlers['kendoAutoComplete'] = {
         var options = valueAccessor() || {};
         var others = allBindings() || {};
 
+
+
         //create AutoComplete UI component
         $.support.cors = true;
-        $(element).kendoAutoComplete({
-            dataTextField: 'Name',
-            minLength: 3,
-            filter: "startswith",
-            placeholder: "Select System...",
-            dataSource: options.ds
-            //separator: ", "
+        var autoComplete = $(element).kendoAutoComplete({
+            minLength: options.minLength,
+            filter: options.filter,
+            placeholder: options.placeholder,
+            dataSource: options.dataSource,
+            change: (e) => {
+                var value = autoComplete.value();
+
+                if (value.toString() !== options.value().toString()) {
+                    options.value(value);
+                }
+            }
+        }).data("kendoAutoComplete");
+
+        options.value.subscribe((newValue) => {
+            var curValue = autoComplete.value();
+            if (curValue.toString() !== newValue.toString()) {
+                autoComplete.value(newValue);
+                autoComplete.trigger("change");
+            }
         });
     }
 };

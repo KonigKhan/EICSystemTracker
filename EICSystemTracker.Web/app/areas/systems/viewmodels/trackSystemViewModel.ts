@@ -17,6 +17,8 @@ class TrackSystemViewModel extends PageViewModel {
     public cmdrName: KnockoutObservable<string> = ko.observable("");
     public factions: KnockoutObservableArray<trackingData> = ko.observableArray([]);
     public isLoading: KnockoutObservable<boolean> = ko.observable(false);
+    public allSystems: Array<IEICSystem> = [];
+    public systemNames: Array<string> = [];
 
     public stateOptions: Array<string> = ["None", "Boom", "Bust", "Expansion", "Lockdown", "CivilUnrest", "Outbreak", "War", "Civil War", "Election"];
     public governmentOptions: Array<string> = ["Corporatation", "Democracy", "Patronage", "Anarchy", "Feudalist"];
@@ -27,39 +29,23 @@ class TrackSystemViewModel extends PageViewModel {
         super();
 
         this.systemName.subscribe((sysName: string) => {
-
+        
             var sys: IEICSystem = systemsCacheService.GetSystems().filter((s: IEICSystem) => {
                 return s.Name.toLowerCase() === sysName.toLowerCase();
             })[0];
 
             if (sys) {
                 console.info('Found System in cache! ' + sys.Name);
-                this.preFillSystem(sys);
-
             }
-            else {
-                this.isLoading(true);
-                eicDataController.GetLatestSystemTrackingData().done((returnData: Array<IEICSystem>) => {
 
-                    var sys = returnData.filter((item: IEICSystem) => {
-                        return item.Name.toLowerCase() === sysName.toLowerCase();
-                    })[0];
-
-                    if (sys) {
-                        console.info('Found System! ' + sys.Name);
-                        this.preFillSystem(sys);
-                    }
-
-                }).always(() => {
-                    this.isLoading(false);
-                });
-            }
+            this.preFillSystem(sys);
         });
     }
 
     Shown() {
         super.Shown();
         this.reset();
+        this.GetPreFillData();
     }
 
     public submitData = () => {
@@ -138,34 +124,63 @@ class TrackSystemViewModel extends PageViewModel {
         }
     }
 
-    private preFillSystem(system: IEICSystem) {
+    private preFillSystem(system: IEICSystem = null) {
 
-        this.traffic(system.Traffic);
-        this.population(system.Population);
-        this.security(system.Security);
-        this.government(system.Government);
-        this.allegiance(system.Allegiance);
+        if (system) {
+            //this.systemName(system.Name);
+            this.traffic(system.Traffic);
+            this.population(system.Population);
+            this.security(system.Security);
+            this.government(system.Government);
+            this.allegiance(system.Allegiance);
 
-        var existingFactions: Array<trackingData> = system.TrackedFactions
-            .filter((sf: IEICSystemFaction) => { return sf.Influence > 0 })
-            .map((sysFac: IEICSystemFaction) => {
-                var newTrackData = new trackingData();
-                newTrackData.factionName(sysFac.Faction.Name);
-                newTrackData.influence(sysFac.Influence);
-                newTrackData.currentState(sysFac.CurrentState);
-                if (sysFac.PendingState) {
-                    newTrackData.pendingState(sysFac.PendingState.split(','));
-                }
-                if (sysFac.RecoveringState) {
-                    newTrackData.recoveringState(sysFac.RecoveringState.split(','));
-                }
-                newTrackData.controllingFaction(sysFac.ControllingFaction);
+            var existingFactions: Array<trackingData> = system.TrackedFactions
+                .filter((sf: IEICSystemFaction) => { return sf.Influence > 0 })
+                .map((sysFac: IEICSystemFaction) => {
+                    var newTrackData = new trackingData();
+                    newTrackData.factionName(sysFac.Faction.Name);
+                    newTrackData.influence(sysFac.Influence);
+                    newTrackData.currentState(sysFac.CurrentState);
+                    if (sysFac.PendingState) {
+                        newTrackData.pendingState(sysFac.PendingState.split(','));
+                    }
+                    if (sysFac.RecoveringState) {
+                        newTrackData.recoveringState(sysFac.RecoveringState.split(','));
+                    }
+                    newTrackData.controllingFaction(sysFac.ControllingFaction);
 
-                return newTrackData;
+                    return newTrackData;
+                });
+
+            this.factions(existingFactions);
+        }
+        else {
+            this.traffic(0);
+            this.population(0);
+            this.security("");
+            this.government("");
+            this.allegiance("");
+            this.factions([]);   
+        }
+    }
+
+    public GetPreFillData = () => {
+    
+        this.isLoading(true);
+        eicDataController.GetLatestSystemTrackingData().done((returnData: Array<IEICSystem>) => {
+
+            systemsCacheService.SetSystems(returnData); // reload the cache to prevent dup calls.
+            var sysNames = returnData.map((item: IEICSystem) => {
+                return item.Name;
             });
 
-        this.factions(existingFactions);
+            if (sysNames.length > 0) {
+                this.systemNames = sysNames;
+            }
 
+        }).always(() => {
+            this.isLoading(false);
+        });    
     }
 
     public reset = () => {

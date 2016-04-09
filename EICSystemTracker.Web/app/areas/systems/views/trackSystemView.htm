@@ -15,7 +15,8 @@
             <div class="col-sm-12 col-md-4" style="padding:10px;">
                 <div class="col-xs-2">Name:</div>
                 <div class="col-xs-10">
-                    <input class="col-xs-12" type="text" data-bind="value: systemName" />
+                    <!--<input class="col-xs-12" type="text" data-bind="value: systemName" />-->
+                    <input data-bind="kendoAutoComplete: {minLength: 3, dataSource: systemNames, filter: 'startswith', placeholder: 'Select System...', value: systemName}" />
                 </div>
             </div>
             <div class="col-sm-12 col-md-4" style="padding:10px;">
