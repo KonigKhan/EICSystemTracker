@@ -72,3 +72,5 @@ Release
 /EICSystemTracker.Web/app/framework/domain/PageViewModel.js
 /EICSystemTracker.Web/app/services/systemscacheservice.js.map
 /EICSystemTracker.Web/app/services/systemscacheservice.js
+/EICSystemTracker.Web/app/services/CmdrService.js
+/EICSystemTracker.Web/app/services/CmdrService.js.map

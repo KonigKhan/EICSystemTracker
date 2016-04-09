@@ -1028,6 +1028,7 @@
     <TypeScriptCompile Include="app\areas\home\viewmodels\factionTrackingViewModel.ts" />
     <TypeScriptCompile Include="app\areas\home\viewmodels\startViewModel.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\logActivityViewModel.ts" />
+    <TypeScriptCompile Include="app\services\CmdrService.ts" />
     <TypeScriptCompile Include="app\services\systemsCacheService.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\allViewModel.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\factionTrackingViewModel.ts" />

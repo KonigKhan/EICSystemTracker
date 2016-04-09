@@ -5,6 +5,7 @@ import eicDataController from '../controllers/EICSystemTrackerDataController';
 import systemsCacheService from '../../../services/systemscacheservice';
 import SystemUtils from '../../../framework/systemutils';
 import trackingData from './factionTrackingViewModel';
+import cmdrService from '../../../services/cmdrservice';
 
 class TrackSystemViewModel extends PageViewModel {
 
@@ -105,6 +106,12 @@ class TrackSystemViewModel extends PageViewModel {
 
         var newFactionTrackingData = new trackingData();
         this.factions.push(newFactionTrackingData);
+    }
+
+    public loadCurrentLocation = () => {
+        cmdrService.GetCmdrCurrentSystem().done((curSys: IEICSystem) => {
+            this.systemName(curSys.Name.trim());
+        });
     }
 
     public removeFaction = (trackedFaction: trackingData) => {
