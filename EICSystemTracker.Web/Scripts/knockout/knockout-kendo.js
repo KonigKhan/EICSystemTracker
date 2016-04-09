@@ -18,12 +18,24 @@ knockout_1.default.bindingHandlers['kendoAutoComplete'] = {
         var others = allBindings() || {};
         //create AutoComplete UI component
         jquery_1.default.support.cors = true;
-        jquery_1.default(element).kendoAutoComplete({
-            dataTextField: 'Name',
-            minLength: 3,
-            filter: "startswith",
-            placeholder: "Select System...",
-            dataSource: options.ds
+        var autoComplete = jquery_1.default(element).kendoAutoComplete({
+            minLength: options.minLength,
+            filter: options.filter,
+            placeholder: options.placeholder,
+            dataSource: options.dataSource,
+            change: function (e) {
+                var value = autoComplete.value();
+                if (value.toString() !== options.value().toString()) {
+                    options.value(value);
+                }
+            }
+        }).data("kendoAutoComplete");
+        options.value.subscribe(function (newValue) {
+            var curValue = autoComplete.value();
+            if (curValue.toString() !== newValue.toString()) {
+                autoComplete.value(newValue);
+                autoComplete.trigger("change");
+            }
         });
     }
 };
