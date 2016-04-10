@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Data\DataAdapters\DataAdapterType.cs" />
     <Compile Include="Data\DataAdapters\IDataAdapter.cs" />
-    <Compile Include="Data\IEDDBData.cs" />
+    <Compile Include="Data\IeddbData.cs" />
     <Compile Include="Data\IEICData.cs" />
     <Compile Include="Data\DataAdapters\Relational\IRelationalDataAdapter.cs" />
     <Compile Include="Data\DataAdapters\Query\IStoredProcedureConfig.cs" />
@@ -50,19 +50,25 @@
     <Compile Include="domain\SystemTracking\EICFaction.cs" />
     <Compile Include="domain\SystemTracking\EICSystem.cs" />
     <Compile Include="domain\SystemTracking\EICSystemFaction.cs" />
-    <Compile Include="domain\SystemTracking\SystemActivity.cs" />
-    <Compile Include="domain\SystemTracking\SystemActivityBountyHunting.cs" />
+    <Compile Include="domain\SystemTracking\SystemActivities\BountyHunting.cs" />
+    <Compile Include="domain\SystemTracking\SystemActivities\Exploration.cs" />
+    <Compile Include="domain\SystemTracking\SystemActivities\Missions.cs" />
+    <Compile Include="domain\SystemTracking\SystemActivities\MurderHobo.cs" />
+    <Compile Include="domain\SystemTracking\SystemActivities\Piracy.cs" />
+    <Compile Include="domain\SystemTracking\SystemActivities\Trading.cs" />
     <Compile Include="IEICSystemTrackerService.cs" />
+    <Compile Include="SystemTracking\ActivityType.cs" />
+    <Compile Include="SystemTracking\SystemActivities\IMurderHobo.cs" />
+    <Compile Include="SystemTracking\SystemActivities\IPiracy.cs" />
     <Compile Include="SystemTracking\IEICFaction.cs" />
     <Compile Include="SystemTracking\IEICSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemTracking\IEICSystemActivity.cs" />
+    <Compile Include="SystemTracking\SystemActivities\IBountyHunting.cs" />
+    <Compile Include="SystemTracking\SystemActivities\IExploration.cs" />
+    <Compile Include="SystemTracking\SystemActivities\IMissions.cs" />
     <Compile Include="SystemTracking\IEICSystemFaction.cs" />
-    <Compile Include="SystemTracking\ISystemActivity.cs" />
-    <Compile Include="SystemTracking\ISystemActivityBountyHunting.cs" />
-    <Compile Include="SystemTracking\ISystemActivityConflictZone.cs" />
-    <Compile Include="SystemTracking\ISystemActivityMissions.cs" />
-    <Compile Include="SystemTracking\ISystemActivityTrading.cs" />
+    <Compile Include="SystemTracking\SystemActivities\ITrading.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace EICSystemTracker.Contracts.SystemTracking
 {
-    public interface IEICSystemActivity
+    interface IEICSystemActivity
     {
-        string ActivityType { get; set; }
-        ISystemActivity Activity { get; set; }
+        ActivityType Type { get; }
+        string SystemName { get; set; }
+        DateTime Timestamp { get; set; }
         string Cmdr { get; set; }
     }
 }

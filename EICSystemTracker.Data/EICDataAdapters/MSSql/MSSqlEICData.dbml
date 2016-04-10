@@ -1,13 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EICData" Class="MSSqlEICDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com,1433;Initial Catalog=EICData;Persist Security Info=True;User ID=admin" SettingsObjectName="EICSystemTracker.Data.Properties.Settings" SettingsPropertyName="EICDataConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Track_Faction" Member="Track_Factions">
-    <Type Name="Track_Faction">
+  <Table Name="dbo.ActivityType" Member="ActivityTypes">
+    <Type Name="ActivityType">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Faction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Allegiance" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="EDFaction_Track_Faction" Member="EDFaction" ThisKey="Faction" OtherKey="Id" Type="EDFaction" IsForeignKey="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(75) NOT NULL" CanBeNull="false" />
+      <Association Name="ActivityType_Track_System_Activity" Member="Track_System_Activities" ThisKey="Id" OtherKey="ActivityType" Type="Track_System_Activity" />
     </Type>
   </Table>
   <Table Name="dbo.Track_SystemFaction" Member="Track_SystemFactions">
@@ -22,18 +19,8 @@
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="ContrllingFaction" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="EDSystem_Track_SystemFaction" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
-      <Association Name="EDFaction_Track_SystemFaction" Member="EDFaction" ThisKey="Faction" OtherKey="Id" Type="EDFaction" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.System" Member="EDSystems">
-    <Type Name="EDSystem">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="ChartColor" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Association Name="EDSystem_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="System" Type="Track_SystemFaction" />
-      <Association Name="EDSystem_Track_System" Member="Track_Systems" ThisKey="Id" OtherKey="System" Type="Track_System" />
-      <Association Name="EDSystem_Track_SystemActivity" Member="Track_SystemActivities" ThisKey="Id" OtherKey="System" Type="Track_SystemActivity" />
+      <Association Name="Faction_Track_SystemFaction" Member="EDFaction" ThisKey="Faction" OtherKey="Id" Type="EDFaction" IsForeignKey="true" />
+      <Association Name="System_Track_SystemFaction" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Faction" Member="EDFactions">
@@ -41,8 +28,28 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="ChartColor" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Association Name="EDFaction_Track_Faction" Member="Track_Factions" ThisKey="Id" OtherKey="Faction" Type="Track_Faction" />
-      <Association Name="EDFaction_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="Faction" Type="Track_SystemFaction" />
+      <Association Name="Faction_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="Faction" Type="Track_SystemFaction" />
+      <Association Name="Faction_Track_Faction" Member="Track_Factions" ThisKey="Id" OtherKey="Faction" Type="Track_Faction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.System" Member="EDSystems">
+    <Type Name="EDSystem">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ChartColor" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="System_Track_SystemFaction" Member="Track_SystemFactions" ThisKey="Id" OtherKey="System" Type="Track_SystemFaction" />
+      <Association Name="System_Track_System" Member="Track_Systems" ThisKey="Id" OtherKey="System" Type="Track_System" />
+      <Association Name="System_Track_System_Activity" Member="Track_System_Activities" ThisKey="Id" OtherKey="System" Type="Track_System_Activity" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Track_Faction" Member="Track_Factions">
+    <Type Name="Track_Faction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Faction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Allegiance" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Faction_Track_Faction" Member="EDFaction" ThisKey="Faction" OtherKey="Id" Type="EDFaction" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Track_System" Member="Track_Systems">
@@ -62,26 +69,26 @@
       <Column Name="NeedPermit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="EDSystem_Track_System" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
+      <Association Name="System_Track_System" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ActivityType" Member="ActivityTypes">
-    <Type Name="ActivityType">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(75) NOT NULL" CanBeNull="false" />
-      <Association Name="ActivityType_Track_SystemActivity" Member="Track_SystemActivities" ThisKey="Id" OtherKey="ActivityType" Type="Track_SystemActivity" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Track_SystemActivity" Member="Track_SystemActivities">
-    <Type Name="Track_SystemActivity">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="System" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.Track_System_Activity" Member="Track_System_Activities">
+    <Type Name="Track_System_Activity">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ActivityType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ActivityData" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="System" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NumHighMissions" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumMedMissions" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumLowMissions" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreditsClaimed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExploreValueSold" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipsTaken" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tonnage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BountyEarned" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="CMDR" Type="System.String" DbType="NVarChar(75) NOT NULL" CanBeNull="false" />
-      <Association Name="ActivityType_Track_SystemActivity" Member="ActivityType1" ThisKey="ActivityType" OtherKey="Id" Type="ActivityType" IsForeignKey="true" />
-      <Association Name="EDSystem_Track_SystemActivity" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
+      <Column Name="Cmdr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="ActivityType_Track_System_Activity" Member="ActivityType1" ThisKey="ActivityType" OtherKey="Id" Type="ActivityType" IsForeignKey="true" />
+      <Association Name="System_Track_System_Activity" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.GetLatestSystemTracking" Method="GetLatestSystemTracking">

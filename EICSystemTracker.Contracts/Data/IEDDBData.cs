@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EICSystemTracker.Contracts.Data
 {
-    public interface IEDDBData
+    public interface IeddbData
     {
         List<IEICSystem> GetAllSystems();
     }
