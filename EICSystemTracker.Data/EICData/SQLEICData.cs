@@ -337,5 +337,11 @@ namespace EICSystemTracker.Data.EICData
         {
             // TODO: Dispose this
         }
+
+        // TODO: Add functionality to get all faction names.
+        public List<string> GetAllFactionNames()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

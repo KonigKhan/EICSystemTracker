@@ -33,7 +33,7 @@ namespace EICSystemTracker.Data.EliteDangerousApiData
         public string simbad_ref { get; set; }
     }
 
-    public class EddbData : IEICData
+    public class EddbData : IeddbData
     {
         private readonly Uri _eddbSystemApiAddress = new Uri("https://eddb.io/archive/v4/systems.json");
         private readonly string _eddbLocalCacheFileName = "";
