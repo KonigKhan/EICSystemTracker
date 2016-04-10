@@ -1,3 +1,29 @@
 ﻿<div data-bind="css: {'loader': isLoading }">
-    <h1>Log Activity</h1>
+    <!-- ko if: !isLoading() -->
+
+    <h1>TrackSystem!</h1>
+    <p class="fontYellow">Enter the following information about what you have done in the system.</p>
+    <div class="col-xs-12" style="padding: 10px;">
+        <div class="col-sm-12 col-md-6" style="padding:10px;">
+            <div class="col-xs-2">Cmdr Name:</div>
+            <div class="col-xs-4">
+                <input class="col-xs-12" type="text" data-bind="value: cmdrName" />
+            </div>
+        </div>
+        <br /><br />
+        <div class="row" style="padding-bottom: 10px;">
+            <div class="col-sm-12 col-md-4" style="padding: 10px;">
+                <div class="col-xs-2">Activity:</div>
+                <div class="col-xs-10">
+                    <input style="width: 100%;" data-bind="kendoDropDownList: {dataTextField: 'Text', dataValueField: 'Value', optionLabel: '', dataSource: activityTypeOptions, value: activityType}" />
+                </div>
+            </div>
+
+            <br />
+            <!-- ko if: activityType() === 1 -->
+            <h4>Missions</h4>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
 </div>

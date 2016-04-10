@@ -56,3 +56,8 @@ interface IPieChartBinding {
     PieChartData: KnockoutObservableArray<CircularChartData>;
     PieChartOptions: PieChartOptions;
 }
+
+interface DropDownOption {
+    Text: string;
+    Value: string;
+}

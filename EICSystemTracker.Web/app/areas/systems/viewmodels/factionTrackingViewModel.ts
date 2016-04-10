@@ -20,7 +20,8 @@ class factionTrackingViewModel {
 
         var faction: IEICFaction = {
             Name: this.factionName(),
-            ChartColor: null
+            ChartColor: null,
+            Alliance: null
         };
 
         var trackingData: IEICSystemFaction = {

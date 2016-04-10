@@ -108,7 +108,6 @@ namespace EICSystemTracker.Host.api
         [HttpPost]
         public string TrackSystemActivity([FromBody] EICSystemActivityDTO activity)
         {
-            IEICSystemActivity sysAct = null;
             switch ((ActivityType)activity.Type)
             {
                 case ActivityType.BountyHunting:
