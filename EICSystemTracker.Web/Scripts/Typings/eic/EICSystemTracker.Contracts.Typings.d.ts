@@ -4,10 +4,11 @@
 interface IEICSystemTrackerService{
 
   /*methods*/
-	GetSystems?():JQueryPromise<any>;
-	GetLatestSystemTrackingData?():JQueryPromise<any>;
 	TrackSystem?(systemFaction:IEICSystem/*IEICSystem*/):JQueryPromise<void>;
+	TrackSystemActivity?(activity:IEICSystemActivity/*IEICSystemActivity*/):JQueryPromise<void>;
+	GetLatestSystemTrackingData?():JQueryPromise<any>;
 	GetSystem?(systemName:string/*String*/):JQueryPromise<IEICSystem>;
+	GetFactionNames?():JQueryPromise<any>;
 }
 
 
@@ -16,7 +17,7 @@ interface IEICSystem{
   /*properties*/
 	Name: string; /*System.String*/
 	Traffic: number; /*System.Int32*/
-	Population: number; /*System.Int32*/
+	Population: number; /*System.Int64*/
 	Government: string; /*System.String*/
 	Allegiance: string; /*System.String*/
 	State: string; /*System.String*/
@@ -32,11 +33,23 @@ interface IEICSystem{
 }
 
 
+/*EICSystemTracker.Contracts.SystemTracking.IEICSystemActivity*/
+interface IEICSystemActivity{
+  /*properties*/
+	Type: any; /*EICSystemTracker.Contracts.SystemTracking.ActivityType*/
+	SystemName: string; /*System.String*/
+	Timestamp: string; /*System.DateTime*/
+	Cmdr: string; /*System.String*/
+
+}
+
+
 /*EICSystemTracker.Contracts.SystemTracking.IEICFaction*/
 interface IEICFaction{
   /*properties*/
 	Name: string; /*System.String*/
 	ChartColor: string; /*System.String*/
+	Alliance: string; /*System.String*/
 
 }
 
@@ -52,6 +65,65 @@ interface IEICSystemFaction{
 	UpdatedBy: string; /*System.String*/
 	ControllingFaction: boolean; /*System.Boolean*/
 	LastUpdated: string; /*System.DateTime*/
+
+}
+
+
+/*EICSystemTracker.Contracts.SystemTracking.SystemActivities.IConflictZone*/
+interface IConflictZone extends IEICSystemActivity{
+  /*properties*/
+	CreditsClaimed: number; /*System.Int32*/
+
+}
+
+
+/*EICSystemTracker.Contracts.SystemTracking.SystemActivities.IMurderHobo*/
+interface IMurderHobo extends IEICSystemActivity{
+  /*properties*/
+	BountyEarned: number; /*System.Int32*/
+
+}
+
+
+/*EICSystemTracker.Contracts.SystemTracking.SystemActivities.IPiracy*/
+interface IPiracy extends IEICSystemActivity{
+  /*properties*/
+	ShipsTaken: number; /*System.Int32*/
+	TonsSold: number; /*System.Int32*/
+
+}
+
+
+/*EICSystemTracker.Contracts.SystemTracking.SystemActivities.IBountyHunting*/
+interface IBountyHunting extends IEICSystemActivity{
+  /*properties*/
+	CreditsClaimed: number; /*System.Int32*/
+
+}
+
+
+/*EICSystemTracker.Contracts.SystemTracking.SystemActivities.IExploration*/
+interface IExploration extends IEICSystemActivity{
+  /*properties*/
+	ValueSold: number; /*System.Int32*/
+
+}
+
+
+/*EICSystemTracker.Contracts.SystemTracking.SystemActivities.IMissions*/
+interface IMissions extends IEICSystemActivity{
+  /*properties*/
+	NumHigh: number; /*System.Int32*/
+	NumMed: number; /*System.Int32*/
+	NumLow: number; /*System.Int32*/
+
+}
+
+
+/*EICSystemTracker.Contracts.SystemTracking.SystemActivities.ITrading*/
+interface ITrading extends IEICSystemActivity{
+  /*properties*/
+	Tonnage: number; /*System.Int32*/
 
 }
 
@@ -72,13 +144,22 @@ interface IDataAdapter{
 }
 
 
+/*EICSystemTracker.Contracts.Data.IeddbData*/
+interface IeddbData{
+
+  /*methods*/
+	GetAllSystems?():JQueryPromise<any>;
+}
+
+
 /*EICSystemTracker.Contracts.Data.IEICData*/
 interface IEICData{
 
   /*methods*/
 	TrackSystem?(system:IEICSystem/*IEICSystem*/):JQueryPromise<void>;
+	TrackSystemActivity?(activity:IEICSystemActivity/*IEICSystemActivity*/):JQueryPromise<void>;
 	GetAllSystems?():JQueryPromise<any>;
-	GetAllFactions?():JQueryPromise<any>;
+	GetAllFactionNames?():JQueryPromise<any>;
 	GetLatestEICSystemFactionTracking?():JQueryPromise<any>;
 	GetSystem?(systemName:string/*String*/):JQueryPromise<IEICSystem>;
 }
