@@ -51,6 +51,7 @@
     <Compile Include="domain\SystemTracking\EICSystem.cs" />
     <Compile Include="domain\SystemTracking\EICSystemFaction.cs" />
     <Compile Include="domain\SystemTracking\SystemActivities\BountyHunting.cs" />
+    <Compile Include="domain\SystemTracking\SystemActivities\ConflictZone.cs" />
     <Compile Include="domain\SystemTracking\SystemActivities\Exploration.cs" />
     <Compile Include="domain\SystemTracking\SystemActivities\Missions.cs" />
     <Compile Include="domain\SystemTracking\SystemActivities\MurderHobo.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="domain\SystemTracking\SystemActivities\Trading.cs" />
     <Compile Include="IEICSystemTrackerService.cs" />
     <Compile Include="SystemTracking\ActivityType.cs" />
+    <Compile Include="SystemTracking\SystemActivities\IConflictZone.cs" />
     <Compile Include="SystemTracking\SystemActivities\IMurderHobo.cs" />
     <Compile Include="SystemTracking\SystemActivities\IPiracy.cs" />
     <Compile Include="SystemTracking\IEICFaction.cs" />

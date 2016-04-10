@@ -1,6 +1,6 @@
 ﻿namespace EICSystemTracker.Contracts.SystemTracking.SystemActivities
 {
-    interface IMissions : IEICSystemActivity
+    public interface IMissions : IEICSystemActivity
     {
         int NumHigh { get; set; }
         int NumMed { get; set; }

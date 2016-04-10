@@ -1,7 +1,7 @@
 ﻿namespace EICSystemTracker.Contracts.SystemTracking.SystemActivities
 {
-    interface IMurderHobo : IEICSystemActivity
+    public interface IMurderHobo : IEICSystemActivity
     {
-        int BountyEarnet { get; set; }
+        int BountyEarned { get; set; }
     }
 }

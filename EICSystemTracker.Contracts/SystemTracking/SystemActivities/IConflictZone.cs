@@ -1,6 +1,6 @@
 ﻿namespace EICSystemTracker.Contracts.SystemTracking.SystemActivities
 {
-    public interface IBountyHunting : IEICSystemActivity
+    public interface IConflictZone : IEICSystemActivity
     {
         int CreditsClaimed { get; set; }
     }

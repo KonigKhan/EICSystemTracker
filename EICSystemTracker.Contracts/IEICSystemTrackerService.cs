@@ -5,9 +5,11 @@ namespace EICSystemTracker.Contracts
 {
     public interface IEICSystemTrackerService
     {
-        List<IEICSystem> GetSystems();
-        List<IEICSystem> GetLatestSystemTrackingData();
         void TrackSystem(IEICSystem systemFaction);
+        void TrackSystemActivity(IEICSystemActivity activity);
+
+        List<IEICSystem> GetLatestSystemTrackingData();
         IEICSystem GetSystem(string systemName);
+        List<string> GetFactionNames();
     }
 }

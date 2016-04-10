@@ -1,6 +1,6 @@
 ﻿namespace EICSystemTracker.Contracts.SystemTracking.SystemActivities
 {
-    interface IExploration : IEICSystemActivity
+    public interface IExploration : IEICSystemActivity
     {
         int ValueSold { get; set; }
     }

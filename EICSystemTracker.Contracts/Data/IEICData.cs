@@ -8,6 +8,8 @@ namespace EICSystemTracker.Contracts.Data
     {
         void TrackSystem(IEICSystem system);
 
+        void TrackSystemActivity(IEICSystemActivity activity);
+
         List<IEICSystem> GetAllSystems();
 
         List<string> GetAllFactionNames();

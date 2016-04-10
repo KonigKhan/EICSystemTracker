@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EICSystemTracker.Contracts.SystemTracking
 {
-    interface IEICSystemActivity
+    public interface IEICSystemActivity
     {
         ActivityType Type { get; }
         string SystemName { get; set; }

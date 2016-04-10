@@ -12,11 +12,12 @@ namespace EICSystemTracker.Service
 {
     public class EICSystemTrackerService : IEICSystemTrackerService
     {
-        public List<IEICSystem> GetSystems()
+        public void TrackSystemActivity(IEICSystemActivity activity)
         {
-
-            // Get systems from 
-            throw new NotImplementedException();
+            using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
+            {
+                da.TrackSystemActivity(activity);
+            }
         }
 
         public List<IEICSystem> GetLatestSystemTrackingData()
@@ -40,6 +41,14 @@ namespace EICSystemTracker.Service
             using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
             {
                 return da.GetSystem(systemName);
+            }
+        }
+
+        public List<string> GetFactionNames()
+        {
+            using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
+            {
+                return da.GetAllFactionNames();
             }
         }
     }

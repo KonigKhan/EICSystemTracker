@@ -1,5 +1,4 @@
-﻿using System;
-using EICSystemTracker.Contracts;
+﻿using EICSystemTracker.Contracts;
 using EICSystemTracker.Host.MediaFormatter;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -10,6 +9,7 @@ using EICSystemTracker.Contracts.SystemTracking;
 using EICSystemTracker.Service;
 using System.Collections.Generic;
 using System.Linq;
+using EICSystemTracker.Host.DTO;
 
 namespace EICSystemTracker.Host.api
 {
@@ -104,38 +104,37 @@ namespace EICSystemTracker.Host.api
 
             return "OK";
         }
-    }
 
-    public class EICSystemDTO
-    {
-        public int Id { get; }
-        public string Name { get; set; }
-        public int Traffic { get; set; }
-        public int Population { get; set; }
-        public string Government { get; set; }
-        public string Allegiance { get; set; }
-        public string State { get; set; }
-        public string Security { get; set; }
-        public string Economy { get; set; }
-        public string Power { get; set; }
-        public string PowerState { get; set; }
-        public bool NeedPermit { get; set; }
-        public DateTime LastUpdated { get; set; }
-        public List<SystemFactionDTO> TrackedFactions { get; set; }
-    }
+        [HttpPost]
+        public string TrackSystemActivity([FromBody] EICSystemActivityDTO activity)
+        {
+            IEICSystemActivity sysAct = null;
+            switch ((ActivityType)activity.Type)
+            {
+                case ActivityType.BountyHunting:
+                    _systemTrackerService.TrackSystemActivity(DTOConversions.ToIBountyHunting(activity));
+                    break;
+                case ActivityType.ConflictZone:
+                    _systemTrackerService.TrackSystemActivity(DTOConversions.ToIConflictZone(activity));
+                    break;
+                case ActivityType.Exploration:
+                    _systemTrackerService.TrackSystemActivity(DTOConversions.ToIExploration(activity));
+                    break;
+                case ActivityType.Missions:
+                    _systemTrackerService.TrackSystemActivity(DTOConversions.ToIMissions(activity));
+                    break;
+                case ActivityType.MurderHobo:
+                    _systemTrackerService.TrackSystemActivity(DTOConversions.ToIMurderHobo(activity));
+                    break;
+                case ActivityType.Piracy:
+                    _systemTrackerService.TrackSystemActivity(DTOConversions.ToIPiracy(activity));
+                    break;
+                case ActivityType.Trade:
+                    _systemTrackerService.TrackSystemActivity(DTOConversions.ToITrading(activity));
+                    break;
+            }
 
-    public class EICFactionDTO
-    {
-        public string Name { get; set; }
-    }
-
-    public class SystemFactionDTO
-    {
-        public EICFactionDTO Faction { get; set; }
-        public double Influence { get; set; }
-        public string CurrentState { get; set; }
-        public string PendingState { get; set; }
-        public string RecoveringState { get; set; }
-        public string UpdatedBy { get; set; }
+            return "OK";
+        }
     }
 }

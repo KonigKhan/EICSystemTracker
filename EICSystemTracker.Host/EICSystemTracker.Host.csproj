@@ -97,7 +97,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DTOConversions.cs" />
+    <Compile Include="DTO\EICFactionDTO.cs" />
+    <Compile Include="DTO\EICSystemActivityDTO.cs" />
+    <Compile Include="DTO\EICSystemDTO.cs" />
     <Compile Include="api\EICSystemTrackerDataController.cs" />
+    <Compile Include="DTO\SystemFactionDTO.cs" />
     <Compile Include="EDLogsTracker.cs" />
     <Compile Include="CustomRootPathProvider.cs" />
     <Compile Include="EliteDangerous\EdLogLine.cs" />
@@ -132,6 +137,7 @@
       <Name>EICSystemTracker.Service</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

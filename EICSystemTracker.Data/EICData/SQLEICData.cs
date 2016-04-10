@@ -8,13 +8,139 @@ using EICSystemTracker.Contracts.SystemTracking;
 using EICSystemTracker.Data.EICDataAdapters.MSSql;
 using EICSystemTracker.Contracts.domain.SystemTracking;
 using System.Runtime.Caching;
+using EICSystemTracker.Contracts.SystemTracking.SystemActivities;
+using ActivityType = EICSystemTracker.Contracts.SystemTracking.ActivityType;
 
 namespace EICSystemTracker.Data.EICData
 {
     class SQLEICData : IEICData
     {
         private readonly MSSqlEICDataDataContext _eicData;
-        // TODO: Caching... private static ObjectCache cache = MemoryCache.Default;
+
+        private string GetRandomColor()
+        {
+            var color = String.Format("#{0:X6}", new Random((int)DateTime.UtcNow.Ticks).Next(0x1000000));
+            return color;
+        }
+
+        #region Activity Tracking Conversion
+
+        private Track_System_Activity ConvertActivityToDbActivity(DateTime timeStamp, EDSystem dbSystem, IBountyHunting bhActivity)
+        {
+            if (bhActivity == null) { return null; }
+
+            var dbSystemActivity = new Track_System_Activity
+            {
+                ActivityType = ((int)bhActivity.Type),
+                EDSystem = dbSystem,
+                CreditsClaimed = bhActivity.CreditsClaimed,
+                Timestamp = timeStamp,
+                Cmdr = bhActivity.Cmdr
+            };
+
+            return dbSystemActivity;
+        }
+
+        private Track_System_Activity ConvertActivityToDbActivity(DateTime timeStamp, EDSystem dbSystem, IConflictZone czActivity)
+        {
+            if (czActivity == null) { return null; }
+
+            var dbSystemActivity = new Track_System_Activity
+            {
+                ActivityType = ((int)czActivity.Type),
+                EDSystem = dbSystem,
+                CreditsClaimed = czActivity.CreditsClaimed,
+                Timestamp = timeStamp,
+                Cmdr = czActivity.Cmdr
+            };
+
+            return dbSystemActivity;
+        }
+
+        private Track_System_Activity ConvertActivityToDbActivity(DateTime timeStamp, EDSystem dbSystem, IExploration expActivity)
+        {
+            if (expActivity == null) { return null; }
+
+            var dbSystemActivity = new Track_System_Activity
+            {
+                ActivityType = ((int)expActivity.Type),
+                EDSystem = dbSystem,
+                ExploreValueSold = expActivity.ValueSold,
+                Timestamp = timeStamp,
+                Cmdr = expActivity.Cmdr
+            };
+
+            return dbSystemActivity;
+        }
+
+        private Track_System_Activity ConvertActivityToDbActivity(DateTime timeStamp, EDSystem dbSystem, IMissions missionActivity)
+        {
+            if (missionActivity == null) { return null; }
+
+            var dbSystemActivity = new Track_System_Activity
+            {
+                ActivityType = ((int)missionActivity.Type),
+                EDSystem = dbSystem,
+                NumHighMissions = missionActivity.NumHigh,
+                NumMedMissions = missionActivity.NumMed,
+                NumLowMissions = missionActivity.NumLow,
+                Timestamp = timeStamp,
+                Cmdr = missionActivity.Cmdr
+            };
+
+            return dbSystemActivity;
+        }
+
+        private Track_System_Activity ConvertActivityToDbActivity(DateTime timeStamp, EDSystem dbSystem, IMurderHobo murderActivity)
+        {
+            if (murderActivity == null) { return null; }
+
+            var dbSystemActivity = new Track_System_Activity
+            {
+                ActivityType = ((int)murderActivity.Type),
+                EDSystem = dbSystem,
+                BountyEarned = murderActivity.BountyEarned,
+                Timestamp = timeStamp,
+                Cmdr = murderActivity.Cmdr
+            };
+
+            return dbSystemActivity;
+        }
+
+        private Track_System_Activity ConvertActivityToDbActivity(DateTime timeStamp, EDSystem dbSystem, IPiracy pirateActivity)
+        {
+            if (pirateActivity == null) { return null; }
+
+            var dbSystemActivity = new Track_System_Activity
+            {
+                ActivityType = ((int)pirateActivity.Type),
+                EDSystem = dbSystem,
+                ShipsTaken = pirateActivity.ShipsTaken,
+                Tonnage = pirateActivity.TonsSold,
+                Timestamp = timeStamp,
+                Cmdr = pirateActivity.Cmdr
+            };
+
+            return dbSystemActivity;
+        }
+
+        private Track_System_Activity ConvertActivityToDbActivity(DateTime timeStamp, EDSystem dbSystem, ITrading tradeActivity)
+        {
+            if (tradeActivity == null) { return null; }
+
+            var dbSystemActivity = new Track_System_Activity
+            {
+                ActivityType = ((int)tradeActivity.Type),
+                EDSystem = dbSystem,
+                Tonnage = tradeActivity.Tonnage,
+                Timestamp = timeStamp,
+                Cmdr = tradeActivity.Cmdr
+            };
+
+            return dbSystemActivity;
+        }
+
+        #endregion
 
         public SQLEICData(string server, string dataBase, string userName, string password)
         {
@@ -26,8 +152,6 @@ namespace EICSystemTracker.Data.EICData
             builder.PersistSecurityInfo = true;
 
             _eicData = new MSSqlEICDataDataContext(builder.ConnectionString);
-
-
         }
 
         public void TrackSystem(IEICSystem system)
@@ -49,7 +173,7 @@ namespace EICSystemTracker.Data.EICData
                 ControllingPower = system.Power,
                 ControllingPowerState = system.PowerState,
                 NeedPermit = system.NeedPermit,
-                Timestamp = system.LastUpdated == DateTime.MinValue ? timestamp : system.LastUpdated
+                Timestamp = timestamp
             };
 
             if (sys == null)
@@ -98,7 +222,7 @@ namespace EICSystemTracker.Data.EICData
                 tracking.PendingState = trackedFaction.PendingState;
                 tracking.RecoveringState = trackedFaction.RecoveringState;
                 tracking.UpdateBy = trackedFaction.UpdatedBy;
-                tracking.Timestamp = trackedFaction.LastUpdated == DateTime.MinValue ? timestamp : trackedFaction.LastUpdated;
+                tracking.Timestamp = timestamp;
 
                 _eicData.Track_SystemFactions.InsertOnSubmit(tracking);
             }
@@ -106,30 +230,53 @@ namespace EICSystemTracker.Data.EICData
             _eicData.SubmitChanges();
         }
 
-        public List<IEICFaction> GetAllFactions()
+        public void TrackSystemActivity(IEICSystemActivity activity)
         {
-            var allFactions = new List<IEICFaction>();
+            var timestamp = DateTime.UtcNow;
 
-            allFactions = (from f in _eicData.EDFactions
-                           select new EICFaction()
-                           {
-                               Name = f.Name
-                           }).ToList<IEICFaction>();
+            // get system
+            EDSystem sys = (from s in _eicData.EDSystems where s.Name == activity.SystemName select s).FirstOrDefault();
+            // If no system, add it so we have refs to it.
+            if (sys == null)
+            {
+                sys = new EDSystem();
+                sys.Name = activity.SystemName;
+                sys.ChartColor = GetRandomColor();
+                _eicData.EDSystems.InsertOnSubmit(sys);
+            }
 
-            return allFactions;
-        }
+            Track_System_Activity activityToSubmit = null;
+            switch (activity.Type)
+            {
+                case ActivityType.BountyHunting:
+                    activityToSubmit = ConvertActivityToDbActivity(timestamp, sys, activity as IBountyHunting);
+                    break;
+                case ActivityType.ConflictZone:
+                    activityToSubmit = ConvertActivityToDbActivity(timestamp, sys, activity as IConflictZone);
+                    break;
+                case ActivityType.Exploration:
+                    activityToSubmit = ConvertActivityToDbActivity(timestamp, sys, activity as IExploration);
+                    break;
+                case ActivityType.Missions:
+                    activityToSubmit = ConvertActivityToDbActivity(timestamp, sys, activity as IMissions);
+                    break;
+                case ActivityType.MurderHobo:
+                    activityToSubmit = ConvertActivityToDbActivity(timestamp, sys, activity as IMurderHobo);
+                    break;
+                case ActivityType.Piracy:
+                    activityToSubmit = ConvertActivityToDbActivity(timestamp, sys, activity as IPiracy);
+                    break;
+                case ActivityType.Trade:
+                    activityToSubmit = ConvertActivityToDbActivity(timestamp, sys, activity as ITrading);
+                    break;
+            }
 
-        public List<IEICSystem> GetAllSystems()
-        {
-            var allSystems = new List<IEICSystem>();
+            if (activityToSubmit != null)
+            {
+                _eicData.Track_System_Activities.InsertOnSubmit(activityToSubmit);
+            }
 
-            allSystems = (from s in _eicData.EDSystems
-                          select new EICSystem()
-                          {
-                              Name = s.Name
-                          }).ToList<IEICSystem>();
-
-            return allSystems;
+            _eicData.SubmitChanges();
         }
 
         public List<IEICSystem> GetLatestEICSystemFactionTracking()
@@ -204,6 +351,19 @@ namespace EICSystemTracker.Data.EICData
             return systemsToReturn;
         }
 
+        public List<IEICSystem> GetAllSystems()
+        {
+            var allSystems = new List<IEICSystem>();
+
+            allSystems = (from s in _eicData.EDSystems
+                          select new EICSystem()
+                          {
+                              Name = s.Name
+                          }).ToList<IEICSystem>();
+
+            return allSystems;
+        }
+
         public IEICSystem GetSystem(string systemName)
         {
             EICSystem system = null;
@@ -272,76 +432,14 @@ namespace EICSystemTracker.Data.EICData
             return system;
         }
 
-        private IEICFaction GetLatestFactionInfo(EDFaction dbFaction)
+        public List<string> GetAllFactionNames()
         {
-            var fac = (from tf in dbFaction.Track_Factions
-                       orderby tf.Timestamp descending
-                       select new EICFaction()
-                       {
-                           Name = tf.EDFaction.Name,
-                           ChartColor = tf.EDFaction.ChartColor
-                       }).FirstOrDefault();
-
-            if (fac == null)
-            {
-                // No tracking data... just get from faction then.
-                fac = new EICFaction()
-                {
-                    Name = dbFaction.Name,
-                    ChartColor = dbFaction.ChartColor
-                };
-            }
-
-            return fac;
-        }
-
-        private IEICSystem GetLatestSystemInfo(EDSystem dbSystem)
-        {
-            var sys = (from ts in dbSystem.Track_Systems
-                       orderby ts.Timestamp descending
-                       select new EICSystem()
-                       {
-                           Name = ts.EDSystem.Name,
-                           Allegiance = ts.Allegiance,
-                           Economy = ts.Economy,
-                           Government = ts.Government,
-                           NeedPermit = ts.NeedPermit,
-                           Population = ts.Population ?? 0,
-                           Power = ts.ControllingPower,
-                           PowerState = ts.ControllingPowerState,
-                           Security = ts.Security,
-                           State = ts.State,
-                           Traffic = ts.Traffic ?? 0,
-                           LastUpdated = ts.Timestamp
-                       }).FirstOrDefault();
-
-            if (sys == null)
-            {
-                sys = new EICSystem()
-                {
-                    Name = dbSystem.Name,
-                    ChartColor = dbSystem.ChartColor
-                };
-            }
-
-            return sys;
-        }
-
-        private string GetRandomColor()
-        {
-            var color = String.Format("#{0:X6}", new Random((int)DateTime.UtcNow.Ticks).Next(0x1000000));
-            return color;
+            return (from f in _eicData.EDFactions select f.Name).ToList<string>();
         }
 
         public void Dispose()
         {
             // TODO: Dispose this
-        }
-
-        // TODO: Add functionality to get all faction names.
-        public List<string> GetAllFactionNames()
-        {
-            throw new NotImplementedException();
         }
     }
 }
