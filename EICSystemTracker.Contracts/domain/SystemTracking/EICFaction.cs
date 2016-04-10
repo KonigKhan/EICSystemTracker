@@ -6,5 +6,6 @@ namespace EICSystemTracker.Contracts.domain.SystemTracking
     {
         public string Name { get; set; }
         public string ChartColor { get; set; }
+        public string Alliance { get; set; }
     }
 }

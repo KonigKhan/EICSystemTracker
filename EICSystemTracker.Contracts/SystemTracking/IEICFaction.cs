@@ -4,5 +4,6 @@
     {
         string Name { get; set; }
         string ChartColor { get; set; }
+        string Alliance { get; set; }
     }
 }
