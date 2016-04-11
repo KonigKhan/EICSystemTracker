@@ -532,7 +532,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_SystemFaction", Storage="_EDFaction", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDFaction_Track_SystemFaction", Storage="_EDFaction", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
 		public EDFaction EDFaction
 		{
 			get
@@ -566,7 +566,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_SystemFaction", Storage="_EDSystem", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_SystemFaction", Storage="_EDSystem", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
 		public EDSystem EDSystem
 		{
 			get
@@ -716,7 +716,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_SystemFaction", Storage="_Track_SystemFactions", ThisKey="Id", OtherKey="Faction")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDFaction_Track_SystemFaction", Storage="_Track_SystemFactions", ThisKey="Id", OtherKey="Faction")]
 		public EntitySet<Track_SystemFaction> Track_SystemFactions
 		{
 			get
@@ -729,7 +729,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_Faction", Storage="_Track_Factions", ThisKey="Id", OtherKey="Faction")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDFaction_Track_Faction", Storage="_Track_Factions", ThisKey="Id", OtherKey="Faction")]
 		public EntitySet<Track_Faction> Track_Factions
 		{
 			get
@@ -885,7 +885,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_SystemFaction", Storage="_Track_SystemFactions", ThisKey="Id", OtherKey="System")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_SystemFaction", Storage="_Track_SystemFactions", ThisKey="Id", OtherKey="System")]
 		public EntitySet<Track_SystemFaction> Track_SystemFactions
 		{
 			get
@@ -898,7 +898,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_System", Storage="_Track_Systems", ThisKey="Id", OtherKey="System")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_System", Storage="_Track_Systems", ThisKey="Id", OtherKey="System")]
 		public EntitySet<Track_System> Track_Systems
 		{
 			get
@@ -911,7 +911,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_System_Activity", Storage="_Track_System_Activities", ThisKey="Id", OtherKey="System")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_System_Activity", Storage="_Track_System_Activities", ThisKey="Id", OtherKey="System")]
 		public EntitySet<Track_System_Activity> Track_System_Activities
 		{
 			get
@@ -1125,7 +1125,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Faction_Track_Faction", Storage="_EDFaction", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDFaction_Track_Faction", Storage="_EDFaction", ThisKey="Faction", OtherKey="Id", IsForeignKey=true)]
 		public EDFaction EDFaction
 		{
 			get
@@ -1564,7 +1564,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_System", Storage="_EDSystem", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_System", Storage="_EDSystem", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
 		public EDSystem EDSystem
 		{
 			get
@@ -1694,7 +1694,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -1996,7 +1996,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="System_Track_System_Activity", Storage="_EDSystem", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EDSystem_Track_System_Activity", Storage="_EDSystem", ThisKey="System", OtherKey="Id", IsForeignKey=true)]
 		public EDSystem EDSystem
 		{
 			get

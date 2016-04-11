@@ -45,6 +45,22 @@ class EICSystemTrackerDataController implements IEICSystemTrackerService {
 
         return dfd.promise();
     };
+
+    public static TrackSystemActivity = (activity: IEICSystemActivity): JQueryPromise<any> => {
+        var dfd = $.Deferred();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/EICSystemTrackerData/TrackSystemActivity",
+            data: activity,
+            success: function(res) {
+                dfd.resolve(res);
+            },
+            dataType: 'json'
+        });
+
+        return dfd.promise();
+    }
 }
 
 export default EICSystemTrackerDataController;

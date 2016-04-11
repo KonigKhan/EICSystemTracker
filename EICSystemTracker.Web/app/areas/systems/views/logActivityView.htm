@@ -3,27 +3,148 @@
 
     <h1>TrackSystem!</h1>
     <p class="fontYellow">Enter the following information about what you have done in the system.</p>
-    <div class="col-xs-12" style="padding: 10px;">
-        <div class="col-sm-12 col-md-6" style="padding:10px;">
-            <div class="col-xs-2">Cmdr Name:</div>
-            <div class="col-xs-4">
-                <input class="col-xs-12" type="text" data-bind="value: cmdrName" />
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding:10px;">
+            <div class="col-xs-3">Cmdr Name:</div>
+            <div class="col-xs-8">
+                <input style="width:100%" type="text" data-bind="value: cmdrName" />
             </div>
-        </div>
-        <br /><br />
-        <div class="row" style="padding-bottom: 10px;">
-            <div class="col-sm-12 col-md-4" style="padding: 10px;">
-                <div class="col-xs-2">Activity:</div>
-                <div class="col-xs-10">
-                    <input style="width: 100%;" data-bind="kendoDropDownList: {dataTextField: 'Text', dataValueField: 'Value', optionLabel: '', dataSource: activityTypeOptions, value: activityType}" />
-                </div>
-            </div>
-
-            <br />
-            <!-- ko if: activityType() === 1 -->
-            <h4>Missions</h4>
-            <!-- /ko -->
         </div>
     </div>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding:10px;">
+            <div class="col-xs-3">System:</div>
+            <div class="col-xs-8">
+                <input style="width: 100%;" data-bind="kendoAutoComplete: {minLength: 3, dataSource: systemNames, filter: 'startswith', placeholder: 'Type System Name...', value: systemName}" />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Activity:</div>
+            <div class="col-xs-8">
+                <input style="width: 100%;" data-bind="kendoDropDownList: {dataTextField: 'Text', dataValueField: 'Value', optionLabel: activityOptionLabel, dataSource: activityTypeOptions, value: activityType }" />
+            </div>
+        </div>
+    </div>
+
+    <!-- TODO: Make this loaded from viewmodels... -->
+    <!-- ko if: activityType() === '1' -->
+    <h3>Missions</h3>
+    <p class="fontYellow">I need to come up with instructions on entering num mission influence.</p>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">High:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: numHighMissions" />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Medium:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: numMedMissions" />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Low:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: numLowMissions" />
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: activityType() === '2' -->
+    <h3>Bounty Hunting</h3>
+    <p class="fontYellow">I need to come up with instructions on entering num credits.</p>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Credits Claimed:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: numBhCredits" />
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: activityType() === '3' -->
+    <h3>Conflict Zones</h3>
+    <p class="fontYellow">I need to come up with instructions on entering num credits.</p>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Credits Claimed:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: numCzCredits" />
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: activityType() === '4' -->
+    <h3>Trading</h3>
+    <p class="fontYellow">I need to come up with instructions on entering trade tonnage.</p>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Tonnage:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: tradeTonnage" />
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: activityType() === '5' -->
+    <h3>Exploration</h3>
+    <p class="fontYellow">I need to come up with instructions on entering exploration values sold.</p>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Value Sold:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: expValueSold" />
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: activityType() === '6' -->
+    <h3>Piracy</h3>
+    <p class="fontYellow">I need to come up with instructions on entering piracy.</p>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Ships Taken:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: shipsTaken" />
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Stolen Tonnage Sold:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: piracyTonnage" />
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: activityType() === '7' -->
+    <h3>Murder Hobo</h3>
+    <p class="fontYellow">I need to come up with instructions on entering murder hobo data.</p>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding: 10px;">
+            <div class="col-xs-3">Bounty Earned:</div>
+            <div class="col-xs-6">
+                <input class="col-xs-6" type="number" min="0" data-bind="value: bountyEarned" />
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="linkButton btn btn-default pull-left" data-bind="click: submitData">Submit</button>
+        </div>
+    </div>
+
     <!-- /ko -->
 </div>
