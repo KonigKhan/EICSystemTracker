@@ -1,6 +1,7 @@
 ﻿<div data-bind="css: {'loader': isLoading }">
     <!-- ko if: !isLoading() -->
     <h1>TrackSystem!</h1>
+
     <p class="fontYellow">Enter the following information for thie system.</p>
     <div class="col-xs-12" style="padding: 10px;">
         <div class="col-sm-12 col-md-6" style="padding:10px;">
@@ -52,7 +53,7 @@
             <hr />
         </div>
         <h4>Factions</h4>
-        <p class="fontYellow">Add Factions for this system by clicking "Add Faction".<br />If a faction is no longer in a system, set it's influence to 0.</p>
+        <p class="fontYellow">Add Factions for this system by clicking "Add Faction".<br />You can remove it by clicking the "x"</p>
         <div class="col-xs-12" style="margin-bottom: 10px;">
             <div class="linkButton pull-left" data-bind="click: addFaction">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Faction
@@ -106,7 +107,7 @@
                     </div>
                     <div class="col-xs-12" style="padding:5px;">
                         <div class="col-xs-12">
-                            <input type="checkbox" data-bind="checked: $data.controllingFaction" />&nbsp;Controlling Faction
+                            <input type="checkbox" data-bind="checked: controllingFaction" />&nbsp;Controlling Faction
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,8 @@ import cmdrService from '../../../services/cmdrservice';
 
 class TrackSystemViewModel extends PageViewModel {
 
+    public isError: KnockoutObservable<boolean> = ko.observable(false);
+    public errorMsgs: KnockoutObservableArray<string> = ko.observableArray([]);
     public systemName: KnockoutObservable<string> = ko.observable("");
     public traffic: KnockoutObservable<number> = ko.observable(0);
     public population: KnockoutObservable<number> = ko.observable(0);
@@ -30,7 +32,7 @@ class TrackSystemViewModel extends PageViewModel {
         super();
 
         this.systemName.subscribe((sysName: string) => {
-        
+
             var sys: IEICSystem = systemsCacheService.GetSystems().filter((s: IEICSystem) => {
                 return s.Name.toLowerCase() === sysName.toLowerCase();
             })[0];
@@ -49,54 +51,73 @@ class TrackSystemViewModel extends PageViewModel {
         this.GetPreFillData();
     }
 
+    public validate = (): void => {
+        this.errorMsgs([]); // reset error messages.
+
+        var cmdrNameValid = true;
+        var cmdrNameMsg = "You need to enter your Cmdr name so we can give credit to you.";
+        if (!this.cmdrName() || this.cmdrName().length <= 0) {
+            cmdrNameValid = false;
+            this.errorMsgs.push(cmdrNameMsg);
+        } else {
+            cmdrNameValid = true;
+        }
+
+        this.isError(cmdrNameValid);
+    }
+
     public submitData = () => {
+        this.validate();
 
-        // TODO: Add missing properties to entry form
-        var trackedFacs: Array<IEICSystemFaction> = [];
-        var arrLen = this.factions().length;
-        for (var i = 0; i < arrLen; i++) {
+        if (this.isError()) {
 
-            var curData: IEICSystemFaction = this.factions()[i].getTrackingData();
-            curData.UpdatedBy = this.cmdrName();
+            // TODO: Add missing properties to entry form
+            var trackedFacs: Array<IEICSystemFaction> = [];
+            var arrLen = this.factions().length;
+            for (var i = 0; i < arrLen; i++) {
 
-            trackedFacs.push(curData);
-        }
+                var curData: IEICSystemFaction = this.factions()[i].getTrackingData();
+                curData.UpdatedBy = this.cmdrName();
 
-        var submitSystem: IEICSystem = {
-            Name: this.systemName(),
-            Traffic: this.traffic(),
-            Population: this.population(),
-            Government: this.government(),
-            Allegiance: this.allegiance(),
-            State: "",
-            Security: this.security(),
-            Economy: "",
-            Power: "",
-            PowerState: "",
-            NeedPermit: false,
-            LastUpdated: "",
-            TrackedFactions: trackedFacs,
-            ChartColor: null
-        };
+                trackedFacs.push(curData);
+            }
 
-        try {
+            var submitSystem: IEICSystem = {
+                Name: this.systemName(),
+                Traffic: this.traffic(),
+                Population: this.population(),
+                Government: this.government(),
+                Allegiance: this.allegiance(),
+                State: "",
+                Security: this.security(),
+                Economy: "",
+                Power: "",
+                PowerState: "",
+                NeedPermit: false,
+                LastUpdated: "",
+                TrackedFactions: trackedFacs,
+                ChartColor: null
+            };
 
-            this.isLoading(true);
-            eicDataController.UpdateSystemFactionInfo(submitSystem).done((result) => {
-                console.debug("eicDataController.UpdateSystemFactionInfo Result: " + JSON.stringify(result));
-                this.reset();
-            }).fail((resError) => {
-                var errorobj = JSON.parse(resError.error().responseText);
-                var errorMsg = "Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage;
-                console.error(errorMsg);
-                alert(errorMsg);
-            }).always(() => {
+            try {
+
+                this.isLoading(true);
+                eicDataController.UpdateSystemFactionInfo(submitSystem).done((result) => {
+                    console.debug("eicDataController.UpdateSystemFactionInfo Result: " + JSON.stringify(result));
+                    this.reset();
+                }).fail((resError) => {
+                    var errorobj = JSON.parse(resError.error().responseText);
+                    var errorMsg = "Error While Saving\r\nMessage: " + errorobj.Message + "\r\nExceptionMessage: " + errorobj.ExceptionMessage;
+                    console.error(errorMsg);
+                    alert(errorMsg);
+                }).always(() => {
+                    this.isLoading(false);
+                });
+            }
+            catch (e) {
+                alert('error while saving... ' + e);
                 this.isLoading(false);
-            });
-        }
-        catch (e) {
-            alert('error while saving... ' + e);
-            this.isLoading(false);
+            }
         }
     }
 
@@ -115,15 +136,6 @@ class TrackSystemViewModel extends PageViewModel {
     }
 
     public setControllingFaction = (faction: trackingData) => {
-
-        var arrLen = this.factions().length;
-        for (var i = 0; i < arrLen; i++) {
-
-            var f: trackingData = this.factions()[i];
-            if (f.factionName !== faction.factionName) {
-                f.controllingFaction(false);
-            }
-        }
     }
 
     private preFillSystem(system: IEICSystem = null) {
@@ -162,12 +174,12 @@ class TrackSystemViewModel extends PageViewModel {
             this.security("");
             this.government("");
             this.allegiance("");
-            this.factions([]);   
+            this.factions([]);
         }
     }
 
     public GetPreFillData = () => {
-    
+
         this.isLoading(true);
         eicDataController.GetLatestSystemTrackingData().done((returnData: Array<IEICSystem>) => {
 
@@ -182,7 +194,7 @@ class TrackSystemViewModel extends PageViewModel {
 
         }).always(() => {
             this.isLoading(false);
-        });    
+        });
     }
 
     public reset = () => {
