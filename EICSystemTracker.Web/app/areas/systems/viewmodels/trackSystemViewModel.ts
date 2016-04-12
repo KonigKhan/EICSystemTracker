@@ -29,6 +29,8 @@ class TrackSystemViewModel extends PageViewModel {
     public allegianceOptions: Array<string> = ["Empire", "Federation", "Alliance", "Independent"];
     public securityOptions: Array<string> = ["None", "High", "Medium", "Low"];
 
+    public controllingFacsArr: KnockoutObservableArray<string> = ko.observableArray([]);
+
     constructor() {
         super();
 
@@ -163,6 +165,20 @@ class TrackSystemViewModel extends PageViewModel {
     }
 
     public setControllingFaction = (faction: trackingData) => {
+        if (faction.controllingFaction() === false) {
+            console.log("associate item " + faction.factionName());
+            for (var i = 0, len = this.factions().length; i < len; i++) {
+                var item: trackingData = this.factions()[i];
+                if (item.factionName() !== faction.factionName() && item.controllingFaction() === true) {
+                    var idx = this.controllingFacsArr.indexOf(item.factionName());
+                    this.controllingFacsArr.splice(idx);
+                    item.controllingFaction(false);
+                }
+            }
+        }
+
+        faction.controllingFaction(!(faction.controllingFaction()));
+        return true;
     }
 
     private preFillSystem(system: IEICSystem = null) {
