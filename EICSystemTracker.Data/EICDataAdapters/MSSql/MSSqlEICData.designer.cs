@@ -54,7 +54,7 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
     #endregion
 		
 		public MSSqlEICDataDataContext() : 
-				base(global::EICSystemTracker.Data.Properties.Settings.Default.EICDataConnectionString1, mappingSource)
+				base(global::EICSystemTracker.Data.Properties.Settings.Default.EICDataConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -144,6 +144,13 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), sysName);
 			return ((ISingleResult<GetLatestSystemTrackingResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetFactionHiostoryForSystem")]
+		public ISingleResult<GetFactionHiostoryForSystemResult> GetFactionHiostoryForSystem([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string factionName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), factionName);
+			return ((ISingleResult<GetFactionHiostoryForSystemResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -2414,6 +2421,158 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 				if ((this._UpdateBy != value))
 				{
 					this._UpdateBy = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetFactionHiostoryForSystemResult
+	{
+		
+		private string _Name;
+		
+		private System.Nullable<decimal> _Influence;
+		
+		private string _CurrentState;
+		
+		private string _PendingState;
+		
+		private string _RecoveringState;
+		
+		private System.DateTime _Timestamp;
+		
+		private string _UpdateBy;
+		
+		private bool _ContrllingFaction;
+		
+		public GetFactionHiostoryForSystemResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Influence", DbType="Decimal(3,1)")]
+		public System.Nullable<decimal> Influence
+		{
+			get
+			{
+				return this._Influence;
+			}
+			set
+			{
+				if ((this._Influence != value))
+				{
+					this._Influence = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string CurrentState
+		{
+			get
+			{
+				return this._CurrentState;
+			}
+			set
+			{
+				if ((this._CurrentState != value))
+				{
+					this._CurrentState = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PendingState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string PendingState
+		{
+			get
+			{
+				return this._PendingState;
+			}
+			set
+			{
+				if ((this._PendingState != value))
+				{
+					this._PendingState = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecoveringState", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string RecoveringState
+		{
+			get
+			{
+				return this._RecoveringState;
+			}
+			set
+			{
+				if ((this._RecoveringState != value))
+				{
+					this._RecoveringState = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timestamp", DbType="DateTime NOT NULL")]
+		public System.DateTime Timestamp
+		{
+			get
+			{
+				return this._Timestamp;
+			}
+			set
+			{
+				if ((this._Timestamp != value))
+				{
+					this._Timestamp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateBy", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string UpdateBy
+		{
+			get
+			{
+				return this._UpdateBy;
+			}
+			set
+			{
+				if ((this._UpdateBy != value))
+				{
+					this._UpdateBy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContrllingFaction", DbType="Bit NOT NULL")]
+		public bool ContrllingFaction
+		{
+			get
+			{
+				return this._ContrllingFaction;
+			}
+			set
+			{
+				if ((this._ContrllingFaction != value))
+				{
+					this._ContrllingFaction = value;
 				}
 			}
 		}

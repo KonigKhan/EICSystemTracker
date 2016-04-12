@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EICData" Class="MSSqlEICDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com,1433;Initial Catalog=EICData;Persist Security Info=True;User ID=admin" SettingsObjectName="EICSystemTracker.Data.Properties.Settings" SettingsPropertyName="EICDataConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com;Initial Catalog=EICData;Persist Security Info=True;User ID=admin" SettingsObjectName="EICSystemTracker.Data.Properties.Settings" SettingsPropertyName="EICDataConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ActivityType" Member="ActivityTypes">
     <Type Name="ActivityType">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -114,6 +114,19 @@
       <Column Name="RecoveringState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetFactionHiostoryForSystem" Method="GetFactionHiostoryForSystem">
+    <Parameter Name="factionName" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="GetFactionHiostoryForSystemResult">
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Influence" Type="System.Decimal" DbType="Decimal(3,1)" CanBeNull="true" />
+      <Column Name="CurrentState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PendingState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RecoveringState" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ContrllingFaction" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

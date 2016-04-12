@@ -441,5 +441,20 @@ namespace EICSystemTracker.Data.EICData
         {
             // TODO: Dispose this
         }
+
+        public List<IEICSystemFaction> GetFactionHistoryForSystem(string systemName)
+        {
+            return _eicData.GetFactionHiostoryForSystem(systemName).Select(res => new EICSystemFaction()
+            {
+                Faction = new EICFaction() { Name = res.Name },
+                Influence = Convert.ToDouble(res.Influence ?? 0),
+                CurrentState = res.CurrentState,
+                PendingState = res.PendingState,
+                RecoveringState = res.RecoveringState,
+                LastUpdated = res.Timestamp,
+                ControllingFaction = res.ContrllingFaction,
+                UpdatedBy = res.UpdateBy
+            }).ToList<IEICSystemFaction>();
+        }
     }
 }

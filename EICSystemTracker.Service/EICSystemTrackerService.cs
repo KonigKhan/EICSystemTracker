@@ -51,5 +51,13 @@ namespace EICSystemTracker.Service
                 return da.GetAllFactionNames();
             }
         }
+
+        public List<IEICSystemFaction> GetFactionHistoryForSystem(string systemName)
+        {
+            using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
