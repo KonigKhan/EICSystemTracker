@@ -1,12 +1,26 @@
-﻿<div data-bind="css: {'loader': isLoading }">
+﻿<!-- ko if: isError -->
+<div class="alert alert-danger" role="alert">
+    <h4>Oops! It looks like there are problems preventing you from submitting. Pleas fix and try again.</h4>
+    <ul data-bind="foreach: errorMsgs">
+        <li style="list-style-type: none">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            <span data-bind="text: $data"></span>
+        </li>
+    </ul>
+</div>
+<!-- /ko -->
+
+
+<div data-bind="css: {'loader': isLoading }">
     <!-- ko if: !isLoading() -->
-    <h1>TrackSystem!</h1>
+    <h1>Track A System</h1>
 
     <p class="fontYellow">Enter the following information for thie system.</p>
     <div class="col-xs-12" style="padding: 10px;">
-        <div class="col-sm-12 col-md-6" style="padding:10px;">
-            <div class="col-xs-2">Cmdr Name:</div>
-            <div class="col-xs-4">
+        <div class="col-sm-12 col-md-4" style="padding:10px;">
+            <div class="col-xs-3">Cmdr Name:</div>
+            <div class="col-xs-8">
                 <input class="col-xs-12" type="text" data-bind="value: cmdrName" />
             </div>
         </div>
@@ -20,7 +34,7 @@
                 <div class="col-xs-2">Name:</div>
                 <div class="col-xs-10">
                     <!--<input class="col-xs-12" type="text" data-bind="value: systemName" />-->
-                    <input data-bind="kendoAutoComplete: {minLength: 3, dataSource: systemNames, filter: 'startswith', placeholder: 'Select System...', value: systemName}" />
+                    <input style="width: 100%;" data-bind="kendoAutoComplete: {minLength: 2, dataSource: systemNames, filter: 'startswith', placeholder: 'Select System...', value: systemName}" />
                 </div>
             </div>
             <div class="col-sm-12 col-md-4" style="padding:10px;">
@@ -72,7 +86,8 @@
                     <div class="col-xs-12" style="padding:5px;">
                         <div class="col-xs-4">Name</div>
                         <div class="col-xs-8">
-                            <input type="text" class="col-xs-12" data-bind="value: factionName" />
+                            <!--<input type="text" class="col-xs-12" data-bind="value: factionName"/>-->
+                            <input style="width: 100%;" data-bind="kendoAutoComplete: {minLength: 2, dataSource: $parent.factionNames, filter: 'startswith', placeholder: '', value: factionName}" />
                         </div>
                     </div>
                     <div class="col-xs-12" style="padding:5px;">

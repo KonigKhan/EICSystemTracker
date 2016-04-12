@@ -48,6 +48,7 @@ namespace EICSystemTracker.Host.EliteDangerous
             _logfileWatcher.Filter = "netLog*.log";
             _logfileWatcher.NotifyFilter = NotifyFilters.LastWrite;
             _logfileWatcher.Changed += updateLogPath;
+            _logfileWatcher.Created += updateLogPath;
             _logfileWatcher.EnableRaisingEvents = true;
         }
 
@@ -57,6 +58,7 @@ namespace EICSystemTracker.Host.EliteDangerous
             if (e.FullPath == logPath) { return; } //already subscribed logfile is being updated, ignore
 
             logPath = e.FullPath;
+            Console.Write("\nNew Log File detected! {0}", e.Name);
 
             //Reset backgroundworker
             StopWatcher();

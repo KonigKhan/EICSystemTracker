@@ -369,6 +369,17 @@ namespace EICSystemTracker.Data.EICData
             EICSystem system = null;
 
             var sysFacTracking = _eicData.GetLatestSystemTracking(systemName).ToList();
+            if (sysFacTracking.Count <= 0)
+            {
+                // If there are no systemfactions for specified system, return an empty system object so it doesn't break shit.
+                return new EICSystem()
+                {
+                    Name = systemName,
+                    TrackedFactions = new List<IEICSystemFaction>()
+                };
+            }
+
+
             foreach (var sysfac in sysFacTracking)
             {
                 // Create new sys fac tracking data.

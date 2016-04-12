@@ -64,6 +64,19 @@ namespace EICSystemTracker.Host.api
             return response;
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetFactionNames()
+        {
+            var factionNames = _systemTrackerService.GetFactionNames();
+
+            var json = JsonConvert.SerializeObject(factionNames);
+
+            HttpResponseMessage response = Request.CreateResponse(System.Net.HttpStatusCode.OK, json, new TextPlainFormatter());
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            return response;
+        }
+
         [HttpPost]
         public string UpdateSystemFactionInfo([FromBody]EICSystemDTO system)
         {

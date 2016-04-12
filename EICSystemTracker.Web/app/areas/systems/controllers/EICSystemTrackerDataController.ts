@@ -8,6 +8,19 @@ class EICSystemTrackerDataController implements IEICSystemTrackerService {
 
         return dfd.resolve().promise();
     };
+
+    public static GetFactionNames = (): JQueryPromise<Array<string>> => {
+        var dfd = $.Deferred();
+
+        $.get("/api/EICSystemTrackerData/GetFactionNames").done((result: Array<string>) => {
+            dfd.resolve(result);
+        }).fail(() => {
+            dfd.reject();
+        });
+
+        return dfd.promise();
+    }
+
     public static GetLatestSystemTrackingData = (): JQueryPromise<any> => {
         var dfd = $.Deferred();
 
@@ -36,7 +49,7 @@ class EICSystemTrackerDataController implements IEICSystemTrackerService {
             type: "POST",
             url: "/api/EICSystemTrackerData/UpdateSystemFactionInfo",
             data: systemFaction,
-            success: function(res) {
+            success: function (res) {
                 dfd.resolve(res);
             },
             dataType: 'json'
@@ -53,7 +66,7 @@ class EICSystemTrackerDataController implements IEICSystemTrackerService {
             type: "POST",
             url: "/api/EICSystemTrackerData/TrackSystemActivity",
             data: activity,
-            success: function(res) {
+            success: function (res) {
                 dfd.resolve(res);
             },
             dataType: 'json'

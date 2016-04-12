@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EICSystemTracker.Contracts;
+﻿using EICSystemTracker.Contracts;
 using EICSystemTracker.Contracts.Data;
 using EICSystemTracker.Contracts.SystemTracking;
 using EICSystemTracker.Data;
+using System;
+using System.Collections.Generic;
 
 namespace EICSystemTracker.Service
 {
