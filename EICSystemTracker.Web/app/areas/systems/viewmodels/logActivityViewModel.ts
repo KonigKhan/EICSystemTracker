@@ -207,6 +207,25 @@ class LogActivityViewModel extends PageViewModel {
                     (<IMissions>activityToSubmit).NumMed = this.numMedMissions();
                     (<IMissions>activityToSubmit).NumLow = this.numLowMissions();
                     break;
+                case 2:
+                    (<IBountyHunting>activityToSubmit).CreditsClaimed = this.numBhCredits();
+                    break;
+                case 3:
+                    (<IConflictZone>activityToSubmit).CreditsClaimed = this.numCzCredits();
+                    break;
+                case 4:
+                    (<ITrading>activityToSubmit).Tonnage = this.tradeTonnage();
+                    break;
+                case 5:
+                    (<IExploration>activityToSubmit).ValueSold = this.expValueSold();
+                    break;
+                case 6:
+                    (<IPiracy>activityToSubmit).ShipsTaken = this.shipsTaken();
+                    (<IPiracy>activityToSubmit).TonsSold = this.piracyTonnage();
+                    break;
+                case 7:
+                    (<IMurderHobo>activityToSubmit).BountyEarned = this.bountyEarned();
+                    break;
             }
 
             try {

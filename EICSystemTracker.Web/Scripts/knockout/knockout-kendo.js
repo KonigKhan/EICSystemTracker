@@ -1,22 +1,9 @@
 var jquery_1 = require('../../app/lib/jquery');
 var knockout_1 = require('../../app/lib/knockout');
-//ko.bindingHandlers.yourBindingName = {
-//    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-//        // This will be called when the binding is first applied to an element
-//        // Set up any initial state, event handlers, etc. here
-//    },
-//    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-//        // This will be called once when the binding is first applied to an element,
-//        // and again whenever any observables/computeds that are accessed change
-//        // Update the DOM element based on the supplied values here.
-//    }
-//};
 knockout_1.default.bindingHandlers['kendoAutoComplete'] = {
     init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        // First get the latest data that we're bound to
         var options = valueAccessor() || {};
         var others = allBindings() || {};
-        //create AutoComplete UI component
         jquery_1.default.support.cors = true;
         var autoComplete = jquery_1.default(element).kendoAutoComplete({
             minLength: options.minLength,
@@ -41,10 +28,8 @@ knockout_1.default.bindingHandlers['kendoAutoComplete'] = {
 };
 knockout_1.default.bindingHandlers['kendoMultiSelect'] = {
     init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        // First get the latest data that we're bound to
         var options = valueAccessor() || {};
         var others = allBindings() || {};
-        //create AutoComplete UI component
         jquery_1.default.support.cors = true;
         var multiSelect = jquery_1.default(element).kendoMultiSelect({
             dataTextField: options.dataTextField,
@@ -61,7 +46,6 @@ knockout_1.default.bindingHandlers['kendoMultiSelect'] = {
                 if (value.toString() !== options.value().toString()) {
                     options.value(value);
                 }
-                //console.debug("chagned multiselect value: " + value);
             }
         }).data("kendoMultiSelect");
         options.value.subscribe(function (newValue) {
@@ -75,10 +59,8 @@ knockout_1.default.bindingHandlers['kendoMultiSelect'] = {
 };
 knockout_1.default.bindingHandlers['kendoDropDownList'] = {
     init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        // First get the latest data that we're bound to
         var options = valueAccessor() || {};
         var others = allBindings() || {};
-        //create AutoComplete UI component
         var dropDown = jquery_1.default(element).kendoDropDownList({
             dataTextField: options.dataTextField,
             dataValueField: options.dataValueField,
@@ -90,7 +72,6 @@ knockout_1.default.bindingHandlers['kendoDropDownList'] = {
                 if (value !== options.value()) {
                     options.value(value);
                 }
-                //console.debug("chagned multiselect value: " + value);
             }
         }).data("kendoDropDownList");
         options.value.subscribe(function (newValue) {
@@ -102,4 +83,3 @@ knockout_1.default.bindingHandlers['kendoDropDownList'] = {
         });
     }
 };
-//# sourceMappingURL=knockout-kendo.js.map

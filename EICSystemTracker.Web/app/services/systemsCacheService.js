@@ -1,4 +1,3 @@
-/// Use this to store the systems in memory.
 var SystemsCacheService = (function () {
     function SystemsCacheService() {
     }
@@ -20,4 +19,3 @@ var SystemsCacheService = (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = SystemsCacheService;
-//# sourceMappingURL=systemscacheservice.js.map
