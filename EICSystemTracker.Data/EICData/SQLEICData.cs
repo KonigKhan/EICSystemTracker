@@ -366,6 +366,8 @@ namespace EICSystemTracker.Data.EICData
 
         public IEICSystem GetSystem(string systemName)
         {
+            if (string.IsNullOrEmpty(systemName)) { return null; }
+
             EICSystem system = null;
 
             var sysFacTracking = _eicData.GetLatestSystemTracking(systemName).ToList();

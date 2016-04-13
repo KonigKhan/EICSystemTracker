@@ -19,10 +19,8 @@ class AppViewModel extends PageViewModel {
     public Navigation = ko.observableArray<IPageNavigation>();
     public Pages = ko.observableArray<IPagerDiv>();
     public Navigate = (nav: IPageNavigation) => {
-        location.hash = nav.Href;
+        //location.hash = nav.Href;
     }
-
-    public someText: KnockoutObservable<string> = ko.observable("POS Framework");
 
     constructor() {
         super();
@@ -45,7 +43,7 @@ class AppViewModel extends PageViewModel {
                         this.Pages.push(page);
                     }
 
-                    if (area === "home") {
+                    if (area === "systems") {
                         return;
                     }
 
@@ -85,7 +83,7 @@ setTimeout(() => {
     if (window.location.hash.indexOf("start") !== -1) {
         pager.start();
     } else {
-        pager.start('start/start');
+        pager.start('start/systems/logActivity');
     }
     ko.applyBindings(appVm);
 }, 500);

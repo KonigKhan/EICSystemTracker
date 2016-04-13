@@ -51,15 +51,21 @@ namespace EICSystemTracker.Host.api
         [HttpGet]
         public HttpResponseMessage GetCmdrCurrentSystem()
         {
+            HttpResponseMessage response;
             var json = string.Empty;
             if (!string.IsNullOrWhiteSpace(Util.StaticProperties.ClientCurrentSystemName))
             {
                 var system = _systemTrackerService.GetSystem(Util.StaticProperties.ClientCurrentSystemName);
                 json = JsonConvert.SerializeObject(system);
-            }
 
-            HttpResponseMessage response = Request.CreateResponse(System.Net.HttpStatusCode.OK, json, new TextPlainFormatter());
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                response = Request.CreateResponse(System.Net.HttpStatusCode.OK, json, new TextPlainFormatter());
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            }
+            else
+            {
+                HttpError err = new HttpError("Could not detect system.");
+                return Request.CreateResponse(System.Net.HttpStatusCode.BadRequest, err);
+            }
 
             return response;
         }
