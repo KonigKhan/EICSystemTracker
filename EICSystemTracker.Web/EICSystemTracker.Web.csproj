@@ -1023,9 +1023,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
-    <TypeScriptCompile Include="app\areas\home\controllers\EICSystemDataController.ts" />
     <TypeScriptCompile Include="app\areas\home\manifest.ts" />
-    <TypeScriptCompile Include="app\areas\home\viewmodels\factionTrackingViewModel.ts" />
     <TypeScriptCompile Include="app\areas\home\viewmodels\startViewModel.ts" />
     <TypeScriptCompile Include="app\areas\systems\viewmodels\logActivityViewModel.ts" />
     <TypeScriptCompile Include="app\services\CmdrService.ts" />
@@ -1137,6 +1135,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\areas\home\controllers\" />
     <Folder Include="app\areas\systems\services\" />
     <Folder Include="node_modules\pagerjs\node_modules\" />
   </ItemGroup>

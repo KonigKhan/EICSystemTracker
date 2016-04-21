@@ -7,7 +7,7 @@ export module Manifest {
     export var GlobalVariables = {
         applicationName: 'EIC System Tracker',
         areas: <string[]>[
-            //'home',
+            'home',
             'systems'
         ],
         fadeSpeed: 300

@@ -42,7 +42,20 @@ var SystemUtils;
     SystemUtils.LoadTemplatesAsync = LoadTemplatesAsync;
     ;
     function LoadStyleAsync(path) {
+        //path += '?v=' + parameters.version;
         var dfdLink = jquery_1.default.Deferred();
+        //if (!document.getElementById(path)) {
+        //    var head = document.getElementsByTagName('head')[0];
+        //    var link = document.createElement('link');
+        //    link.id = path;
+        //    link.rel = 'stylesheet';
+        //    link.type = 'text/css';
+        //    link.href = path;
+        //    link.media = 'all';
+        //    link.onload = dfdLink.resolve;
+        //    link.onerror = dfdLink.reject;
+        //    head.appendChild(link);
+        //}
         System.import(path + '!css').then(function () {
             dfdLink.resolve();
         });
@@ -71,3 +84,4 @@ var SystemUtils;
 })(SystemUtils || (SystemUtils = {}));
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = SystemUtils;
+//# sourceMappingURL=SystemUtils.js.map
