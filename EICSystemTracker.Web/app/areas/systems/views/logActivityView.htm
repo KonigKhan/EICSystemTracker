@@ -1,7 +1,20 @@
-﻿<div data-bind="css: {'loader': isLoading }">
+﻿<!-- ko if: isError -->
+<div class="alert alert-danger" role="alert">
+    <h4>Oops! It looks like there are problems preventing you from submitting. Pleas fix and try again.</h4>
+    <ul data-bind="foreach: errorMsgs">
+        <li style="list-style-type: none">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            <span data-bind="text: $data"></span>
+        </li>
+    </ul>
+</div>
+<!-- /ko -->
+
+<div data-bind="css: {'loader': isLoading }">
     <!-- ko if: !isLoading() -->
 
-    <h1>TrackSystem!</h1>
+    <h1>Log Activity</h1>
     <p class="fontYellow">Enter the following information about what you have done in the system.</p>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-sm-12 col-md-4" style="padding:10px;">
@@ -13,9 +26,17 @@
     </div>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-sm-12 col-md-4" style="padding:10px;">
+            <div class="col-sm-offset-3 col-xs-8 col-md-6">
+                <button style="width:100%;" class="btn btn-default" data-bind="click: loadCurrentLocation">Load Current Cmdr Location</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-sm-12 col-md-4" style="padding:10px;">
             <div class="col-xs-3">System:</div>
             <div class="col-xs-8">
-                <input style="width: 100%;" data-bind="kendoAutoComplete: {minLength: 3, dataSource: systemNames, filter: 'startswith', placeholder: 'Type System Name...', value: systemName}" />
+                <input type="text" style="width: 100%;" data-bind="value: systemName"/>
+                <!--<input style="width: 100%;" data-bind="kendoAutoComplete: {minLength: 3, dataSource: systemNames, filter: 'startswith', placeholder: 'Type System Name...', value: systemName}"/>-->
             </div>
         </div>
     </div>
@@ -31,12 +52,12 @@
     <!-- TODO: Make this loaded from viewmodels... -->
     <!-- ko if: activityType() === '1' -->
     <h3>Missions</h3>
-    <p class="fontYellow">I need to come up with instructions on entering num mission influence.</p>
+    <p class="fontYellow">Please enter the number of High, Medium, or Low missions you completed.</p>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">High:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: numHighMissions" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: numHighMissions" />
             </div>
         </div>
     </div>
@@ -44,7 +65,7 @@
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">Medium:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: numMedMissions" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: numMedMissions" />
             </div>
         </div>
     </div>
@@ -52,67 +73,67 @@
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">Low:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: numLowMissions" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: numLowMissions" />
             </div>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko if: activityType() === '2' -->
     <h3>Bounty Hunting</h3>
-    <p class="fontYellow">I need to come up with instructions on entering num credits.</p>
+    <p class="fontYellow">Please enter the amount of credits you turned in for bounty hunting in the system.</p>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">Credits Claimed:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: numBhCredits" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: numBhCredits" />
             </div>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko if: activityType() === '3' -->
     <h3>Conflict Zones</h3>
-    <p class="fontYellow">I need to come up with instructions on entering num credits.</p>
+    <p class="fontYellow">Please enter the amount of credits you turned in for combat bonds in the system.</p>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">Credits Claimed:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: numCzCredits" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: numCzCredits" />
             </div>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko if: activityType() === '4' -->
     <h3>Trading</h3>
-    <p class="fontYellow">I need to come up with instructions on entering trade tonnage.</p>
+    <p class="fontYellow">Please enter the total tonnage you traded in the system.</p>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">Tonnage:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: tradeTonnage" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: tradeTonnage" />
             </div>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko if: activityType() === '5' -->
     <h3>Exploration</h3>
-    <p class="fontYellow">I need to come up with instructions on entering exploration values sold.</p>
+    <p class="fontYellow">Please enter the amount you sold in exploration data to this system.</p>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">Value Sold:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: expValueSold" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: expValueSold" />
             </div>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko if: activityType() === '6' -->
     <h3>Piracy</h3>
-    <p class="fontYellow">I need to come up with instructions on entering piracy.</p>
+    <p class="fontYellow">Please specify the amount of ships you took, and how much stolen tonnage you turned in from piracy.</p>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">Ships Taken:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: shipsTaken" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: shipsTaken" />
             </div>
         </div>
     </div>
@@ -120,19 +141,19 @@
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">Stolen Tonnage Sold:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: piracyTonnage" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: piracyTonnage" />
             </div>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko if: activityType() === '7' -->
     <h3>Murder Hobo</h3>
-    <p class="fontYellow">I need to come up with instructions on entering murder hobo data.</p>
+    <p class="fontYellow">Please specify the amount in credits your bounty is worth in the system.</p>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-sm-12 col-md-4" style="padding: 10px;">
             <div class="col-xs-3">Bounty Earned:</div>
             <div class="col-xs-6">
-                <input class="col-xs-6" type="number" min="0" data-bind="value: bountyEarned" />
+                <input class="col-xs-12" type="number" min="0" data-bind="value: bountyEarned" />
             </div>
         </div>
     </div>

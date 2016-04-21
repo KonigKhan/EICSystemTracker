@@ -11,14 +11,9 @@
             <li data-bind="css:{active:_isCurrentPage('start/systems/logActivity')},click:function(){location.hash = 'start/systems/logActivity'}">
                 <a>Log System Activity</a>
             </li>
-            <!--ko if:_isCurrentPage('start/systems/system')-->
-            <li class="active">
-                <a>System Details</a>
-            </li>
-            <!-- /ko -->
         </ul>
     </div>
-    <div class="col-sm-12 col-md-10">
+    <div class="col-sm-12 col-md-10" style="margin-left:2em;">
         <!-- ko foreach: Pages -->
         <div data-bind="page: $data.config"></div>
         <!-- /ko -->

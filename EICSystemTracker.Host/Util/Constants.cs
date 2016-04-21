@@ -20,9 +20,9 @@ namespace EICSystemTracker.Host.Util
         #endregion
 
         #region Launcher Appdata Install Location
-        public const string LAUNCHER_APPDATA_NETLOG_RELATIVEPATH = @"Local\Frontier Developments\Products\elite-dangerous-64\logs\";
-        public const string LAUNCHER_APPDATA_APPCONFIG_RELATIVEPATH = @"Local\Frontier_Developments\Products\elite-dangerous-64\AppConfig.xml";
-        public const string LAUNCHER_APPDATA_GAMEFOLDER_RELATIVEPATH = @"\Local\Frontier_Developments\";
+        public const string LAUNCHER_APPDATA_NETLOG_RELATIVEPATH = @"Frontier Developments\Products\elite-dangerous-64\logs\";
+        public const string LAUNCHER_APPDATA_APPCONFIG_RELATIVEPATH = @"Frontier_Developments\Products\elite-dangerous-64\AppConfig.xml";
+        public const string LAUNCHER_APPDATA_GAMEFOLDER_RELATIVEPATH = @"Frontier_Developments\";
         #endregion
 
         #region Steam Non-Horizons Install Location

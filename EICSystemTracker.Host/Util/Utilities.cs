@@ -55,7 +55,7 @@ namespace EICSystemTracker.Host.Util
             if (Directory.Exists(Constants.LAUNCHER_NETLOG_PATH)) { return Constants.LAUNCHER_NETLOG_PATH; }
 
             // Get Launcher Appdata Path
-            var netLogAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.LAUNCHER_APPDATA_NETLOG_RELATIVEPATH);
+            var netLogAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Constants.LAUNCHER_APPDATA_NETLOG_RELATIVEPATH);
             if (Directory.Exists(netLogAppDataPath)) { return netLogAppDataPath; }
 
             // Get Steam Horizons
