@@ -9,10 +9,10 @@
 </head>
 <body>
     <div id="app" data-bind="page:{id:'start'}">
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-static-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/#start/start">EIC System Tracker</a>
+                    <a class="navbar-brand force-border-box" href="/#start/start">EIC System Tracker</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <!-- ko foreach: Navigation -->
@@ -24,6 +24,9 @@
                 <p class="navbar-text pull-right">
                     Version: 1.0.0 - Beta 1.6
                 </p>
+                <a class="navbar-text pull-right" data-toggle="modal" data-target="#CmdrSettingsModal">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
             </div>
         </nav>
         <div class="container-fluid">
@@ -36,6 +39,54 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div data-bind="template: {name: 'settings-modal-template', data: $root.settings }"></div>
     </div>
 </body>
 </html>
+
+<script type="text/html" id="settings-modal-template">
+    <div class="modal fade" id="CmdrSettingsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalLabel">Configuration</h4>
+                </div>
+                <div class="modal-body" data-bind="css: {'loader': isLoading }">
+                    <!-- ko if: !isLoading() -->
+                    <form class="form-horizontal">
+                        <h5>Commander Settings</h5>
+                        <div class="form-group">
+                            <label for="inputCmdrName" class="col-sm-3 control-label">Cmdr Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" data-bind="value: cmdrName" class="form-control" id="inputCmdrName" placeholder="Commander Name" aria-describedby="cmdrNameHelp">
+                                <span id="cmdrNameHelp" class="help-block">Enter your Elite Dangerous Commander name so that it is auto-populated on data entry forms.</span>
+                            </div>
+                        </div>
+                        <h5>Application Settings</h5>
+                        <div class="form-group">
+                            <label for="inputPort" class="col-sm-3 control-label">Port Number</label>
+                            <div class="col-sm-9">
+                                <input type="number" data-bind="value: portNumber" min="0" class="form-control" id="inputPort" placeholder="Application Host Port Number" aria-describedby="portNumHelp">
+                                <span id="portNumHelp" class="help-block">You can change the port number that the application uses. The default port number is 8080. If you change this value, a restart of the application is required.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNetLog" class="col-sm-3 control-label">Netlog Path</label>
+                            <div class="col-sm-9">
+                                <input type="text" data-bind="value: netLogPath" class="form-control" id="inputNetLog" placeholder="Netlog Path" aria-describedby="netLogHelp">
+                                <span id="netLogHelp" class="help-block">The netlog is used to load your current location. You must have Verbose turned on in the Elite Dangerous application config file.</span>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /ko -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bind="click: save">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

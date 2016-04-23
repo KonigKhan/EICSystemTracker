@@ -4,6 +4,7 @@ import pager from './app/lib/pager';
 import PageViewModel from './app/framework/domain/PageViewModel';
 import FrameworkManifest from './manifest';
 import SystemUtils from './app/framework/systemutils';
+import CmdrService from './app/services/CmdrService';
 
 pager.onSourceError.add((event) => {
     var page = event.page;
@@ -12,21 +13,55 @@ pager.onSourceError.add((event) => {
     elm.innerHTML = "<div class='alert'>Error loading page" + event.url + "</div>";
 });
 
+class SettingsViewModel {
+    public cmdrName: KnockoutObservable<string> = ko.observable("");
+    public portNumber: KnockoutObservable<number> = ko.observable(8080);
+    public netLogPath: KnockoutObservable<string> = ko.observable("");
+    public isLoading: KnockoutObservable<boolean> = ko.observable(false);
+
+    constructor(cmdr?: string, port?: number, netLog?: string) {
+        if (cmdr) {
+            this.cmdrName(cmdr);
+        }
+
+        if (port) {
+            this.portNumber(port);
+        }
+
+        if (netLog) {
+            this.netLogPath(netLog);
+        }
+    }
+
+    public save = () => {
+        var toSave: IEICSystemTrackerConfig = <IEICSystemTrackerConfig>({
+            CmdrName: this.cmdrName(),
+            HostPort: this.portNumber(),
+            EliteDangerousNetLogPath: this.netLogPath()
+        });
+
+        this.isLoading(true);
+        CmdrService.SaveSettings(toSave).done((res) => {
+            console.log('save success for: ' + JSON.stringify(res));
+        }).always(() => {
+            this.isLoading(false);
+        });
+    }
+}
+
 // This is the main parent page view model.
 // Everything funnels under this.
 class AppViewModel extends PageViewModel {
 
+    public settings: KnockoutObservable<SettingsViewModel> = ko.observable(new SettingsViewModel());
     public Navigation = ko.observableArray<IPageNavigation>();
     public Pages = ko.observableArray<IPagerDiv>();
     public Navigate = (nav: IPageNavigation) => {
         location.hash = nav.Href;
     }
 
-    public someText: KnockoutObservable<string> = ko.observable("POS Framework");
-
     constructor() {
         super();
-
         FrameworkManifest.GlobalVariables.areas.map((area) => {
             var areaPath = 'app/areas/' + area;
             return SystemUtils.ImportModuleAsync<IAreaManifest>(areaPath + '/manifest')
@@ -80,7 +115,9 @@ class AppViewModel extends PageViewModel {
 var appVm = new AppViewModel();
 pager.extendWithPage(appVm);
 
-setTimeout(() => {
+CmdrService.GetSavedSettings().done((res: IEICSystemTrackerConfig) => {
+    appVm.settings(new SettingsViewModel(res.CmdrName, res.HostPort, res.EliteDangerousNetLogPath));
+
     // apply bindings...
     if (window.location.hash.indexOf("start") !== -1) {
         pager.start();
@@ -88,4 +125,10 @@ setTimeout(() => {
         pager.start('start/start');
     }
     ko.applyBindings(appVm);
-}, 500);
+
+});
+
+
+//setTimeout(() => {
+    
+//}, 500);

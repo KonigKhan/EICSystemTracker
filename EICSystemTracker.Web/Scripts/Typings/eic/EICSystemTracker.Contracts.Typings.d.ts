@@ -1,5 +1,15 @@
 /// <reference path="../jquery/jquery.d.ts" />
 
+/*EICSystemTracker.Contracts.IEICSystemTrackerConfig*/
+interface IEICSystemTrackerConfig{
+  /*properties*/
+	HostPort: number; /*System.Int32*/
+	EliteDangerousNetLogPath: string; /*System.String*/
+	CmdrName: string; /*System.String*/
+
+}
+
+
 /*EICSystemTracker.Contracts.IEICSystemTrackerService*/
 interface IEICSystemTrackerService{
 
@@ -9,6 +19,7 @@ interface IEICSystemTrackerService{
 	GetLatestSystemTrackingData?():JQueryPromise<any>;
 	GetSystem?(systemName:string/*String*/):JQueryPromise<IEICSystem>;
 	GetFactionNames?():JQueryPromise<any>;
+	GetFactionHistoryForSystem?(systemName:string/*String*/):JQueryPromise<any>;
 }
 
 
@@ -162,6 +173,7 @@ interface IEICData{
 	GetAllFactionNames?():JQueryPromise<any>;
 	GetLatestEICSystemFactionTracking?():JQueryPromise<any>;
 	GetSystem?(systemName:string/*String*/):JQueryPromise<IEICSystem>;
+	GetFactionHistoryForSystem?(systemName:string/*String*/):JQueryPromise<any>;
 }
 
 

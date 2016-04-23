@@ -10,7 +10,7 @@ namespace EICSystemTracker.Host
     {
         static void Main(string[] args)
         {
-            SetConfig();
+            Utilities.SetConfig();
 
             var uris = Utilities.GetUriParams(StaticProperties.UserConfig.HostPort);
             var owinStartupOptions = new StartOptions();
@@ -45,32 +45,7 @@ namespace EICSystemTracker.Host
                 Console.ReadLine();
             }
 
-            SaveConfig();
-        }
-
-        /// <summary>
-        /// Sets default config or loads cfg from application directory.
-        /// </summary>
-        private static void SetConfig()
-        {
-            var cfg = new EICSystemTrackerConfig();
-
-            var cfgPath = Path.Combine(Environment.CurrentDirectory, Constants.USER_CONFIG_RELATIVE_PATH);
-            if (File.Exists(cfgPath))
-            {
-                cfg = JsonConvert.DeserializeObject<EICSystemTrackerConfig>(File.ReadAllText(cfgPath));
-            }
-
-            StaticProperties.UserConfig = cfg;
-        }
-
-        /// <summary>
-        /// Save configuration stored in StaticProperties.UserConfig.
-        /// </summary>
-        private static void SaveConfig()
-        {
-            var cfgPath = Path.Combine(Environment.CurrentDirectory, Constants.USER_CONFIG_RELATIVE_PATH);
-            File.WriteAllText(cfgPath, JsonConvert.SerializeObject(StaticProperties.UserConfig));
+            Utilities.SaveConfig();
         }
     }
 }

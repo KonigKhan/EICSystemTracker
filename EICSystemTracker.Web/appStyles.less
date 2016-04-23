@@ -1,13 +1,20 @@
-﻿body {
-    color: #F6F6F6;
-    background-color: #2B2B2B;
+﻿@font-face {
+    font-family: Orbitron-Regular;
+    src: url('fonts/Orbitron/Orbitron-Regular.ttf') format('truetype');
+    font-weight:normal;
+}
+/* TODO: Use Custom fonts */
+
+body {
+    /*color: #F6F6F6;
+    background-color: #2B2B2B;*/
     font-family: Arial;
 }
 
 .linkButton {
     &:hover {
         cursor: pointer;
-    }   
+    }
 }
 
 a {
@@ -37,23 +44,23 @@ input {
 }
 
 .tabs-left {
-    >.nav-tabs {
+    > .nav-tabs {
         float: left;
         margin-right: 19px;
         border-bottom: 0;
 
-        .active{
-            >a{
+        .active {
+            > a {
                 border-color: #ddd transparent #ddd #ddd;
                 background-color: transparent;
             }
         }
 
-        >li{
+        > li {
             float: none;
             margin-bottom: -4px;
 
-            >a{
+            > a {
                 border-radius: 4px 0 0 4px;
                 margin-right: -1px;
                 min-width: 74px;
@@ -72,11 +79,28 @@ input {
 
 /* reset everything to the default box model */
 
-*, :before, :after
-{
+*, :before, :after {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
+}
+
+.force-border-box {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    &:before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    &:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 }
 
 /* set a border-box model only to elements that need it */
@@ -96,8 +120,7 @@ input {
 .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
 .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
 .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
-.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12
-{
+.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;

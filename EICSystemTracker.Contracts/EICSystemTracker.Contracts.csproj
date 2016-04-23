@@ -57,6 +57,7 @@
     <Compile Include="domain\SystemTracking\SystemActivities\MurderHobo.cs" />
     <Compile Include="domain\SystemTracking\SystemActivities\Piracy.cs" />
     <Compile Include="domain\SystemTracking\SystemActivities\Trading.cs" />
+    <Compile Include="IEICSystemTrackerConfig.cs" />
     <Compile Include="IEICSystemTrackerService.cs" />
     <Compile Include="SystemTracking\ActivityType.cs" />
     <Compile Include="SystemTracking\SystemActivities\IConflictZone.cs" />

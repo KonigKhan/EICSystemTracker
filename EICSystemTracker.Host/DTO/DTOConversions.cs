@@ -1,6 +1,8 @@
-﻿using EICSystemTracker.Contracts.domain.SystemTracking.SystemActivities;
+﻿using EICSystemTracker.Contracts;
+using EICSystemTracker.Contracts.domain.SystemTracking.SystemActivities;
 using EICSystemTracker.Contracts.SystemTracking;
 using EICSystemTracker.Contracts.SystemTracking.SystemActivities;
+using EICSystemTracker.Host.Util;
 
 namespace EICSystemTracker.Host.DTO
 {
@@ -83,6 +85,16 @@ namespace EICSystemTracker.Host.DTO
                 Cmdr = activity.Cmdr,
                 Timestamp = activity.Timestamp,
                 Tonnage = activity.Tonnage
+            };
+        }
+
+        public static IEICSystemTrackerConfig ToEicSystemTrackerConfig(EICUserConfigDTO config)
+        {
+            return new EICSystemTrackerConfig()
+            {
+                CmdrName = config.CmdrName,
+                EliteDangerousNetLogPath = config.EliteDangerousNetLogPath,
+                HostPort = config.HostPort
             };
         }
     }

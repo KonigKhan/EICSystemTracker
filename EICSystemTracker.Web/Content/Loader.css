@@ -1,7 +1,7 @@
 ﻿.loader,
 .loader:before,
 .loader:after {
-  background: #ffffff;
+  background: #000;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
@@ -36,11 +36,11 @@
   0%,
   80%,
   100% {
-    box-shadow: 0 0 #ffffff;
+    box-shadow: 0 0 #000;
     height: 4em;
   }
   40% {
-    box-shadow: 0 -2em #ffffff;
+    box-shadow: 0 -2em #000;
     height: 5em;
   }
 }
@@ -48,11 +48,11 @@
   0%,
   80%,
   100% {
-    box-shadow: 0 0 #ffffff;
+    box-shadow: 0 0 #000;
     height: 4em;
   }
   40% {
-    box-shadow: 0 -2em #ffffff;
+    box-shadow: 0 -2em #000;
     height: 5em;
   }
 }

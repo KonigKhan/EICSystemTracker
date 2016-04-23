@@ -97,11 +97,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api\UserConfigurationController.cs" />
     <Compile Include="DTO\DTOConversions.cs" />
     <Compile Include="DTO\EICFactionDTO.cs" />
     <Compile Include="DTO\EICSystemActivityDTO.cs" />
     <Compile Include="DTO\EICSystemDTO.cs" />
     <Compile Include="api\EICSystemTrackerDataController.cs" />
+    <Compile Include="DTO\EICUserConfigDTO.cs" />
     <Compile Include="DTO\SystemFactionDTO.cs" />
     <Compile Include="EDLogsTracker.cs" />
     <Compile Include="CustomRootPathProvider.cs" />

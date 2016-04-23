@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace EICSystemTracker.Host.Util
 {
@@ -65,6 +66,31 @@ namespace EICSystemTracker.Host.Util
             if (Directory.Exists(Constants.NONHORIZONS_STEAM_NETLOG_PATH)) { return Constants.NONHORIZONS_STEAM_NETLOG_PATH; }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Sets default config or loads cfg from application directory.
+        /// </summary>
+        public static void SetConfig()
+        {
+            var cfg = new EICSystemTrackerConfig();
+
+            var cfgPath = Path.Combine(Environment.CurrentDirectory, Constants.USER_CONFIG_RELATIVE_PATH);
+            if (File.Exists(cfgPath))
+            {
+                cfg = JsonConvert.DeserializeObject<EICSystemTrackerConfig>(File.ReadAllText(cfgPath));
+            }
+
+            StaticProperties.UserConfig = cfg;
+        }
+
+        /// <summary>
+        /// Save configuration stored in StaticProperties.UserConfig.
+        /// </summary>
+        public static void SaveConfig()
+        {
+            var cfgPath = Path.Combine(Environment.CurrentDirectory, Constants.USER_CONFIG_RELATIVE_PATH);
+            File.WriteAllText(cfgPath, JsonConvert.SerializeObject(StaticProperties.UserConfig));
         }
     }
 }

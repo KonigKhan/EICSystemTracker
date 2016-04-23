@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EICSystemTracker.Contracts;
 
 namespace EICSystemTracker.Host.Util
 {
-    public class EICSystemTrackerConfig
+    public class EICSystemTrackerConfig : IEICSystemTrackerConfig
     {
         public int HostPort { get; set; }
         public string EliteDangerousNetLogPath { get; set; }
+        public string CmdrName { get; set; }
 
         /// <summary>
         /// System Configuration.

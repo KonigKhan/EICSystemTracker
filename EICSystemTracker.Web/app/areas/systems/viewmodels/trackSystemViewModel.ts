@@ -224,9 +224,20 @@ class TrackSystemViewModel extends PageViewModel {
     public getPreFillData = () => {
 
         this.isLoading(true);
-        $.when(this.loadSystemNamesAsync(), this.loadFactionNamesAsync()).always(() => {
+        $.when(this.loadSystemNamesAsync(), this.loadFactionNamesAsync(), this.loadCmdrAsync()).always(() => {
             this.isLoading(false);
         });
+    }
+
+    private loadCmdrAsync = (): JQueryPromise<any> => {
+        var dfd = $.Deferred();
+
+        cmdrService.GetSavedSettings().done((cfg: IEICSystemTrackerConfig) => {
+            this.cmdrName(cfg.CmdrName);
+            dfd.resolve();
+        });
+
+        return dfd.promise();
     }
 
     private loadSystemNamesAsync = (): JQueryPromise<any> => {
@@ -253,7 +264,7 @@ class TrackSystemViewModel extends PageViewModel {
         var dfd = $.Deferred();
 
         eicDataController.GetFactionNames().done((factionNames: Array<string>) => {
-            
+
             if (factionNames.length > 0) {
                 this.factionNames = factionNames;
             }
