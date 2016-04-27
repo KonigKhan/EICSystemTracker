@@ -1,32 +1,28 @@
 ﻿<div data-bind="css: {'loader': isLoading }">
-    <div class="row">
-        <div class="col-xs-3 col-md-2">
-            <h4>System</h4>
-        </div>
-        <div class="col-xs-2 col-md-1 col-md-1">
-            <h4>Population</h4>
-        </div>
-        <div class="hidden-xs hidden-sm col-md-1">
-            <h4>Security</h4>
-        </div>
-        <div class="hidden-xs hidden-sm col-md-1">
-            <h4>Allegiance</h4>
-        </div>
-        <div class="col-xs-3 col-md-2">
-            <h4>Last Updated</h4>
-        </div>
-    </div>
-    <br />
-
-    <!-- ko foreach: TrackedSystems -->
-    <div class="row">
-        <a data-bind="click: $parent.SelectSystem">
-            <div class="col-xs-3 col-md-2" data-bind="text: Name"></div>
-        </a>
-        <div class="col-xs-2 col-md-1" data-bind="text: Population"></div>
-        <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Security"></div>
-        <div class="hidden-xs hidden-sm col-md-1" data-bind="text: Allegiance"></div>
-        <div class="col-xs-3 col-md-2" data-bind="text: $parent.ToLocalDate($data)"></div>
-    </div>
+    <!-- ko if: !isLoading() -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>System</th>
+                <th>Population</th>
+                <th>Security</th>
+                <th>Allegiance</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ko foreach: TrackedSystems -->
+            <tr class="selectable" data-bind="click: $parent.SelectSystem">
+                <td>
+                    <a data-bind="text: Name"></a>
+                </td>
+                <td data-bind="text: Population"></td>
+                <td data-bind="text: Security"></td>
+                <td data-bind="text: Allegiance"></td>
+                <td data-bind="text: $parent.ToLocalDate($data)"></td>
+            </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
     <!-- /ko -->
 </div>

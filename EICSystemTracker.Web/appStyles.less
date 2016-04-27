@@ -1,14 +1,21 @@
 ﻿@font-face {
     font-family: Orbitron-Regular;
     src: url('fonts/Orbitron/Orbitron-Regular.ttf') format('truetype');
-    font-weight:normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Eurostile;
+    src: url('fonts/eurostile/Eurostile.ttf') format('truetype');
+    font-weight: normal;
 }
 /* TODO: Use Custom fonts */
 
 body {
-    /*color: #F6F6F6;
-    background-color: #2B2B2B;*/
-    font-family: Arial;
+    color: #ccc;
+    background-color: #000;
+    font-family: Eurostile,Helvetica,sans-serif;
+    letter-spacing: .05em;
 }
 
 .linkButton {
@@ -18,8 +25,18 @@ body {
 }
 
 a {
+    color: #FF8C0D;
+    text-decoration: none;
+
     &:hover {
         cursor: pointer;
+        color: #FF8C0D;
+        text-decoration: none;
+    }
+
+    &:visited {
+        color: #FF8C0D;
+        text-decoration: none;
     }
 }
 
@@ -27,31 +44,19 @@ input {
     color: #2B2B2B;
 }
 
-.fontBlack {
-    background-color: #2B2B2B;
-}
-
-.fontRed {
-    background-color: #DE1B1B;
-}
-
-.fontWhite {
-    color: #F6F6F6;
-}
-
-.fontYellow {
-    color: #E9E581;
-}
-
 .tabs-left {
+    padding-left: 15px;
+    padding-right: 15px;
+
     > .nav-tabs {
         float: left;
-        margin-right: 19px;
         border-bottom: 0;
+
+
 
         .active {
             > a {
-                border-color: #ddd transparent #ddd #ddd;
+                border-color: #c06400 #000 #c06400 #c06400;
                 background-color: transparent;
             }
         }
@@ -61,7 +66,7 @@ input {
             margin-bottom: -4px;
 
             > a {
-                border-radius: 4px 0 0 4px;
+                border-radius: 0px;
                 margin-right: -1px;
                 min-width: 74px;
                 margin-bottom: 3px;
@@ -71,7 +76,12 @@ input {
                 padding-left: 12px;
                 line-height: 20px;
                 border: 1px solid transparent;
-                border-right: 1px solid #ddd;
+                border-right: 1px solid #c06400;
+
+                &:hover {
+                    border-color: #c06400 transparent #c06400 #c06400;
+                    background-color: rgba(51,12,0,.9);
+                }
             }
         }
     }
@@ -124,4 +134,69 @@ input {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+/* Override Theme stuff */
+.navbar {
+    background-color: #1e1e1e;
+    color: #FF3B00;
+    font-family: Orbitron-Regular,Arial,sans-serif;
+    text-transform: capitalize;
+
+    a {
+        color: #FF3B00;
+
+        &:hover {
+            color: #FF3B00;
+        }
+    }
+}
+
+.nav {
+    li {
+        a {
+            &:hover {
+                background-color: #1e1e1e;
+            }
+        }
+    }
+}
+
+.table {
+    background-color: rgba(28,15,0,.85);
+
+    thead {
+        background-color: #c06400;
+        color: rgba(0,0,0,.9);
+        text-transform: uppercase;
+
+        th {
+            border-left: 1px solid rgba(28,15,0,.85);
+            border-bottom: none;
+
+            &:first-child {
+                border-left: none;
+            }
+        }
+
+        tr {
+            th {
+                border-bottom: none;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border: none;
+
+            &:hover {
+                background-color: rgba(51,12,0,.9);
+            }
+
+            td {
+                border: none;
+            }
+        }
+    }
 }

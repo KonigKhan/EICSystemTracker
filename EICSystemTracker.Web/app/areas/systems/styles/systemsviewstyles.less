@@ -1,7 +1,4 @@
 ﻿.systems {
-
-
-
     #systems_startView {
         position: absolute;
         top: 0;
@@ -28,6 +25,16 @@
             .title {
                 height: 10vh;
                 font-size: 10vh;
+            }
+        }
+    }
+
+    .table {
+        tbody {
+            tr.selectable {
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
     }

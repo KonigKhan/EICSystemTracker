@@ -377,6 +377,8 @@
     <Content Include="Content\site_plugins.min.css">
       <DependentUpon>site_plugins.css</DependentUpon>
     </Content>
+    <Content Include="fonts\eurostile\eurostile.png" />
+    <Content Include="fonts\eurostile\myfontsfree.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\Orbitron\OFL.txt" />
     <Content Include="index.html" />
@@ -498,6 +500,8 @@
     <Content Include="fonts\Orbitron\Orbitron-Bold.ttf" />
     <Content Include="fonts\Orbitron\Orbitron-Medium.ttf" />
     <Content Include="fonts\Orbitron\Orbitron-Regular.ttf" />
+    <Content Include="fonts\eurostile\Eurostile.ttf" />
+    <Content Include="fonts\eurostile\films.eurostile.ttf" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
@@ -1140,6 +1144,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\areas\activity\" />
     <Folder Include="app\areas\home\controllers\" />
     <Folder Include="app\areas\systems\services\" />
     <Folder Include="node_modules\pagerjs\node_modules\" />
