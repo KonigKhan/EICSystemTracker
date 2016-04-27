@@ -27,6 +27,9 @@
                 <a class="navbar-text pull-right" data-toggle="modal" data-target="#CmdrSettingsModal">
                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                 </a>
+                <a class="navbar-text pull-right" data-toggle="modal" data-target="#CmdrLoginModal">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                </a>
             </div>
         </nav>
         <div class="container-fluid">
@@ -41,6 +44,7 @@
         </div>
         <!-- Modal -->
         <div data-bind="template: {name: 'settings-modal-template', data: $root.settings }"></div>
+        <div data-bind="template: {name: 'login-modal-template', data: $root.login }"></div>
     </div>
 </body>
 </html>
@@ -85,6 +89,81 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-bind="click: save">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="login-modal-template">
+    <div class="modal fade" id="CmdrLoginModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalLabel">Commander LogIn</h4>
+                </div>
+                <div class="modal-body" data-bind="css: {'loader': isLoading }">
+                    <!-- ko if: !isLoading() -->
+
+                    <!-- ko if: !newUser() -->
+                    <form class="form-horizontal">
+                        <h5>Log In</h5>
+                        <div class="form-group">
+                            <label for="inputCmdrName" class="col-sm-3 control-label">Cmdr Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" data-bind="value: logInName" class="form-control" id="inputCmdrName" placeholder="Commander Name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPwd" class="col-sm-3 control-label">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" data-bind="value: logInPassword" class="form-control" id="inputPwd"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <span>Need a login? </span><a data-bind="click: newLogIn">Click Here</a><span> to create an account.</span>
+                            </div>
+                        </div>
+                        <br/>
+                    </form>
+                    <!-- /ko -->
+
+                    <!-- ko if: newUser -->
+                    <form class="form-horizontal">
+                        <h5>Create Account</h5>
+                        <div class="form-group">
+                            <label for="inputCmdrName" class="col-sm-3 control-label">Cmdr Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" data-bind="value: logInName" class="form-control" id="inputCmdrName" placeholder="Commander Name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPwd" class="col-sm-3 control-label">Set Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" data-bind="value: logInPassword" class="form-control" id="inputPwd"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputcfrmPwd" class="col-sm-3 control-label">Confirm Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" data-bind="value: logInConfirmPassword" class="form-control" id="inputcfrmPwd"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <span>Have an account? </span><a data-bind="click: newLogIn">Click Here</a><span> to log in.</span>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /ko -->
+
+                    <!-- /ko -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bind="click: save, text: buttonText"></button>
                 </div>
             </div>
         </div>

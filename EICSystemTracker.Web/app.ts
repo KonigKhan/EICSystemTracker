@@ -49,11 +49,54 @@ class SettingsViewModel {
     }
 }
 
+class LogInViewModel {
+
+    public isLoading: KnockoutObservable<boolean> = ko.observable(false);
+    public logInName: KnockoutObservable<string> = ko.observable("");
+    public newUser: KnockoutObservable<boolean> = ko.observable(false);
+    public logInPassword: KnockoutObservable<string> = ko.observable("");
+    public logInConfirmPassword: KnockoutObservable<string> = ko.observable("");
+    public buttonText: KnockoutObservable<string> = ko.observable("Log In");
+
+    constructor(cmdr?: string) {
+        if (cmdr) {
+            this.logInName(cmdr);
+        }
+    }
+
+    public newLogIn = () => {
+
+        if (this.newUser()) {
+            this.newUser(false);
+            this.buttonText("Log In");
+        } else {
+            this.newUser(true);
+            this.buttonText("Create Account");
+        }
+    }
+
+    public save = () => {
+        //var toSave: IEICSystemTrackerConfig = <IEICSystemTrackerConfig>({
+        //    CmdrName: this.cmdrName(),
+        //    HostPort: this.portNumber(),
+        //    EliteDangerousNetLogPath: this.netLogPath()
+        //});
+
+        //this.isLoading(true);
+        //CmdrService.SaveSettings(toSave).done((res) => {
+        //    console.log('save success for: ' + JSON.stringify(res));
+        //}).always(() => {
+        //    this.isLoading(false);
+        //});
+    }
+}
+
 // This is the main parent page view model.
 // Everything funnels under this.
 class AppViewModel extends PageViewModel {
 
     public settings: KnockoutObservable<SettingsViewModel> = ko.observable(new SettingsViewModel());
+    public login: KnockoutObservable<LogInViewModel> = ko.observable(new LogInViewModel());
     public Navigation = ko.observableArray<IPageNavigation>();
     public Pages = ko.observableArray<IPagerDiv>();
     public Navigate = (nav: IPageNavigation) => {
