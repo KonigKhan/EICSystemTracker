@@ -8,7 +8,10 @@ using EICSystemTracker.Contracts.SystemTracking;
 using EICSystemTracker.Data.EICDataAdapters.MSSql;
 using EICSystemTracker.Contracts.domain.SystemTracking;
 using System.Runtime.Caching;
+using EICSystemTracker.Contracts.domain.UserData;
 using EICSystemTracker.Contracts.SystemTracking.SystemActivities;
+using EICSystemTracker.Contracts.UserData;
+using EICSystemTracker.Data.DbUtil;
 using ActivityType = EICSystemTracker.Contracts.SystemTracking.ActivityType;
 
 namespace EICSystemTracker.Data.EICData
@@ -468,6 +471,59 @@ namespace EICSystemTracker.Data.EICData
                 ControllingFaction = res.ContrllingFaction,
                 UpdatedBy = res.UpdateBy
             }).ToList<IEICSystemFaction>();
+        }
+
+        public void RegisterNewCommander(string cmdrName, string password)
+        {
+            var existingCmdr =
+                (from c in _eicData.Commanders
+                 where c.CmdrName.ToLower() == cmdrName.ToLower()
+                 select c).FirstOrDefault();
+            if (existingCmdr != null)
+            {
+                throw new Exception(String.Format("The Commander {0} already exists.", cmdrName));
+            }
+
+            // First create a new Guid for the user. This will be unique for each user
+            Guid userGuid = System.Guid.NewGuid();
+
+            // Hash the password together with our unique userGuid
+            string hashedPassword = Security.HashSHA1(password + userGuid.ToString());
+
+            // Add user to database.
+            Commander cmdr = new Commander();
+            cmdr.CmdrName = cmdrName;
+            cmdr.password = hashedPassword;
+            cmdr.userGuid = userGuid;
+
+            _eicData.Commanders.InsertOnSubmit(cmdr);
+            _eicData.SubmitChanges();
+        }
+
+        public ICommander GetCommanderByCmdrNameAndPassword(string cmdrName, string password)
+        {
+            ICommander cmdr = new Cmdr();
+
+            Commander foundCmdr =
+                (from c in _eicData.Commanders
+                 where c.CmdrName.ToLower() == cmdrName.ToLower()
+                 select c).ToList().FirstOrDefault();
+
+            if (foundCmdr != null)
+            {
+                // Now we hash the UserGuid from the database with the password we wan't to check
+                // In the same way as when we saved it to the database in the first place. (see AddUser() function)
+                string hashedPassword = Security.HashSHA1(password + foundCmdr.userGuid);
+
+                // if its correct password the result of the hash is the same as in the database
+                if (foundCmdr.password == hashedPassword)
+                {
+                    // The password is correct
+                    cmdr.CommanderName = foundCmdr.CmdrName;
+                }
+            }
+
+            return cmdr;
         }
     }
 }

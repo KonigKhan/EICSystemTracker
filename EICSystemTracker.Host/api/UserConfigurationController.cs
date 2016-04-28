@@ -4,6 +4,7 @@ using System.Web.Http;
 using EICSystemTracker.Host.DTO;
 using EICSystemTracker.Host.MediaFormatter;
 using EICSystemTracker.Host.Util;
+using EICSystemTracker.Service;
 using Nancy;
 using Newtonsoft.Json;
 
@@ -11,6 +12,14 @@ namespace EICSystemTracker.Host.api
 {
     public class UserConfigurationController : ApiController
     {
+        private EICSystemTrackerService _systemTrackerService;
+
+        public UserConfigurationController()
+        {
+            // for now... later on we will use autofact to inject these dependancies...
+            _systemTrackerService = new EICSystemTrackerService();
+        }
+
         [HttpGet]
         public HttpResponseMessage GetSavedSettings()
         {
@@ -30,6 +39,25 @@ namespace EICSystemTracker.Host.api
             Utilities.SaveConfig();
 
             return "OK";
+        }
+
+        [HttpPost]
+        public string RegisterNewCommander([FromBody] CmdrAuthDTO cmdr)
+        {
+            _systemTrackerService.RegisterNewCommander(cmdr.CommanderName, cmdr.Password);
+            return "OK";
+        }
+
+        [HttpPost]
+        public string CmdrLogIn([FromBody] CmdrAuthDTO cmdr)
+        {
+            var res = _systemTrackerService.GetCommanderByCmdrNameAndPassword(cmdr.CommanderName, cmdr.Password);
+            if (!string.IsNullOrEmpty(res.CommanderName))
+            {
+                return "OK";
+            }
+
+            return "Could not find cmdr " + cmdr.CommanderName;
         }
     }
 }

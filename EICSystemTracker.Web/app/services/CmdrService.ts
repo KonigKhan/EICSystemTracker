@@ -34,6 +34,51 @@ class CmdrService {
 
     }
 
+    public static RegisterNewCommander = (cmdr: ICommander) => {
+        var dfd = $.Deferred();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/UserConfiguration/RegisterNewCommander",
+            data: cmdr,
+            success: function (res) {
+                if (res === "OK")
+                    dfd.resolve(cmdr);
+                else {
+                    dfd.reject();
+                }
+            },
+            error: function () {
+                dfd.reject();
+            },
+            dataType: 'json'
+        });
+
+        return dfd.promise();
+    }
+
+    public static CmdrLogIn = (cmdr: ICommander) => {
+        var dfd = $.Deferred();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/UserConfiguration/CmdrLogIn",
+            data: cmdr,
+            success: function (res) {
+                if (res === "OK")
+                    dfd.resolve(cmdr);
+                else {
+                    dfd.reject();
+                }
+            },
+            error: function () {
+                dfd.reject();
+            },
+            dataType: 'json'
+        });
+
+        return dfd.promise();
+    }
 }
 
 export default CmdrService;

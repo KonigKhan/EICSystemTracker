@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EICData" Class="MSSqlEICDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com;Initial Catalog=EICData;Persist Security Info=True;User ID=admin" SettingsObjectName="EICSystemTracker.Data.Properties.Settings" SettingsPropertyName="EICDataConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=pumknnutzsql.cdoiaf2cq4xx.us-west-2.rds.amazonaws.com,1433;Initial Catalog=EICData;Persist Security Info=True;User ID=admin" SettingsObjectName="EICSystemTracker.Data.Properties.Settings" SettingsPropertyName="EICDataConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ActivityType" Member="ActivityTypes">
     <Type Name="ActivityType">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -89,6 +89,13 @@
       <Column Name="Cmdr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Association Name="ActivityType_Track_System_Activity" Member="ActivityType1" ThisKey="ActivityType" OtherKey="Id" Type="ActivityType" IsForeignKey="true" />
       <Association Name="EDSystem_Track_System_Activity" Member="EDSystem" ThisKey="System" OtherKey="Id" Type="EDSystem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Commanders" Member="Commanders">
+    <Type Name="Commander">
+      <Column Name="CmdrName" Type="System.String" DbType="NVarChar(75) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="userGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.GetLatestSystemTracking" Method="GetLatestSystemTracking">

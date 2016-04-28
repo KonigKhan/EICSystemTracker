@@ -51,10 +51,13 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
     partial void InsertTrack_System_Activity(Track_System_Activity instance);
     partial void UpdateTrack_System_Activity(Track_System_Activity instance);
     partial void DeleteTrack_System_Activity(Track_System_Activity instance);
+    partial void InsertCommander(Commander instance);
+    partial void UpdateCommander(Commander instance);
+    partial void DeleteCommander(Commander instance);
     #endregion
 		
 		public MSSqlEICDataDataContext() : 
-				base(global::EICSystemTracker.Data.Properties.Settings.Default.EICDataConnectionString2, mappingSource)
+				base(global::EICSystemTracker.Data.Properties.Settings.Default.EICDataConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -136,6 +139,14 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 			get
 			{
 				return this.GetTable<Track_System_Activity>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Commander> Commanders
+		{
+			get
+			{
+				return this.GetTable<Commander>();
 			}
 		}
 		
@@ -2033,6 +2044,116 @@ namespace EICSystemTracker.Data.EICDataAdapters.MSSql
 						this._System = default(int);
 					}
 					this.SendPropertyChanged("EDSystem");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Commanders")]
+	public partial class Commander : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CmdrName;
+		
+		private string _password;
+		
+		private System.Guid _userGuid;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCmdrNameChanging(string value);
+    partial void OnCmdrNameChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    partial void OnuserGuidChanging(System.Guid value);
+    partial void OnuserGuidChanged();
+    #endregion
+		
+		public Commander()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CmdrName", DbType="NVarChar(75) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CmdrName
+		{
+			get
+			{
+				return this._CmdrName;
+			}
+			set
+			{
+				if ((this._CmdrName != value))
+				{
+					this.OnCmdrNameChanging(value);
+					this.SendPropertyChanging();
+					this._CmdrName = value;
+					this.SendPropertyChanged("CmdrName");
+					this.OnCmdrNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userGuid", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid userGuid
+		{
+			get
+			{
+				return this._userGuid;
+			}
+			set
+			{
+				if ((this._userGuid != value))
+				{
+					this.OnuserGuidChanging(value);
+					this.SendPropertyChanging();
+					this._userGuid = value;
+					this.SendPropertyChanged("userGuid");
+					this.OnuserGuidChanged();
 				}
 			}
 		}

@@ -20,6 +20,8 @@ interface IEICSystemTrackerService{
 	GetSystem?(systemName:string/*String*/):JQueryPromise<IEICSystem>;
 	GetFactionNames?():JQueryPromise<any>;
 	GetFactionHistoryForSystem?(systemName:string/*String*/):JQueryPromise<any>;
+	RegisterNewCommander?(cmdrName:string/*String*/, password:string/*String*/):JQueryPromise<void>;
+	GetCommanderByCmdrNameAndPassword?(cmdrName:string/*String*/, password:string/*String*/):JQueryPromise<ICommander>;
 }
 
 
@@ -51,6 +53,15 @@ interface IEICSystemActivity{
 	SystemName: string; /*System.String*/
 	Timestamp: string; /*System.DateTime*/
 	Cmdr: string; /*System.String*/
+
+}
+
+
+/*EICSystemTracker.Contracts.UserData.ICommander*/
+interface ICommander{
+  /*properties*/
+	CommanderName: string; /*System.String*/
+	Password: string; /*System.String*/
 
 }
 
@@ -139,6 +150,15 @@ interface ITrading extends IEICSystemActivity{
 }
 
 
+/*EICSystemTracker.Contracts.domain.UserData.Cmdr*/
+interface ICmdr extends ICommander{
+  /*properties*/
+	CommanderName: string; /*System.String*/
+	Password: string; /*System.String*/
+
+}
+
+
 /*EICSystemTracker.Contracts.domain.Data.DataAdapters.Query.StoredProcedureConfig*/
 interface IStoredProcedureConfig{
   /*properties*/
@@ -174,6 +194,8 @@ interface IEICData{
 	GetLatestEICSystemFactionTracking?():JQueryPromise<any>;
 	GetSystem?(systemName:string/*String*/):JQueryPromise<IEICSystem>;
 	GetFactionHistoryForSystem?(systemName:string/*String*/):JQueryPromise<any>;
+	RegisterNewCommander?(cmdrName:string/*String*/, password:string/*String*/):JQueryPromise<void>;
+	GetCommanderByCmdrNameAndPassword?(cmdrName:string/*String*/, password:string/*String*/):JQueryPromise<ICommander>;
 }
 
 

@@ -24,12 +24,16 @@
                 <p class="navbar-text pull-right">
                     Version: 1.0.0 - Beta 1.6
                 </p>
+                <!-- ko if: LoggedInCmdrName() -->
                 <a class="navbar-text pull-right" data-toggle="modal" data-target="#CmdrSettingsModal">
-                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;<span data-bind="text: LoggedInCmdrName"></span>
                 </a>
+                <!-- /ko -->
+                <!-- ko if: !LoggedInCmdrName() -->
                 <a class="navbar-text pull-right" data-toggle="modal" data-target="#CmdrLoginModal">
                     <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                 </a>
+                <!-- /ko -->
             </div>
         </nav>
         <div class="container-fluid">
@@ -44,7 +48,7 @@
         </div>
         <!-- Modal -->
         <div data-bind="template: {name: 'settings-modal-template', data: $root.settings }"></div>
-        <div data-bind="template: {name: 'login-modal-template', data: $root.login }"></div>
+        <div data-bind="template: {name: 'login-modal-template', data: $root.loginVm }"></div>
     </div>
 </body>
 </html>

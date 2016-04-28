@@ -4,6 +4,7 @@ using EICSystemTracker.Contracts.SystemTracking;
 using EICSystemTracker.Data;
 using System;
 using System.Collections.Generic;
+using EICSystemTracker.Contracts.UserData;
 
 namespace EICSystemTracker.Service
 {
@@ -54,6 +55,22 @@ namespace EICSystemTracker.Service
             using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
             {
                 throw new NotImplementedException();
+            }
+        }
+
+        public void RegisterNewCommander(string cmdrName, string password)
+        {
+            using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
+            {
+                da.RegisterNewCommander(cmdrName, password);
+            }
+        }
+
+        public ICommander GetCommanderByCmdrNameAndPassword(string cmdrName, string password)
+        {
+            using (var da = EICDataFactory.GetDataAdapter(DataAdapterType.MSSql))
+            {
+                return da.GetCommanderByCmdrNameAndPassword(cmdrName, password);
             }
         }
     }

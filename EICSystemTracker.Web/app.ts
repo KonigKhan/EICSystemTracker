@@ -57,6 +57,7 @@ class LogInViewModel {
     public logInPassword: KnockoutObservable<string> = ko.observable("");
     public logInConfirmPassword: KnockoutObservable<string> = ko.observable("");
     public buttonText: KnockoutObservable<string> = ko.observable("Log In");
+    public LoggedInCmdr: KnockoutObservable<ICommander> = ko.observable(null);
 
     constructor(cmdr?: string) {
         if (cmdr) {
@@ -76,18 +77,36 @@ class LogInViewModel {
     }
 
     public save = () => {
-        //var toSave: IEICSystemTrackerConfig = <IEICSystemTrackerConfig>({
-        //    CmdrName: this.cmdrName(),
-        //    HostPort: this.portNumber(),
-        //    EliteDangerousNetLogPath: this.netLogPath()
-        //});
 
-        //this.isLoading(true);
-        //CmdrService.SaveSettings(toSave).done((res) => {
-        //    console.log('save success for: ' + JSON.stringify(res));
-        //}).always(() => {
-        //    this.isLoading(false);
-        //});
+        var toSave: ICommander =
+            {
+                CommanderName: this.logInName(),
+                Password: this.logInPassword()
+            };
+        if (this.newUser()) {
+
+            this.isLoading(true);
+            CmdrService.RegisterNewCommander(toSave).done((res) => {
+                console.log('Cmdr Logged In Successfully! ' + JSON.stringify(res));
+                this.LoggedInCmdr(toSave);
+            }).fail((data, text) => {
+                console.error(text);
+            }).always(() => {
+                this.isLoading(false);
+            });
+
+        } else {
+
+            this.isLoading(true);
+            CmdrService.CmdrLogIn(toSave).done((res) => {
+                console.log('Cmdr Logged In Successfully! ' + JSON.stringify(res));
+                this.LoggedInCmdr(toSave);
+            }).fail((data, text) => {
+                console.error(text);
+            }).always(() => {
+                this.isLoading(false);
+            });
+        }
     }
 }
 
@@ -96,15 +115,22 @@ class LogInViewModel {
 class AppViewModel extends PageViewModel {
 
     public settings: KnockoutObservable<SettingsViewModel> = ko.observable(new SettingsViewModel());
-    public login: KnockoutObservable<LogInViewModel> = ko.observable(new LogInViewModel());
+    public loginVm: LogInViewModel = new LogInViewModel();
     public Navigation = ko.observableArray<IPageNavigation>();
     public Pages = ko.observableArray<IPagerDiv>();
     public Navigate = (nav: IPageNavigation) => {
         location.hash = nav.Href;
     }
 
+    public LoggedInCmdrName: KnockoutObservable<string> = ko.observable('');
+
     constructor() {
         super();
+
+        this.loginVm.LoggedInCmdr.subscribe((c: ICommander) => {
+            this.LoggedInCmdrName(c.CommanderName);
+        });
+
         FrameworkManifest.GlobalVariables.areas.map((area) => {
             var areaPath = 'app/areas/' + area;
             return SystemUtils.ImportModuleAsync<IAreaManifest>(areaPath + '/manifest')

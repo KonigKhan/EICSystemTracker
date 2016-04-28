@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using EICSystemTracker.Contracts.SystemTracking;
+using EICSystemTracker.Contracts.UserData;
 
 namespace EICSystemTracker.Contracts
 {
@@ -12,5 +13,8 @@ namespace EICSystemTracker.Contracts
         IEICSystem GetSystem(string systemName);
         List<string> GetFactionNames();
         List<IEICSystemFaction> GetFactionHistoryForSystem(string systemName);
+
+        void RegisterNewCommander(string cmdrName, string password);
+        ICommander GetCommanderByCmdrNameAndPassword(string cmdrName, string password);
     }
 }
