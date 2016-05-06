@@ -121,8 +121,9 @@
                         </div>
                     </div>
                     <div class="col-xs-12" style="padding:5px;">
-                        <div class="col-xs-12">
-                            <input type="checkbox" data-bind="value: factionName(), checked: $parent.controllingFacsArr, click: $parent.setControllingFaction" />&nbsp;Controlling Faction
+                        <!-- TODO: make a css class for pointer style-->
+                        <div class="col-xs-12" style="cursor: pointer" data-bind="click: $parent.setControllingFaction">
+                            <input type="checkbox" data-bind="value: factionName(), checked: controllingFaction(), click: $parent.setControllingFaction" />&nbsp;Controlling Faction
                         </div>
                     </div>
                 </div>

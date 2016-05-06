@@ -401,7 +401,7 @@ namespace EICSystemTracker.Data.EICData
                     CurrentState = sysfac.CurrentState,
                     PendingState = sysfac.PendingState,
                     RecoveringState = sysfac.RecoveringState,
-                    // ControllingFaction = sysfac.ControllingFaction,
+                    ControllingFaction = sysfac.ControllingPower == sysfac.FactionName,
                     LastUpdated = sysfac.Timestamp,
                     UpdatedBy = sysfac.UpdateBy
                 };
